@@ -1,10 +1,10 @@
 #define _GNU_SOURCE
 #include "cpufp_x86.h"
+#include "smtl.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <pthread.h>
 #include <time.h>
 
 static double get_time(struct timespec *start,
@@ -19,16 +19,14 @@ static double get_time(struct timespec *start,
 #define FP32_COMP (0x60000000L * 64)
 #define FP64_COMP (0x60000000L * 32)
 
-static void* thread_func_fp32(void *params)
+static void thread_func_fp32(void *params)
 {
     cpufp_x86_sse_fp32();
-    return NULL;
 }
 
-static void* thread_func_fp64(void *params)
+static void thread_func_fp64(void *params)
 {
     cpufp_x86_sse_fp64();
-    return NULL;
 }
 
 #elif defined(_USE_X86_AVX)
@@ -36,16 +34,14 @@ static void* thread_func_fp64(void *params)
 #define FP32_COMP (0x200000000L * 16)
 #define FP64_COMP (0x200000000L * 8)
 
-static void* thread_func_fp32(void *params)
+static void thread_func_fp32(void *params)
 {
     cpufp_x86_avx_fp32();
-    return NULL;
 }
 
-static void* thread_func_fp64(void *params)
+static void thread_func_fp64(void *params)
 {
     cpufp_x86_avx_fp64();
-    return NULL;
 }
 
 #elif defined(_USE_X86_FMA)
@@ -53,16 +49,14 @@ static void* thread_func_fp64(void *params)
 #define FP32_COMP (0x80000000L * 160)
 #define FP64_COMP (0x80000000L * 80)
 
-static void* thread_func_fp32(void *params)
+static void thread_func_fp32(void *params)
 {
     cpufp_x86_fma_fp32();
-    return NULL;
 }
 
-static void* thread_func_fp64(void *params)
+static void thread_func_fp64(void *params)
 {
     cpufp_x86_fma_fp64();
-    return NULL;
 }
 
 #endif
@@ -73,37 +67,40 @@ static void cpufp_x86(int num_cores)
     struct timespec start, end;
     double time_used, perf;
 
-    pthread_t *tids = (pthread_t*)calloc(num_cores, sizeof(pthread_t));
-   
+    smtl_handle sh;
+    smtl_init(&sh, num_cores);
+  
+    // warm up
+    smtl_add_task(sh, thread_func_fp32, NULL);
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
+
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-    for (i = 0; i < num_cores; i++)
-    {
-        pthread_create(&tids[i], NULL, thread_func_fp32, (void*)&i);
-    }
-    for (i = 0; i < num_cores; i++)
-    {
-        pthread_join(tids[i], NULL);
-    }
+    smtl_add_task(sh, thread_func_fp32, NULL);
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+
     time_used = get_time(&start, &end);
     perf = FP32_COMP * num_cores / time_used * 1e-9;
     printf("FP32 perf: %.4lf GFLOPS.\n", perf);
 
+    // warm up
+    smtl_add_task(sh, thread_func_fp64, NULL);
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
+
     clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-    for (i = 0; i < num_cores; i++)
-    {
-        pthread_create(&tids[i], NULL, thread_func_fp64, (void*)&i);
-    }
-    for (i = 0; i < num_cores; i++)
-    {
-        pthread_join(tids[i], NULL);
-    }
+    smtl_add_task(sh, thread_func_fp64, NULL);
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
     clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+
     time_used = get_time(&start, &end);
     perf = FP64_COMP * num_cores / time_used * 1e-9;
     printf("FP64 perf: %.4lf GFLOPS.\n", perf);
 
-    free(tids);
+    smtl_fini(sh);
 }
 
 int main(int argc, char *argv[])

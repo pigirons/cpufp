@@ -113,23 +113,24 @@ unsigned int cpuid_x86_support(cpuid_x86_feature_t feature)
 int main()
 {
     cpuid_x86_init();
+    printf("gcc -pthread -O3 -c smtl.c\n");
     if (cpuid_x86_support(_CPUID_X86_FMA_))
     {
         printf("as -o cpufp_x86_fma.o cpufp_x86_fma.s\n");
         printf("gcc -pthread -O3 -D_USE_X86_FMA -c cpufp_x86.c\n");
-        printf("gcc -pthread -O3 -o cpufp cpufp_x86.o cpufp_x86_fma.o\n");
+        printf("gcc -pthread -O3 -o cpufp smtl.o cpufp_x86.o cpufp_x86_fma.o\n");
     }
     else if (cpuid_x86_support(_CPUID_X86_AVX_))
     {
         printf("as -o cpufp_x86_avx.o cpufp_x86_avx.s\n");
         printf("gcc -pthread -O3 -D_USE_X86_AVX -c cpufp_x86.c\n");
-        printf("gcc -pthread -O3 -o cpufp cpufp_x86.o cpufp_x86_avx.o\n");
+        printf("gcc -pthread -O3 -o cpufp smtl.o cpufp_x86.o cpufp_x86_avx.o\n");
     }
     else if (cpuid_x86_support(_CPUID_X86_SSE2_))
     {
         printf("as -o cpufp_x86_sse.o cpufp_x86_sse.s\n");
         printf("gcc -pthread -O3 -D_USE_X86_SSE -c cpufp_x86.c\n");
-        printf("gcc -pthread -O3 -o cpufp cpufp_x86.o cpufp_x86_sse.o\n");
+        printf("gcc -pthread -O3 -o cpufp smtl.o cpufp_x86.o cpufp_x86_sse.o\n");
     }
     
     return 0;
