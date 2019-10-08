@@ -1,8 +1,8 @@
-.globl cpufp_x86_avx_fp32
-.globl cpufp_x86_avx_fp64
+.globl cpufp_kernel_x86_avx_fp32
+.globl cpufp_kernel_x86_avx_fp64
 
-cpufp_x86_avx_fp32:
-    mov $0x200000000, %rax
+cpufp_kernel_x86_avx_fp32:
+    mov $0x100000000, %rax
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
     vxorps %ymm3, %ymm3, %ymm3
@@ -14,8 +14,8 @@ cpufp_x86_avx_fp32:
     jne .cpufp.x86.avx.fp32.L1
     ret
 
-cpufp_x86_avx_fp64:
-    mov $0x200000000, %rax
+cpufp_kernel_x86_avx_fp64:
+    mov $0x100000000, %rax
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
     vxorpd %ymm3, %ymm3, %ymm3

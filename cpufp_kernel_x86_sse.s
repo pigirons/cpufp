@@ -1,8 +1,8 @@
-.globl cpufp_x86_sse_fp32
-.globl cpufp_x86_sse_fp64
+.globl cpufp_kernel_x86_sse_fp32
+.globl cpufp_kernel_x86_sse_fp64
 
-cpufp_x86_sse_fp32:
-    mov $0x60000000, %rax
+cpufp_kernel_x86_sse_fp32:
+    mov $0x30000000, %rax
     xorps %xmm0, %xmm0
     xorps %xmm1, %xmm1
     xorps %xmm2, %xmm2
@@ -28,6 +28,7 @@ cpufp_x86_sse_fp32:
     addps %xmm5, %xmm5
     mulps %xmm6, %xmm6
     addps %xmm7, %xmm7
+    sub $0x1, %rax
     mulps %xmm8, %xmm8
     addps %xmm9, %xmm9
     mulps %xmm10, %xmm10
@@ -36,12 +37,11 @@ cpufp_x86_sse_fp32:
     addps %xmm13, %xmm13
     mulps %xmm14, %xmm14
     addps %xmm15, %xmm15
-    sub $0x1, %rax
     jne .cpufp.x86.sse.fp32.L1
     ret
 
-cpufp_x86_sse_fp64:
-    mov $0x60000000, %rax
+cpufp_kernel_x86_sse_fp64:
+    mov $0x30000000, %rax
     xorpd %xmm0, %xmm0
     xorpd %xmm1, %xmm1
     xorpd %xmm2, %xmm2
@@ -67,6 +67,7 @@ cpufp_x86_sse_fp64:
     addpd %xmm5, %xmm5
     mulpd %xmm6, %xmm6
     addpd %xmm7, %xmm7
+    sub $0x1, %rax
     mulpd %xmm8, %xmm8
     addpd %xmm9, %xmm9
     mulpd %xmm10, %xmm10
@@ -75,7 +76,6 @@ cpufp_x86_sse_fp64:
     addpd %xmm13, %xmm13
     mulpd %xmm14, %xmm14
     addpd %xmm15, %xmm15
-    sub $0x1, %rax
     jne .cpufp.x86.sse.fp64.L1
     ret
 
