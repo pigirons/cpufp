@@ -326,9 +326,9 @@ void smtl_add_task(smtl_handle sh,
 
 void smtl_begin_tasks(smtl_handle sh)
 {
-    int err = 0;
+    int i, err = 0;
     sh->thread_holds = sh->num_threads;
-    for (int i = 0; i < sh->num_threads; i++)
+    for (i = 0; i < sh->num_threads; i++)
     {
         err = pthread_mutex_lock(sh->sl_mtxs + i);
         if (err != 0)

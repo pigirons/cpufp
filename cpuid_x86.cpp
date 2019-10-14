@@ -91,8 +91,8 @@ int main()
 
     string smtl_cmd = "gcc -pthread -O3 -c smtl.c\n";
     string asm_cmd = "";
-    string c_cmd = "gcc -pthread -O3 ";
-    string lnk_cmd = "gcc -pthread -O3 -o cpufp smtl.o cpufp_x86.o";
+    string c_cmd = "gcc -pthread ";
+    string lnk_cmd = "gcc -pthread -lrt -o cpufp smtl.o cpufp_x86.o";
 
     string isa_macro = "";
 
