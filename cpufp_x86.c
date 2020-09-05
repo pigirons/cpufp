@@ -184,8 +184,8 @@ void cpufp_x86_fma(int num_threads)
 #endif
 
 #ifdef _AVX_
-#define AVX_FP32_COMP (0x100000000L * 16)
-#define AVX_FP64_COMP (0x100000000L * 8)
+#define AVX_FP32_COMP (0x40000000L * 96)
+#define AVX_FP64_COMP (0x40000000L * 48)
 
 static void thread_func_avx_fp32(void *params)
 {
