@@ -330,8 +330,16 @@ int main(int argc, char *argv[])
 	}
 
 	// Determine if it is all numbers
-	if (strspn(argv[1], "0123456789") == strlen(argv[i]))
-		int num_threads = atoi(argv[1]);
+	int num_threads;
+	if (strspn(argv[1], "0123456789") == strlen(argv[1]))
+	{
+		num_threads = atoi(argv[1]);
+	}
+	else
+	{
+		fprintf(stderr, "Invalid num_threads.\n");
+		exit(0);
+	}
 	printf("Thread(s): %d\n", num_threads);
 
 #ifdef _AVX512F_
