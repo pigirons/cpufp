@@ -330,7 +330,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Determine if it is all numbers
-	if (strspn(argv[1], "0123456789") == strlen(argv[i]))
+	if (strspn(argv[1], "0123456789") == strlen(argv[1]))
 		int num_threads = atoi(argv[1]);
 	printf("Thread(s): %d\n", num_threads);
 
