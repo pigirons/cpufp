@@ -8,7 +8,7 @@
 #include <pthread.h>
 #include <sched.h>
 
-#define SMTL_MAX_THREADS 128
+#define SMTL_MAX_THREADS 512
 
 enum smtl_status
 {
@@ -45,6 +45,7 @@ struct smtl_t
 struct smtl_tp_t
 {
     int tid;
+    int tbind;
     struct smtl_t *sh;
 };
 
@@ -67,10 +68,11 @@ static void *smtl_thread_func(void *params)
 
     struct smtl_tp_t *stp = (struct smtl_tp_t*)params;
     int tid = stp->tid;
+    int tbind = stp->tbind;
     struct smtl_t *sh = stp->sh;
     free(stp);
 
-    thread_bind(tid);
+    thread_bind(tbind);
 
     pthread_mutex_t *sl_mtx = sh->sl_mtxs + tid;
     pthread_cond_t *sl_cv = sh->sl_cvs + tid;
@@ -152,7 +154,8 @@ static void *smtl_thread_func(void *params)
 }
 
 void smtl_init(smtl_handle *psh,
-    int num_threads)
+    int num_threads,
+    int *set_of_threads)
 {
     int err = 0;
 
@@ -214,6 +217,7 @@ void smtl_init(smtl_handle *psh,
         }
         stp->sh = sh;
         stp->tid = i;
+        stp->tbind = set_of_threads[i];
 
         err = pthread_create(sh->tids + i, NULL,
             smtl_thread_func, stp);
@@ -299,6 +303,11 @@ void smtl_fini(smtl_handle sh)
             p = q;
         }
     }
+}
+
+int smtl_num_threads(smtl_handle sh)
+{
+    return sh->num_threads;
 }
 
 void smtl_add_task(smtl_handle sh,

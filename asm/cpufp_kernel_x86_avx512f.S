@@ -2,7 +2,6 @@
 .globl cpufp_kernel_x86_avx512f_fp64
 
 cpufp_kernel_x86_avx512f_fp32:
-    mov $0x20000000, %rax
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -24,12 +23,11 @@ cpufp_kernel_x86_avx512f_fp32:
     vfmadd231ps %zmm7, %zmm7, %zmm7
     vfmadd231ps %zmm8, %zmm8, %zmm8
     vfmadd231ps %zmm9, %zmm9, %zmm9
-    sub $0x1, %rax
+    sub $0x1, %rdi
     jne .cpufp.x86.avx512f.fp32.L1
     ret
 
 cpufp_kernel_x86_avx512f_fp64:
-    mov $0x20000000, %rax
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -51,7 +49,7 @@ cpufp_kernel_x86_avx512f_fp64:
     vfmadd231pd %zmm7, %zmm7, %zmm7
     vfmadd231pd %zmm8, %zmm8, %zmm8
     vfmadd231pd %zmm9, %zmm9, %zmm9
-    sub $0x1, %rax
+    sub $0x1, %rdi
     jne .cpufp.x86.avx512f.fp64.L1
     ret
 

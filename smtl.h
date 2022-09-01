@@ -5,9 +5,12 @@ typedef struct smtl_t* smtl_handle;
 typedef void (*task_func_t)(void*);
 
 void smtl_init(smtl_handle *psh,
-    int num_threads);
+    int num_threads,
+    int *set_of_threads);
 
 void smtl_fini(smtl_handle sh);
+
+int smtl_num_threads(smtl_handle sh);
 
 void smtl_add_task(smtl_handle sh,
     task_func_t task_func,

@@ -2,7 +2,6 @@
 .globl cpufp_kernel_x86_sse_fp64
 
 cpufp_kernel_x86_sse_fp32:
-    mov $0x30000000, %rax
     xorps %xmm0, %xmm0
     xorps %xmm1, %xmm1
     xorps %xmm2, %xmm2
@@ -28,7 +27,7 @@ cpufp_kernel_x86_sse_fp32:
     addps %xmm5, %xmm5
     mulps %xmm6, %xmm6
     addps %xmm7, %xmm7
-    sub $0x1, %rax
+    sub $0x1, %rdi
     mulps %xmm8, %xmm8
     addps %xmm9, %xmm9
     mulps %xmm10, %xmm10
@@ -41,7 +40,6 @@ cpufp_kernel_x86_sse_fp32:
     ret
 
 cpufp_kernel_x86_sse_fp64:
-    mov $0x30000000, %rax
     xorpd %xmm0, %xmm0
     xorpd %xmm1, %xmm1
     xorpd %xmm2, %xmm2
@@ -67,7 +65,7 @@ cpufp_kernel_x86_sse_fp64:
     addpd %xmm5, %xmm5
     mulpd %xmm6, %xmm6
     addpd %xmm7, %xmm7
-    sub $0x1, %rax
+    sub $0x1, %rdi
     mulpd %xmm8, %xmm8
     addpd %xmm9, %xmm9
     mulpd %xmm10, %xmm10

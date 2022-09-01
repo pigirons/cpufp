@@ -2,7 +2,6 @@
 .globl cpufp_kernel_x86_fma_fp64
 
 cpufp_kernel_x86_fma_fp32:
-    mov $0x40000000, %rax
     vxorps %ymm0, %ymm0, %ymm0
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
@@ -24,12 +23,11 @@ cpufp_kernel_x86_fma_fp32:
     vfmadd231ps %ymm7, %ymm7, %ymm7
     vfmadd231ps %ymm8, %ymm8, %ymm8
     vfmadd231ps %ymm9, %ymm9, %ymm9
-    sub $0x1, %rax
+    sub $0x1, %rdi
     jne .cpufp.x86.fma.fp32.L1
     ret
 
 cpufp_kernel_x86_fma_fp64:
-    mov $0x40000000, %rax
     vxorpd %ymm0, %ymm0, %ymm0
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
@@ -51,7 +49,7 @@ cpufp_kernel_x86_fma_fp64:
     vfmadd231pd %ymm7, %ymm7, %ymm7
     vfmadd231pd %ymm8, %ymm8, %ymm8
     vfmadd231pd %ymm9, %ymm9, %ymm9
-    sub $0x1, %rax
+    sub $0x1, %rdi
     jne .cpufp.x86.fma.fp64.L1
     ret
 
