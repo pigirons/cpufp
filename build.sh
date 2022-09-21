@@ -1,5 +1,3 @@
-set -x
-
 instruction_sets='sse avx fma avx512f avx512_vnni avx_vnni'
 CC_FLAGS=''
 OBJ_FILES=''
