@@ -20,23 +20,35 @@ static double get_time(struct timespec *start,
 		(end->tv_nsec - start->tv_nsec) * 1e-9;
 }
 
+#ifdef __X86_SSE__
 void cpufp_kernel_x86_sse_fp32(int64_t);
 void cpufp_kernel_x86_sse_fp64(int64_t);
+#endif
 
+#ifdef __X86_AVX__
 void cpufp_kernel_x86_avx_fp32(int64_t);
 void cpufp_kernel_x86_avx_fp64(int64_t);
+#endif
 
+#ifdef __X86_FMA__
 void cpufp_kernel_x86_fma_fp32(int64_t);
 void cpufp_kernel_x86_fma_fp64(int64_t);
+#endif
 
+#ifdef __X86_AVX512F__
 void cpufp_kernel_x86_avx512f_fp32(int64_t);
 void cpufp_kernel_x86_avx512f_fp64(int64_t);
+#endif
 
+#ifdef __X86_AVX512_VNNI__
 void cpufp_kernel_x86_avx512_vnni_int8(int64_t);
 void cpufp_kernel_x86_avx512_vnni_int16(int64_t);
+#endif
 
+#ifdef __X86_AVX_VNNI__
 void cpufp_kernel_x86_avx_vnni_int8(int64_t);
 void cpufp_kernel_x86_avx_vnni_int16(int64_t);
+#endif
 
 typedef struct
 {
@@ -56,6 +68,7 @@ void cpu_benchmark_x86_init()
     
     bm_list_size = 0;
 
+#ifdef __X86_AVX512_VNNI__
     if (cpuid_x86_support(_CPUID_X86_AVX512_VNNI_))
     {
         cpubm_x86_t s1 =
@@ -77,7 +90,11 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
-    else if (cpuid_x86_support(_CPUID_X86_AVX_VNNI_))
+#endif
+
+#ifdef __X86_AVX_VNNI__
+    if (!cpuid_x86_support(_CPUID_X86_AVX512_VNNI_) && 
+        cpuid_x86_support(_CPUID_X86_AVX_VNNI_))
     {
         cpubm_x86_t s1 =
         {
@@ -98,7 +115,9 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
-    
+#endif
+
+#ifdef __X86_AVX512F__    
     if (cpuid_x86_support(_CPUID_X86_AVX512F_))
     {
         cpubm_x86_t s1 =
@@ -120,7 +139,9 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
+#endif
 
+#ifdef __X86_FMA__
     if (cpuid_x86_support(_CPUID_X86_FMA_))
     {
         cpubm_x86_t s1 =
@@ -142,7 +163,9 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
+#endif
 
+#ifdef __X86_AVX__
     if (cpuid_x86_support(_CPUID_X86_AVX_))
     {
         cpubm_x86_t s1 =
@@ -164,7 +187,9 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
+#endif
 
+#ifdef __X86_SSE__
     if (cpuid_x86_support(_CPUID_X86_SSE_))
     {
         cpubm_x86_t s1 =
@@ -186,6 +211,7 @@ void cpu_benchmark_x86_init()
         cpubm_x86_list[bm_list_size++] = s1;
         cpubm_x86_list[bm_list_size++] = s2;
     }
+#endif
 }
 
 static void cpubm_x86_get_string(cpubm_x86_t *item,
