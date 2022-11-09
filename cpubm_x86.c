@@ -250,7 +250,7 @@ static void cpubm_x86_one(smtl_handle sh,
 
     cpubm_x86_t *item = cpubm_x86_list + list_idx;
     
-    char *isa, *type, value[16];
+    char *isa, *type, value[32];
     cpubm_x86_get_string(item, &isa, &type);
 
     int i;
