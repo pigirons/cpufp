@@ -1,12 +1,13 @@
 #ifndef _SMTL_H
 #define _SMTL_H
 
+#include <vector>
+
 typedef struct smtl_t* smtl_handle;
 typedef void (*task_func_t)(void*);
 
 void smtl_init(smtl_handle *psh,
-    int num_threads,
-    int *set_of_threads);
+    std::vector<int> &set_of_threads);
 
 void smtl_fini(smtl_handle sh);
 

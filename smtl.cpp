@@ -1,10 +1,8 @@
-#define _GNU_SOURCE
+#include "smtl.hpp"
 
-#include "smtl.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdlib>
+#include <cstdio>
+#include <cstring>
 #include <pthread.h>
 #include <sched.h>
 
@@ -154,8 +152,7 @@ static void *smtl_thread_func(void *params)
 }
 
 void smtl_init(smtl_handle *psh,
-    int num_threads,
-    int *set_of_threads)
+    std::vector<int> &set_of_threads)
 {
     int err = 0;
 
@@ -168,6 +165,7 @@ void smtl_init(smtl_handle *psh,
         exit(0);
     }
 
+    int num_threads = set_of_threads.size();
     sh->num_threads = num_threads;
     sh->cur_qid = 0;
     sh->thread_holds = 0;

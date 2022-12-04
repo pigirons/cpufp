@@ -1,19 +1,38 @@
-#define _GNU_SOURCE
+#include "cpubm_x86.hpp"
 
-#include "cpubm_x86.h"
+#include <cstring>
+#include <cstdint>
+#include <vector>
+using namespace std;
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+extern "C"
+{
+void cpufp_kernel_x86_sse_fp32(int64_t);
+void cpufp_kernel_x86_sse_fp64(int64_t);
 
-static int parse_thread_pool(char *sets,
-    int *set_of_threads)
+void cpufp_kernel_x86_avx_fp32(int64_t);
+void cpufp_kernel_x86_avx_fp64(int64_t);
+
+void cpufp_kernel_x86_fma_fp32(int64_t);
+void cpufp_kernel_x86_fma_fp64(int64_t);
+
+void cpufp_kernel_x86_avx512f_fp32(int64_t);
+void cpufp_kernel_x86_avx512f_fp64(int64_t);
+
+void cpufp_kernel_x86_avx512_vnni_int8(int64_t);
+void cpufp_kernel_x86_avx512_vnni_int16(int64_t);
+
+void cpufp_kernel_x86_avx_vnni_int8(int64_t);
+void cpufp_kernel_x86_avx_vnni_int16(int64_t);
+}
+
+static void parse_thread_pool(char *sets,
+    vector<int> &set_of_threads)
 {
     if (sets[0] != '[')
     {
-        return 0;
+        return;
     }
-    int num_threads = 0;
     int pos = 1;
     int left = 0, right = 0;
     int state = 0;
@@ -28,7 +47,7 @@ static int parse_thread_pool(char *sets,
             }
             else if (sets[pos] == ',')
             {
-                set_of_threads[num_threads++] = left;
+                set_of_threads.push_back(left);
                 left = 0;
             }
             else if (sets[pos] == '-')
@@ -49,7 +68,7 @@ static int parse_thread_pool(char *sets,
                 int i;
                 for (i = left; i <= right; i++)
                 {
-                    set_of_threads[num_threads++] = i;
+                    set_of_threads.push_back(i);
                 }
                 left = 0;
                 state = 0;
@@ -59,23 +78,23 @@ static int parse_thread_pool(char *sets,
     }
     if (sets[pos] != ']')
     {
-        return 0;
+        return;
     }
     if (state == 0)
     {
-        set_of_threads[num_threads++] = left;
+        set_of_threads.push_back(left);
     }
     else if (state == 1)
     {
         int i;
         for (i = left; i <= right; i++)
         {
-            set_of_threads[num_threads++] = i;
+            set_of_threads.push_back(i);
         }
     }
-
-    return num_threads;
 }
+
+#include "cpufp_x86_incl.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -98,14 +117,13 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
-    int num_threads;
-    int set_of_threads[512];
+    vector<int> set_of_threads;
 
-    num_threads = parse_thread_pool(argv[1] + 14, set_of_threads);
+    parse_thread_pool(argv[1] + 14, set_of_threads);
 
-    cpu_benchmark_x86_init();
-    cpu_benchmark_x86_do(num_threads, set_of_threads);
-    
+    cpufp_register_isa();
+    cpubm_do_bench(set_of_threads);
+
     return 0;
 }
 
