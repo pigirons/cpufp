@@ -5,12 +5,15 @@ This is a cpu tool for benchmarking the floating-points peak performance. Now it
 ## How to use
 
 build:
+
 `./build.sh`
 
-test:
+benchmark:
+
 `./cpufp --thread_pool=[xxx]`
 
 clean:
+
 `./clean.sh`
 
 xxx indicates that all the cores defined by xxx will be used for benchmarking(by affinity setting). For example, [0,3,5-8,13-15].
