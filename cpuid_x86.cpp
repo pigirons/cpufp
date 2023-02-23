@@ -196,7 +196,7 @@ void gen_cpufp_include_cpp()
 void gen_link()
 {
     ofstream lf("link.sh");
-    lf << "g++ -O3 -o cpufp table.o smtl.o cpubm_x86.o cpufp_x86.o";
+    lf << "g++ -O3 -o cpufp table.o smtl.o cpubm_x86.o cpufp_x86.o -lpthread";
     if (cpuid_x86_support(_CPUID_X86_SSE_))
     {
         lf << " cpufp_kernel_x86_sse.o";
