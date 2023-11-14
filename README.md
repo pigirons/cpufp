@@ -28,6 +28,9 @@ xxx indicates that all the cores defined by xxx will be used for benchmarking(by
 |AVX512f|fp32/fp64|From Skylake X/Zen4|
 |AVX512_VNNI|int8/int16|From IceLake|
 |AVX_VNNI|int8/int16|From Alder Lake|
+|AVX512_FP16|fp16|From Intel Sapphire Rapids|
+|AVX512_BF16|bf16|From AMD Zen4|
+|AVX_VNNI_INT8|int8|Unknown|
 
 ## Some benchmark results
 
