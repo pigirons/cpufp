@@ -112,7 +112,7 @@ void cpubm_do_bench(std::vector<int> &set_of_threads)
     vector<string> ti;
     ti.resize(3);
     ti[0] = "Instruction Set";
-    ti[1] = "Data Type";
+    ti[1] = "Core Computation";
     ti[2] = "Peak Performance";
     
     Table table;

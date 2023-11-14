@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_fma_fp32
-.globl cpufp_kernel_x86_fma_fp64
+.globl cpufp_kernel_x86_fma_f32f32f32
+.globl cpufp_kernel_x86_fma_f64f64f64
 
-cpufp_kernel_x86_fma_fp32:
+cpufp_kernel_x86_fma_f32f32f32:
     vxorps %ymm0, %ymm0, %ymm0
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
@@ -12,7 +12,13 @@ cpufp_kernel_x86_fma_fp32:
     vxorps %ymm7, %ymm7, %ymm7
     vxorps %ymm8, %ymm8, %ymm8
     vxorps %ymm9, %ymm9, %ymm9
-.cpufp.x86.fma.fp32.L1:
+    vxorps %ymm10, %ymm10, %ymm10
+    vxorps %ymm11, %ymm11, %ymm11
+    vxorps %ymm12, %ymm12, %ymm12
+    vxorps %ymm13, %ymm13, %ymm13
+    vxorps %ymm14, %ymm14, %ymm14
+    vxorps %ymm15, %ymm15, %ymm15
+.cpufp.x86.fma.f32f32f32.L1:
     vfmadd231ps %ymm0, %ymm0, %ymm0
     vfmadd231ps %ymm1, %ymm1, %ymm1
     vfmadd231ps %ymm2, %ymm2, %ymm2
@@ -23,11 +29,17 @@ cpufp_kernel_x86_fma_fp32:
     vfmadd231ps %ymm7, %ymm7, %ymm7
     vfmadd231ps %ymm8, %ymm8, %ymm8
     vfmadd231ps %ymm9, %ymm9, %ymm9
+    vfmadd231ps %ymm10, %ymm10, %ymm10
+    vfmadd231ps %ymm11, %ymm11, %ymm11
+    vfmadd231ps %ymm12, %ymm12, %ymm12
+    vfmadd231ps %ymm13, %ymm13, %ymm13
+    vfmadd231ps %ymm14, %ymm14, %ymm14
+    vfmadd231ps %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.fma.fp32.L1
+    jne .cpufp.x86.fma.f32f32f32.L1
     ret
 
-cpufp_kernel_x86_fma_fp64:
+cpufp_kernel_x86_fma_f64f64f64:
     vxorpd %ymm0, %ymm0, %ymm0
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
@@ -38,7 +50,13 @@ cpufp_kernel_x86_fma_fp64:
     vxorpd %ymm7, %ymm7, %ymm7
     vxorpd %ymm8, %ymm8, %ymm8
     vxorpd %ymm9, %ymm9, %ymm9
-.cpufp.x86.fma.fp64.L1:
+    vxorpd %ymm10, %ymm10, %ymm10
+    vxorpd %ymm11, %ymm11, %ymm11
+    vxorpd %ymm12, %ymm12, %ymm12
+    vxorpd %ymm13, %ymm13, %ymm13
+    vxorpd %ymm14, %ymm14, %ymm14
+    vxorpd %ymm15, %ymm15, %ymm15
+.cpufp.x86.fma.f64f64f64.L1:
     vfmadd231pd %ymm0, %ymm0, %ymm0
     vfmadd231pd %ymm1, %ymm1, %ymm1
     vfmadd231pd %ymm2, %ymm2, %ymm2
@@ -49,7 +67,13 @@ cpufp_kernel_x86_fma_fp64:
     vfmadd231pd %ymm7, %ymm7, %ymm7
     vfmadd231pd %ymm8, %ymm8, %ymm8
     vfmadd231pd %ymm9, %ymm9, %ymm9
+    vfmadd231pd %ymm10, %ymm10, %ymm10
+    vfmadd231pd %ymm11, %ymm11, %ymm11
+    vfmadd231pd %ymm12, %ymm12, %ymm12
+    vfmadd231pd %ymm13, %ymm13, %ymm13
+    vfmadd231pd %ymm14, %ymm14, %ymm14
+    vfmadd231pd %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.fma.fp64.L1
+    jne .cpufp.x86.fma.f64f64f64.L1
     ret
 

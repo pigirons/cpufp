@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_avx_fp32
-.globl cpufp_kernel_x86_avx_fp64
+.globl cpufp_kernel_x86_avx_add_mul_f32f32_f32
+.globl cpufp_kernel_x86_avx_add_mul_f64f64_f64
 
-cpufp_kernel_x86_avx_fp32:
+cpufp_kernel_x86_avx_add_mul_f32f32_f32:
     vxorps %ymm0, %ymm0, %ymm0
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
@@ -15,7 +15,7 @@ cpufp_kernel_x86_avx_fp32:
     vxorps %ymm10, %ymm10, %ymm10
     vxorps %ymm11, %ymm11, %ymm11
     vxorps %ymm12, %ymm12, %ymm12
-.cpufp.x86.avx.fp32.L1:
+.cpufp.x86.avx.add.mul.f32f32.f32.L1:
     vmulps %ymm12, %ymm12, %ymm0
     vaddps %ymm12, %ymm12, %ymm1
     vmulps %ymm12, %ymm12, %ymm2
@@ -29,10 +29,10 @@ cpufp_kernel_x86_avx_fp32:
     vmulps %ymm12, %ymm12, %ymm10
     vaddps %ymm12, %ymm12, %ymm11
     sub $0x1, %rdi
-    jne .cpufp.x86.avx.fp32.L1
+    jne .cpufp.x86.avx.add.mul.f32f32.f32.L1
     ret
 
-cpufp_kernel_x86_avx_fp64:
+cpufp_kernel_x86_avx_add_mul_f64f64_f64:
     vxorpd %ymm0, %ymm0, %ymm0
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
@@ -46,7 +46,7 @@ cpufp_kernel_x86_avx_fp64:
     vxorpd %ymm10, %ymm10, %ymm10
     vxorpd %ymm11, %ymm11, %ymm11
     vxorpd %ymm12, %ymm12, %ymm12
-.cpufp.x86.avx.fp64.L1:
+.cpufp.x86.avx.add.mul.f64f64.f64.L1:
     vmulpd %ymm12, %ymm12, %ymm0
     vaddpd %ymm12, %ymm12, %ymm1
     vmulpd %ymm12, %ymm12, %ymm2
@@ -60,6 +60,6 @@ cpufp_kernel_x86_avx_fp64:
     vmulpd %ymm12, %ymm12, %ymm10
     vaddpd %ymm12, %ymm12, %ymm11
     sub $0x1, %rdi
-    jne .cpufp.x86.avx.fp64.L1
+    jne .cpufp.x86.avx.add.mul.f64f64.f64.L1
     ret
 

@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_sse_fp32
-.globl cpufp_kernel_x86_sse_fp64
+.globl cpufp_kernel_x86_sse_add_mul_f32f32_f32
+.globl cpufp_kernel_x86_sse_add_mul_f64f64_f64
 
-cpufp_kernel_x86_sse_fp32:
+cpufp_kernel_x86_sse_add_mul_f32f32_f32:
     xorps %xmm0, %xmm0
     xorps %xmm1, %xmm1
     xorps %xmm2, %xmm2
@@ -18,7 +18,7 @@ cpufp_kernel_x86_sse_fp32:
     xorps %xmm13, %xmm13
     xorps %xmm14, %xmm14
     xorps %xmm15, %xmm15
-.cpufp.x86.sse.fp32.L1:
+.cpufp.x86.sse.add.mul.f32f32_f32.L1:
     mulps %xmm0, %xmm0
     addps %xmm1, %xmm1
     mulps %xmm2, %xmm2
@@ -36,10 +36,10 @@ cpufp_kernel_x86_sse_fp32:
     addps %xmm13, %xmm13
     mulps %xmm14, %xmm14
     addps %xmm15, %xmm15
-    jne .cpufp.x86.sse.fp32.L1
+    jne .cpufp.x86.sse.add.mul.f32f32_f32.L1
     ret
 
-cpufp_kernel_x86_sse_fp64:
+cpufp_kernel_x86_sse_add_mul_f64f64_f64:
     xorpd %xmm0, %xmm0
     xorpd %xmm1, %xmm1
     xorpd %xmm2, %xmm2
@@ -56,7 +56,7 @@ cpufp_kernel_x86_sse_fp64:
     xorpd %xmm13, %xmm13
     xorpd %xmm14, %xmm14
     xorpd %xmm15, %xmm15
-.cpufp.x86.sse.fp64.L1:
+.cpufp.x86.sse.add.mul.f64f64.f64.L1:
     mulpd %xmm0, %xmm0
     addpd %xmm1, %xmm1
     mulpd %xmm2, %xmm2
@@ -74,6 +74,6 @@ cpufp_kernel_x86_sse_fp64:
     addpd %xmm13, %xmm13
     mulpd %xmm14, %xmm14
     addpd %xmm15, %xmm15
-    jne .cpufp.x86.sse.fp64.L1
+    jne .cpufp.x86.sse.add.mul.f64f64.f64.L1
     ret
 

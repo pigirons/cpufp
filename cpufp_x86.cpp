@@ -7,23 +7,31 @@ using namespace std;
 
 extern "C"
 {
-void cpufp_kernel_x86_sse_fp32(int64_t);
-void cpufp_kernel_x86_sse_fp64(int64_t);
+void cpufp_kernel_x86_sse_add_mul_f32f32_f32(int64_t);
+void cpufp_kernel_x86_sse_add_mul_f64f64_f64(int64_t);
 
-void cpufp_kernel_x86_avx_fp32(int64_t);
-void cpufp_kernel_x86_avx_fp64(int64_t);
+void cpufp_kernel_x86_avx_add_mul_f32f32_f32(int64_t);
+void cpufp_kernel_x86_avx_add_mul_f64f64_f64(int64_t);
 
-void cpufp_kernel_x86_fma_fp32(int64_t);
-void cpufp_kernel_x86_fma_fp64(int64_t);
+void cpufp_kernel_x86_fma_f32f32f32(int64_t);
+void cpufp_kernel_x86_fma_f64f64f64(int64_t);
 
-void cpufp_kernel_x86_avx512f_fp32(int64_t);
-void cpufp_kernel_x86_avx512f_fp64(int64_t);
+void cpufp_kernel_x86_avx512f_fma_f32f32f32(int64_t);
+void cpufp_kernel_x86_avx512f_fma_f64f64f64(int64_t);
 
-void cpufp_kernel_x86_avx512_vnni_int8(int64_t);
-void cpufp_kernel_x86_avx512_vnni_int16(int64_t);
+void cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16(int64_t);
 
-void cpufp_kernel_x86_avx_vnni_int8(int64_t);
-void cpufp_kernel_x86_avx_vnni_int16(int64_t);
+void cpufp_kernel_x86_avx512_fp16_fma_f16f16f16(int64_t);
+
+void cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8(int64_t);
+void cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16(int64_t);
+
+void cpufp_kernel_x86_avx_vnni_dp4a_s32u8s8(int64_t);
+void cpufp_kernel_x86_avx_vnni_dp2a_s32s16s16(int64_t);
+
+void cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8(int64_t);
+void cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8(int64_t);
+void cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8(int64_t);
 }
 
 static void parse_thread_pool(char *sets,
