@@ -10,13 +10,14 @@ build:
 
 benchmark:
 
-`./cpufp --thread_pool=[xxx]`
+`./cpufp --thread_pool=[xxx] --idle_time=yyy`
 
 clean:
 
 `./clean.sh`
 
 xxx indicates that all the cores defined by xxx will be used for benchmarking(by affinity setting). For example, [0,3,5-8,13-15].
+idle_time is the interval time(sec) between two benchmarks, default 0.
 
 ## Support x86-64 SIMD ISA
 
@@ -120,15 +121,15 @@ For single core:
 $ ./cpufp --thread_pool=[0]
 Number Threads: 1
 Thread Pool Binding: 0
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| FMA             | FP32      | 156.18 GFLOPS    |
-| FMA             | FP64      | 78.371 GFLOPS    |
-| AVX             | FP32      | 156.55 GFLOPS    |
-| AVX             | FP64      | 78.256 GFLOPS    |
-| SSE             | FP32      | 78.219 GFLOPS    |
-| SSE             | FP64      | 38.99 GFLOPS     |
---------------------------------------------------
+--------------------------------------------------------------
+| Instruction Set | Core Computation      | Peak Performance |
+| FMA             | FMA(f32,f32,f32)      | 150.94 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 75.77 GFLOPS     |
+| AVX             | ADD(MUL(f32,f32),f32) | 149.89 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 74.982 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 75.378 GFLOPS    |
+| SSE             | ADD(MUL(f64,f64),f64) | 37.608 GFLOPS    |
+--------------------------------------------------------------
 </pre>
 
 For multi-cores:
@@ -137,15 +138,15 @@ For multi-cores:
 $ ./cpufp --thread_pool=[0,2,4,6,8,10,12,14]
 Number Threads: 8
 Thread Pool Binding: 0 2 4 6 8 10 12 14
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| FMA             | FP32      | 1151.2 GFLOPS    |
-| FMA             | FP64      | 569.89 GFLOPS    |
-| AVX             | FP32      | 1088.7 GFLOPS    |
-| AVX             | FP64      | 536.37 GFLOPS    |
-| SSE             | FP32      | 541.35 GFLOPS    |
-| SSE             | FP64      | 269.56 GFLOPS    |
---------------------------------------------------
+--------------------------------------------------------------
+| Instruction Set | Core Computation      | Peak Performance |
+| FMA             | FMA(f32,f32,f32)      | 1054.6 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 525.72 GFLOPS    |
+| AVX             | ADD(MUL(f32,f32),f32) | 1014.6 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 506.08 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 519.33 GFLOPS    |
+| SSE             | ADD(MUL(f64,f64),f64) | 254.33 GFLOPS    |
+--------------------------------------------------------------
 </pre>
 
 ### Intel Celeron N5105(Jasper Lake)

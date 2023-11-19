@@ -165,70 +165,70 @@ void gen_cpufp_include_cpp()
     if (cpuid_x86_support(_CPUID_X86_AVX_VNNI_))
     {
         cf << "    reg_new_isa(\"AVX_VNNI\", \"DP4A(s32,u8,s8)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx_vnni_dp4a_s32u8s8);" << endl;
         cf << "    reg_new_isa(\"AVX_VNNI\", \"DP2A(s32,s16,s16)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 512LL," << endl;
+        cf << "        0x20000000LL, 512LL," << endl;
         cf << "        cpufp_kernel_x86_avx_vnni_dp2a_s32s16s16);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_AVX_VNNI_INT8_))
     {
         cf << "    reg_new_isa(\"AVX_VNNI_INT8\", \"DP4A(s32,s8,s8)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8);" << endl;
         cf << "    reg_new_isa(\"AVX_VNNI_INT8\", \"DP4A(s32,s8,u8)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8);" << endl;
         cf << "    reg_new_isa(\"AVX_VNNI_INT8\", \"DP4A(s32,u8,u8)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_AVX512_VNNI_))
     {
         cf << "    reg_new_isa(\"AVX512_VNNI\", \"DP4A(s32,u8,s8)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 2048LL," << endl;
+        cf << "        0x20000000LL, 2048LL," << endl;
         cf << "        cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8);" << endl;
         cf << "    reg_new_isa(\"AVX512_VNNI\", \"DP2A(s32,s16,s16)\", \"GOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_AVX512_BF16_))
     {
         cf << "    reg_new_isa(\"AVX512_BF16\", \"DP2A(f32,bf16,bf16)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_AVX512_FP16_))
     {
         cf << "    reg_new_isa(\"AVX512_FP16\", \"FMA(f16,f16,f16)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 1024LL," << endl;
+        cf << "        0x20000000LL, 1024LL," << endl;
         cf << "        cpufp_kernel_x86_avx512f_fp16_fma_f16f16f16);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_FMA_))
     {
         cf << "    reg_new_isa(\"FMA\", \"FMA(f32,f32,f32)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 256LL," << endl;
+        cf << "        0x20000000LL, 256LL," << endl;
         cf << "        cpufp_kernel_x86_fma_f32f32f32);" << endl;
         cf << "    reg_new_isa(\"FMA\", \"FMA(f64,f64,f64)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 128LL," << endl;
+        cf << "        0x20000000LL, 128LL," << endl;
         cf << "        cpufp_kernel_x86_fma_f64f64f64);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_AVX_))
     {
         cf << "    reg_new_isa(\"AVX\", \"ADD(MUL(f32,f32),f32)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 96LL," << endl;
+        cf << "        0x20000000LL, 96LL," << endl;
         cf << "        cpufp_kernel_x86_avx_add_mul_f32f32_f32);" << endl;
         cf << "    reg_new_isa(\"AVX\", \"ADD(MUL(f64,f64),f64)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 48LL," << endl;
+        cf << "        0x20000000LL, 48LL," << endl;
         cf << "        cpufp_kernel_x86_avx_add_mul_f64f64_f64);" << endl;
     }
     if (cpuid_x86_support(_CPUID_X86_SSE_))
     {
         cf << "    reg_new_isa(\"SSE\", \"ADD(MUL(f32,f32),f32)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 64LL," << endl;
+        cf << "        0x20000000LL, 64LL," << endl;
         cf << "        cpufp_kernel_x86_sse_add_mul_f32f32_f32);" << endl;
         cf << "    reg_new_isa(\"SSE\", \"ADD(MUL(f64,f64),f64)\", \"GFLOPS\"," << endl;
-        cf << "        0x10000000LL, 32LL," << endl;
+        cf << "        0x20000000LL, 32LL," << endl;
         cf << "        cpufp_kernel_x86_sse_add_mul_f64f64_f64);" << endl;
     }
     cf << "}" << endl;

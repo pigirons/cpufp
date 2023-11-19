@@ -2,11 +2,13 @@
 #include "smtl.hpp"
 #include "cpubm_x86.hpp"
 
+#include <unistd.h>
 #include <cstdint>
 #include <ctime>
 #include <vector>
 #include <sstream>
 #include <iomanip>
+
 using namespace std;
 
 static double get_time(struct timespec *start,
@@ -94,7 +96,8 @@ static void cpubm_x86_one(smtl_handle sh,
     table.addOneItem(cont);
 }
 
-void cpubm_do_bench(std::vector<int> &set_of_threads)
+void cpubm_do_bench(std::vector<int> &set_of_threads,
+    uint32_t idle_time)
 {
     int i;
 
@@ -124,7 +127,12 @@ void cpubm_do_bench(std::vector<int> &set_of_threads)
 	smtl_init(&sh, set_of_threads);
 
     // traverse task list
-    for (i = 0; i < bm_list.size(); i++)
+    for (i = 0; i < bm_list.size() - 1; i++)
+    {
+        cpubm_x86_one(sh, bm_list[i], table);
+        sleep(idle_time);
+    }
+    if (bm_list.size() > 0)
     {
         cpubm_x86_one(sh, bm_list[i], table);
     }

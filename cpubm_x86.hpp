@@ -1,6 +1,7 @@
 #ifndef _CPUBM_X86_HPP
 #define _CPUBM_X86_HPP
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
@@ -11,7 +12,8 @@ void reg_new_isa(std::string isa,
     int64_t comp_pl,
     void (*bench)(int64_t));
 
-void cpubm_do_bench(std::vector<int> &set_of_threads);
+void cpubm_do_bench(std::vector<int> &set_of_threads,
+    uint32_t idle_time);
 
 #endif
 
