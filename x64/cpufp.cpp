@@ -290,6 +290,12 @@ static void cpufp_register_isa()
     reg_new_isa("AVX512_FP16", "FMA(f16,f16,f16)", "GFLOPS",
         0x20000000LL, 1024LL, avx512f_fp16_fma_f16f16f16);
 #endif
+#ifdef _AVX512F_
+    reg_new_isa("AVX512F", "FMA(f32,f32,f32)", "GFLOPS",
+        0x20000000LL, 512LL, avx512f_fma_f32f32f32);
+    reg_new_isa("AVX512F", "FMA(f64,f64,f64)", "GFLOPS",
+        0x20000000LL, 256LL, avx512f_fma_f64f64f64);
+#endif
 #ifdef _FMA_
     reg_new_isa("FMA", "FMA(f32,f32,f32)", "GFLOPS",
         0x20000000LL, 256LL, fma_f32f32f32);
