@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_avx512f_fma_f32f32f32
-.globl cpufp_kernel_x86_avx512f_fma_f64f64f64
+.globl avx512f_fma_f32f32f32
+.globl avx512f_fma_f64f64f64
 
-cpufp_kernel_x86_avx512f_fma_f32f32f32:
+avx512f_fma_f32f32f32:
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -18,7 +18,7 @@ cpufp_kernel_x86_avx512f_fma_f32f32f32:
     vpxorq %zmm13, %zmm13, %zmm13
     vpxorq %zmm14, %zmm14, %zmm14
     vpxorq %zmm15, %zmm15, %zmm15
-.cpufp.x86.avx512f.fma.f32f32f32.L1:
+.avx512f.fma.f32f32f32.L1:
     vfmadd231ps %zmm0, %zmm0, %zmm0
     vfmadd231ps %zmm1, %zmm1, %zmm1
     vfmadd231ps %zmm2, %zmm2, %zmm2
@@ -36,10 +36,10 @@ cpufp_kernel_x86_avx512f_fma_f32f32f32:
     vfmadd231ps %zmm14, %zmm14, %zmm14
     vfmadd231ps %zmm15, %zmm15, %zmm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx512f.fma.f32f32f32.L1
+    jne .avx512f.fma.f32f32f32.L1
     ret
 
-cpufp_kernel_x86_avx512f_fma_f64f64f64:
+avx512f_fma_f64f64f64:
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -56,7 +56,7 @@ cpufp_kernel_x86_avx512f_fma_f64f64f64:
     vpxorq %zmm13, %zmm13, %zmm13
     vpxorq %zmm14, %zmm14, %zmm14
     vpxorq %zmm15, %zmm15, %zmm15
-.cpufp.x86.avx512f.fma.f64f64f64.L1:
+.avx512f.fma.f64f64f64.L1:
     vfmadd231pd %zmm0, %zmm0, %zmm0
     vfmadd231pd %zmm1, %zmm1, %zmm1
     vfmadd231pd %zmm2, %zmm2, %zmm2
@@ -74,6 +74,6 @@ cpufp_kernel_x86_avx512f_fma_f64f64f64:
     vfmadd231pd %zmm14, %zmm14, %zmm14
     vfmadd231pd %zmm15, %zmm15, %zmm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx512f.fma.f64f64f64.L1
+    jne .avx512f.fma.f64f64f64.L1
     ret
 

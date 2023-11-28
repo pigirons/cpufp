@@ -1,6 +1,6 @@
-.globl cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16
+.globl avx512_bf16_dp2a_f32bf16bf16
 
-cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16:
+avx512_bf16_dp2a_f32bf16bf16:
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -17,7 +17,7 @@ cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16:
     vpxorq %zmm13, %zmm13, %zmm13
     vpxorq %zmm14, %zmm14, %zmm14
     vpxorq %zmm15, %zmm15, %zmm15
-.cpufp.x86.avx512.bf16.dp2a.fp32bf16bf16.L1:
+.avx512.bf16.dp2a.fp32bf16bf16.L1:
     vdpbf16ps %zmm0, %zmm0, %zmm0
     vdpbf16ps %zmm1, %zmm1, %zmm1
     vdpbf16ps %zmm2, %zmm2, %zmm2
@@ -35,6 +35,6 @@ cpufp_kernel_x86_avx512_bf16_dp2a_f32bf16bf16:
     vdpbf16ps %zmm14, %zmm14, %zmm14
     vdpbf16ps %zmm15, %zmm15, %zmm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx512.bf16.dp2a.fp32bf16bf16.L1
+    jne .avx512.bf16.dp2a.fp32bf16bf16.L1
     ret
 

@@ -4,9 +4,13 @@ This is a cpu tool for benchmarking the floating-points peak performance. Now it
 
 ## How to use
 
-build:
+build x64 version:
 
-`./build.sh`
+`./build_x64.sh`
+
+build arm64 version:
+
+`./build_arm64.sh`
 
 benchmark:
 
@@ -17,6 +21,7 @@ clean:
 `./clean.sh`
 
 xxx indicates that all the cores defined by xxx will be used for benchmarking(by affinity setting). For example, [0,3,5-8,13-15].
+
 idle_time is the interval time(sec) between two benchmarks, default 0.
 
 ## Support x86-64 SIMD ISA
@@ -176,9 +181,5 @@ Thread Pool Binding: 0 1 2 3
 | SSE             | FP64      | 44.664 GFLOPS    |
 --------------------------------------------------
 </pre>
-
-## TODO
-
-The next version may support ARMv7 and ARMv8 architectures.
 
 Welcome for bug reporting.

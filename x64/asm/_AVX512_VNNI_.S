@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8
-.globl cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16
+.globl avx512_vnni_dp4a_s32u8s8
+.globl avx512_vnni_dp2a_s32s16s16
 
-cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8:
+avx512_vnni_dp4a_s32u8s8:
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -18,7 +18,7 @@ cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8:
     vpxorq %zmm13, %zmm13, %zmm13
     vpxorq %zmm14, %zmm14, %zmm14
     vpxorq %zmm15, %zmm15, %zmm15
-.cpufp.x86.avx512.vnni.dp4a.s32u8s8.L1:
+.avx512.vnni.dp4a.s32u8s8.L1:
     vpdpbusd %zmm0, %zmm0, %zmm0
     vpdpbusd %zmm1, %zmm1, %zmm1
     vpdpbusd %zmm2, %zmm2, %zmm2
@@ -36,10 +36,10 @@ cpufp_kernel_x86_avx512_vnni_dp4a_s32u8s8:
     vpdpbusd %zmm14, %zmm14, %zmm14
     vpdpbusd %zmm15, %zmm15, %zmm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx512.vnni.dp4a.s32u8s8.L1
+    jne .avx512.vnni.dp4a.s32u8s8.L1
     ret
 
-cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16:
+avx512_vnni_dp2a_s32s16s16:
     vpxorq %zmm0, %zmm0, %zmm0
     vpxorq %zmm1, %zmm1, %zmm1
     vpxorq %zmm2, %zmm2, %zmm2
@@ -56,7 +56,7 @@ cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16:
     vpxorq %zmm13, %zmm13, %zmm13
     vpxorq %zmm14, %zmm14, %zmm14
     vpxorq %zmm15, %zmm15, %zmm15
-.cpufp.x86.avx512.vnni.dp2a.s32s16s16.L1:
+.avx512.vnni.dp2a.s32s16s16.L1:
     vpdpwssd %zmm0, %zmm0, %zmm0
     vpdpwssd %zmm1, %zmm1, %zmm1
     vpdpwssd %zmm2, %zmm2, %zmm2
@@ -74,6 +74,6 @@ cpufp_kernel_x86_avx512_vnni_dp2a_s32s16s16:
     vpdpwssd %zmm14, %zmm14, %zmm14
     vpdpwssd %zmm15, %zmm15, %zmm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx512.vnni.dp2a.s32s16s16.L1
+    jne .avx512.vnni.dp2a.s32s16s16.L1
     ret
 

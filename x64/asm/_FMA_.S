@@ -1,7 +1,7 @@
-.globl cpufp_kernel_x86_fma_f32f32f32
-.globl cpufp_kernel_x86_fma_f64f64f64
+.globl fma_f32f32f32
+.globl fma_f64f64f64
 
-cpufp_kernel_x86_fma_f32f32f32:
+fma_f32f32f32:
     vxorps %ymm0, %ymm0, %ymm0
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
@@ -18,7 +18,7 @@ cpufp_kernel_x86_fma_f32f32f32:
     vxorps %ymm13, %ymm13, %ymm13
     vxorps %ymm14, %ymm14, %ymm14
     vxorps %ymm15, %ymm15, %ymm15
-.cpufp.x86.fma.f32f32f32.L1:
+.fma.f32f32f32.L1:
     vfmadd231ps %ymm0, %ymm0, %ymm0
     vfmadd231ps %ymm1, %ymm1, %ymm1
     vfmadd231ps %ymm2, %ymm2, %ymm2
@@ -36,10 +36,10 @@ cpufp_kernel_x86_fma_f32f32f32:
     vfmadd231ps %ymm14, %ymm14, %ymm14
     vfmadd231ps %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.fma.f32f32f32.L1
+    jne .fma.f32f32f32.L1
     ret
 
-cpufp_kernel_x86_fma_f64f64f64:
+fma_f64f64f64:
     vxorpd %ymm0, %ymm0, %ymm0
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
@@ -56,7 +56,7 @@ cpufp_kernel_x86_fma_f64f64f64:
     vxorpd %ymm13, %ymm13, %ymm13
     vxorpd %ymm14, %ymm14, %ymm14
     vxorpd %ymm15, %ymm15, %ymm15
-.cpufp.x86.fma.f64f64f64.L1:
+.fma.f64f64f64.L1:
     vfmadd231pd %ymm0, %ymm0, %ymm0
     vfmadd231pd %ymm1, %ymm1, %ymm1
     vfmadd231pd %ymm2, %ymm2, %ymm2
@@ -74,6 +74,6 @@ cpufp_kernel_x86_fma_f64f64f64:
     vfmadd231pd %ymm14, %ymm14, %ymm14
     vfmadd231pd %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.fma.f64f64f64.L1
+    jne .fma.f64f64f64.L1
     ret
 

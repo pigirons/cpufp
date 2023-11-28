@@ -1,8 +1,8 @@
-.globl cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8
-.globl cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8
-.globl cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8
+.globl avx_vnni_int8_dp4a_s32s8s8
+.globl avx_vnni_int8_dp4a_s32s8u8
+.globl avx_vnni_int8_dp4a_s32u8u8
 
-cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8:
+avx_vnni_int8_dp4a_s32s8s8:
     vpxor %ymm0, %ymm0, %ymm0
     vpxor %ymm1, %ymm1, %ymm1
     vpxor %ymm2, %ymm2, %ymm2
@@ -19,7 +19,7 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8:
     vpxor %ymm13, %ymm13, %ymm13
     vpxor %ymm14, %ymm14, %ymm14
     vpxor %ymm15, %ymm15, %ymm15
-.cpufp.x86.avx.vnni.int8.dp4a.s32s8s8.L1:
+.avx.vnni.int8.dp4a.s32s8s8.L1:
     vpdpbssd %ymm0, %ymm0, %ymm0
     vpdpbssd %ymm1, %ymm1, %ymm1
     vpdpbssd %ymm2, %ymm2, %ymm2
@@ -37,10 +37,10 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8s8:
     vpdpbssd %ymm14, %ymm14, %ymm14
     vpdpbssd %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx.vnni.int8.dp4a.s32s8s8.L1
+    jne .avx.vnni.int8.dp4a.s32s8s8.L1
     ret
 
-cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8:
+avx_vnni_int8_dp4a_s32s8u8:
     vpxor %ymm0, %ymm0, %ymm0
     vpxor %ymm1, %ymm1, %ymm1
     vpxor %ymm2, %ymm2, %ymm2
@@ -57,7 +57,7 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8:
     vpxor %ymm13, %ymm13, %ymm13
     vpxor %ymm14, %ymm14, %ymm14
     vpxor %ymm15, %ymm15, %ymm15
-.cpufp.x86.avx.vnni.int8.dp4a.s32s8u8.L1:
+.avx.vnni.int8.dp4a.s32s8u8.L1:
     vpdpbsud %ymm0, %ymm0, %ymm0
     vpdpbsud %ymm1, %ymm1, %ymm1
     vpdpbsud %ymm2, %ymm2, %ymm2
@@ -75,10 +75,10 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32s8u8:
     vpdpbsud %ymm14, %ymm14, %ymm14
     vpdpbsud %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx.vnni.int8.dp4a.s32s8u8.L1
+    jne .avx.vnni.int8.dp4a.s32s8u8.L1
     ret
 
-cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8:
+avx_vnni_int8_dp4a_s32u8u8:
     vpxor %ymm0, %ymm0, %ymm0
     vpxor %ymm1, %ymm1, %ymm1
     vpxor %ymm2, %ymm2, %ymm2
@@ -95,7 +95,7 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8:
     vpxor %ymm13, %ymm13, %ymm13
     vpxor %ymm14, %ymm14, %ymm14
     vpxor %ymm15, %ymm15, %ymm15
-.cpufp.x86.avx.vnni.int8.dp4a.s32u8u8.L1:
+.avx.vnni.int8.dp4a.s32u8u8.L1:
     vpdpbuud %ymm0, %ymm0, %ymm0
     vpdpbuud %ymm1, %ymm1, %ymm1
     vpdpbuud %ymm2, %ymm2, %ymm2
@@ -113,6 +113,6 @@ cpufp_kernel_x86_avx_vnni_int8_dp4a_s32u8u8:
     vpdpbuud %ymm14, %ymm14, %ymm14
     vpdpbuud %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .cpufp.x86.avx.vnni.int8.dp4a.s32u8u8.L1
+    jne .avx.vnni.int8.dp4a.s32u8u8.L1
     ret
 
