@@ -31,9 +31,9 @@ avx_add_mul_f32f32_f32:
     vaddps %ymm9, %ymm9, %ymm9
     vmulps %ymm10, %ymm10, %ymm10
     vaddps %ymm11, %ymm11, %ymm11
-    vaddps %ymm12, %ymm12, %ymm12
+    vmulps %ymm12, %ymm12, %ymm12
     vaddps %ymm13, %ymm13, %ymm13
-    vaddps %ymm14, %ymm14, %ymm14
+    vmulps %ymm14, %ymm14, %ymm14
     vaddps %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
     jne .avx.add.mul.f32f32.f32.L1
@@ -69,9 +69,9 @@ avx_add_mul_f64f64_f64:
     vaddpd %ymm9, %ymm9, %ymm9
     vmulpd %ymm10, %ymm10, %ymm10
     vaddpd %ymm11, %ymm11, %ymm11
-    vaddpd %ymm12, %ymm12, %ymm12
+    vmulpd %ymm12, %ymm12, %ymm12
     vaddpd %ymm13, %ymm13, %ymm13
-    vaddpd %ymm14, %ymm14, %ymm14
+    vmulpd %ymm14, %ymm14, %ymm14
     vaddpd %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
     jne .avx.add.mul.f64f64.f64.L1
