@@ -1,5 +1,4 @@
 SRC=x64
-INC=x64
 ASM=$SRC/asm
 COMM=common
 BUILD_DIR=build_dir
