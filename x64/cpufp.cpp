@@ -180,7 +180,7 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
 
         // traverse task list
         cpubm_x86_one(sh, bm_list[0], table);
-        for (i = 0; i < bm_list.size() - 1; i++)
+        for (i = 1; i < bm_list.size(); i++)
         {
             sleep(idle_time);
             cpubm_x86_one(sh, bm_list[i], table);
