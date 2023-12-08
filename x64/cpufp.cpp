@@ -74,10 +74,10 @@ typedef struct
 static vector<cpubm_t> bm_list;
 
 static double get_time(struct timespec *start,
-	struct timespec *end)
+    struct timespec *end)
 {
-	return end->tv_sec - start->tv_sec +
-		(end->tv_nsec - start->tv_nsec) * 1e-9;
+    return end->tv_sec - start->tv_sec +
+        (end->tv_nsec - start->tv_nsec) * 1e-9;
 }
 
 static void reg_new_isa(std::string isa,
@@ -114,27 +114,27 @@ static void cpubm_x86_one(smtl_handle sh,
     int i;
     int num_threads = smtl_num_threads(sh);
 
-	// warm up
-	for (i = 0; i < num_threads; i++)
-	{
-		smtl_add_task(sh, thread_func, (void*)&item);
-	}
-	smtl_begin_tasks(sh);
-	smtl_wait_tasks_finished(sh);
+    // warm up
+    for (i = 0; i < num_threads; i++)
+    {
+        smtl_add_task(sh, thread_func, (void*)&item);
+    }
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
 
-	clock_gettime(CLOCK_MONOTONIC_RAW, &start);
-	for (i = 0; i < num_threads; i++)
-	{
-		smtl_add_task(sh, thread_func, (void*)&item);
-	}
-	smtl_begin_tasks(sh);
-	smtl_wait_tasks_finished(sh);
-	clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &start);
+    for (i = 0; i < num_threads; i++)
+    {
+        smtl_add_task(sh, thread_func, (void*)&item);
+    }
+    smtl_begin_tasks(sh);
+    smtl_wait_tasks_finished(sh);
+    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
 
-	time_used = get_time(&start, &end);
-	perf = item.loop_time * item.comp_pl * num_threads /
+    time_used = get_time(&start, &end);
+    perf = item.loop_time * item.comp_pl * num_threads /
         time_used * 1e-9;
-    
+
     stringstream ss;
     ss << std::setprecision(5) << perf << " " << item.dim;
 
@@ -151,45 +151,45 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
 {
     int i;
 
-    int num_threads = set_of_threads.size();
-
-    printf("Number Threads: %d\n", num_threads);
-    printf("Thread Pool Binding:");
-    for (i = 0; i < num_threads; i++)
-    {
-        printf(" %d", set_of_threads[i]);
-    }
-    printf("\n");
-
-    // set table head
-    vector<string> ti;
-    ti.resize(3);
-    ti[0] = "Instruction Set";
-    ti[1] = "Core Computation";
-    ti[2] = "Peak Performance";
-    
-    Table table;
-    table.setColumnNum(3);
-    table.addOneItem(ti);
-
-    // set thread pool
-    smtl_handle sh;
-	smtl_init(&sh, set_of_threads);
-
-    // traverse task list
-    for (i = 0; i < bm_list.size() - 1; i++)
-    {
-        cpubm_x86_one(sh, bm_list[i], table);
-        sleep(idle_time);
-    }
     if (bm_list.size() > 0)
     {
-        cpubm_x86_one(sh, bm_list[i], table);
+        int num_threads = set_of_threads.size();
+
+        printf("Number Threads: %d\n", num_threads);
+        printf("Thread Pool Binding:");
+        for (i = 0; i < num_threads; i++)
+        {
+            printf(" %d", set_of_threads[i]);
+        }
+        printf("\n");
+
+        // set table head
+        vector<string> ti;
+        ti.resize(3);
+        ti[0] = "Instruction Set";
+        ti[1] = "Core Computation";
+        ti[2] = "Peak Performance";
+
+        Table table;
+        table.setColumnNum(3);
+        table.addOneItem(ti);
+
+        // set thread pool
+        smtl_handle sh;
+        smtl_init(&sh, set_of_threads);
+
+        // traverse task list
+        cpubm_x86_one(sh, bm_list[0], table);
+        for (i = 0; i < bm_list.size() - 1; i++)
+        {
+            sleep(idle_time);
+            cpubm_x86_one(sh, bm_list[i], table);
+        }
+
+        table.print();
+
+        smtl_fini(sh);
     }
-
-    table.print();
-
-    smtl_fini(sh);
 }
 
 static void parse_thread_pool(char *sets,
