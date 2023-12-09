@@ -38,85 +38,15 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 |AVX512_BF16|bf16|From AMD Zen4|
 |AVX_VNNI_INT8|int8|Unknown|
 
-## Some benchmark results
+## Support arm64 SIMD ISA
 
-### Intel Alder Lake i7-1280p
+|ISA|Data Type|Description|
+| ------------ | ------------ | ------------ |
+|asimd|fp32/fp64|From Cortex-A57/A53|
+|asimd_hp|fp16|From Cortex-A75/A55|
+|asimd_dp|int8|From Cortex-A76/A55|
 
-For single Golden Cove(big) core:
-
-<pre>
-$ ./cpufp --thread_pool=[0]
-Number Threads: 1
-Thread Pool Binding: 0
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| AVX_VNNI        | INT8      | 590.31 GOPS      |
-| AVX_VNNI        | INT16     | 295.06 GOPS      |
-| FMA             | FP32      | 149.87 GFLOPS    |
-| FMA             | FP64      | 74.931 GFLOPS    |
-| AVX             | FP32      | 112.39 GFLOPS    |
-| AVX             | FP64      | 56.203 GFLOPS    |
-| SSE             | FP32      | 56.054 GFLOPS    |
-| SSE             | FP64      | 28.001 GFLOPS    |
---------------------------------------------------
-</pre>
-
-For multiple big cores:
-
-<pre>
-$ ./cpufp --thread_pool=[0,2,4,6,8,10]
-Number Threads: 6
-Thread Pool Binding: 0 2 4 6 8 10
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| AVX_VNNI        | INT8      | 2636.8 GOPS      |
-| AVX_VNNI        | INT16     | 1319.1 GOPS      |
-| FMA             | FP32      | 670.05 GFLOPS    |
-| FMA             | FP64      | 335 GFLOPS       |
-| AVX             | FP32      | 502.4 GFLOPS     |
-| AVX             | FP64      | 251.2 GFLOPS     |
-| SSE             | FP32      | 250.42 GFLOPS    |
-| SSE             | FP64      | 125.16 GFLOPS    |
---------------------------------------------------
-</pre>
-
-For single Gracemont(little) core:
-
-<pre>
-$ ./cpufp --thread_pool=[12]
-Number Threads: 1
-Thread Pool Binding: 12
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| AVX_VNNI        | INT8      | 114.89 GOPS      |
-| AVX_VNNI        | INT16     | 57.445 GOPS      |
-| FMA             | FP32      | 57.444 GFLOPS    |
-| FMA             | FP64      | 28.723 GFLOPS    |
-| AVX             | FP32      | 28.723 GFLOPS    |
-| AVX             | FP64      | 14.362 GFLOPS    |
-| SSE             | FP32      | 28.312 GFLOPS    |
-| SSE             | FP64      | 14.361 GFLOPS    |
---------------------------------------------------
-</pre>
-
-For multiple little cores:
-
-<pre>
-$ ./cpufp --thread_pool=[12-19]
-Number Threads: 8
-Thread Pool Binding: 12 13 14 15 16 17 18 19
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| AVX_VNNI        | INT8      | 867.99 GOPS      |
-| AVX_VNNI        | INT16     | 434 GOPS         |
-| FMA             | FP32      | 434 GFLOPS       |
-| FMA             | FP64      | 217 GFLOPS       |
-| AVX             | FP32      | 217.01 GFLOPS    |
-| AVX             | FP64      | 108.5 GFLOPS     |
-| SSE             | FP32      | 216.39 GFLOPS    |
-| SSE             | FP64      | 108.5 GFLOPS     |
---------------------------------------------------
-</pre>
+## Some x86-64 CPU benchmark results
 
 ### AMD Ryzen9 6900HX(Zen3+)
 
@@ -128,12 +58,12 @@ Number Threads: 1
 Thread Pool Binding: 0
 --------------------------------------------------------------
 | Instruction Set | Core Computation      | Peak Performance |
-| FMA             | FMA(f32,f32,f32)      | 150.94 GFLOPS    |
-| FMA             | FMA(f64,f64,f64)      | 75.77 GFLOPS     |
-| AVX             | ADD(MUL(f32,f32),f32) | 149.89 GFLOPS    |
-| AVX             | ADD(MUL(f64,f64),f64) | 74.982 GFLOPS    |
-| SSE             | ADD(MUL(f32,f32),f32) | 75.378 GFLOPS    |
-| SSE             | ADD(MUL(f64,f64),f64) | 37.608 GFLOPS    |
+| FMA             | FMA(f32,f32,f32)      | 151.84 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 75.702 GFLOPS    |
+| AVX             | ADD(MUL(f32,f32),f32) | 150.86 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 75.476 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 75.452 GFLOPS    |
+| SSE2            | ADD(MUL(f64,f64),f64) | 37.737 GFLOPS    |
 --------------------------------------------------------------
 </pre>
 
@@ -145,16 +75,16 @@ Number Threads: 8
 Thread Pool Binding: 0 2 4 6 8 10 12 14
 --------------------------------------------------------------
 | Instruction Set | Core Computation      | Peak Performance |
-| FMA             | FMA(f32,f32,f32)      | 1054.6 GFLOPS    |
-| FMA             | FMA(f64,f64,f64)      | 525.72 GFLOPS    |
-| AVX             | ADD(MUL(f32,f32),f32) | 1014.6 GFLOPS    |
-| AVX             | ADD(MUL(f64,f64),f64) | 506.08 GFLOPS    |
-| SSE             | ADD(MUL(f32,f32),f32) | 519.33 GFLOPS    |
-| SSE             | ADD(MUL(f64,f64),f64) | 254.33 GFLOPS    |
+| FMA             | FMA(f32,f32,f32)      | 1057.8 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 534.37 GFLOPS    |
+| AVX             | ADD(MUL(f32,f32),f32) | 1037.6 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 516.21 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 518.32 GFLOPS    |
+| SSE2            | ADD(MUL(f64,f64),f64) | 258.92 GFLOPS    |
 --------------------------------------------------------------
 </pre>
 
-### Intel Celeron N5105(Jasper Lake)
+### Intel N100(Alder Lake-N)
 
 For single core:
 
@@ -162,11 +92,17 @@ For single core:
 $ ./cpufp --thread_pool=[0]
 Number Threads: 1
 Thread Pool Binding: 0
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| SSE             | FP32      | 23.102 GFLOPS    |
-| SSE             | FP64      | 11.564 GFLOPS    |
---------------------------------------------------
+--------------------------------------------------------------
+| Instruction Set | Core Computation      | Peak Performance |
+| AVX_VNNI        | DP4A(s32,u8,s8)       | 108.51 GOPS      |
+| AVX_VNNI        | DP2A(s32,s16,s16)     | 54.244 GOPS      |
+| FMA             | FMA(f32,f32,f32)      | 54.247 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 27.128 GFLOPS    |
+| AVX             | ADD(MUL(f32,f32),f32) | 27.128 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 13.564 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 27.126 GFLOPS    |
+| SSE2            | ADD(MUL(f64,f64),f64) | 13.563 GFLOPS    |
+--------------------------------------------------------------
 </pre>
 
 For multi_cores:
@@ -175,11 +111,50 @@ For multi_cores:
 $ ./cpufp --thread_pool=[0-3]
 Number Threads: 4
 Thread Pool Binding: 0 1 2 3
---------------------------------------------------
-| Instruction Set | Data Type | Peak Performance |
-| SSE             | FP32      | 89.327 GFLOPS    |
-| SSE             | FP64      | 44.664 GFLOPS    |
---------------------------------------------------
+--------------------------------------------------------------
+| Instruction Set | Core Computation      | Peak Performance |
+| AVX_VNNI        | DP4A(s32,u8,s8)       | 369.66 GOPS      |
+| AVX_VNNI        | DP2A(s32,s16,s16)     | 185.09 GOPS      |
+| FMA             | FMA(f32,f32,f32)      | 185.08 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 92.55 GFLOPS     |
+| AVX             | ADD(MUL(f32,f32),f32) | 92.546 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 46.269 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 92.546 GFLOPS    |
+| SSE2            | ADD(MUL(f64,f64),f64) | 46.27 GFLOPS     |
+--------------------------------------------------------------
 </pre>
 
-Welcome for bug reporting.
+## Some arm64 CPU benchmark results
+
+### RaspBerry Pi4(Cortex-A72)
+
+For Single Core:
+
+<pre>
+$ ./cpufp --thread_pool=[0]
+Number Threads: 1
+Thread Pool Binding: 0
+-------------------------------------------------------------
+| Instruction Set | Core Computation     | Peak Performance |
+| asimd           | fmla.vs(f32,f32,f32) | 11.958 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32) | 11.958 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64) | 5.9792 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64) | 5.9792 GFLOPS    |
+-------------------------------------------------------------
+</pre>
+
+For multi_cores:
+
+<pre>
+$ ./cpufp --thread_pool=[0-3]
+Number Threads: 4
+Thread Pool Binding: 0 1 2 3
+-------------------------------------------------------------
+| Instruction Set | Core Computation     | Peak Performance |
+| asimd           | fmla.vs(f32,f32,f32) | 47.883 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32) | 47.88 GFLOPS     |
+| asimd           | fmla.vs(f64,f64,f64) | 23.933 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64) | 23.943 GFLOPS    |
+-------------------------------------------------------------
+</pre>
+
