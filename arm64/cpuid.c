@@ -2,9 +2,9 @@
 
 typedef enum
 {
-    _ASIMD_   = 0x1,
-    _ASIMDHP_ = 0x2,
-    _ASIMDDP_ = 0x3,
+    _ASIMD_    = 0x1,
+    _ASIMD_HP_ = 0x2,
+    _ASIMD_DP_ = 0x3,
 } x64_simd_t;
 
 static unsigned int feat = 0;
