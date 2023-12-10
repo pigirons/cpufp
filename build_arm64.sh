@@ -22,7 +22,7 @@ for SIMD in `$BUILD_DIR/cpuid`;
 do
     SIMD_MACRO="$SIMD_MACRO-D$SIMD "
     SIMD_OBJ="$SIMD_OBJ$BUILD_DIR/$SIMD.o "
-    g++ -c $ASM/$SIMD.S -o $BUILD_DIR/$SIMD.o
+    as -mcpu=all -c $ASM/$SIMD.S -o $BUILD_DIR/$SIMD.o
 done
 
 # compile cpufp

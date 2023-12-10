@@ -244,9 +244,9 @@ static void cpufp_register_isa()
     reg_new_isa("asimd_dp", "dp4a.vv(s32,s8,s8)", "GOPS",
         0x10000000LL, 768LL, asimd_sdot_vv_s32s8s8);
     reg_new_isa("asimd_dp", "dp4a.vs(u32,u8,u8)", "GOPS",
-        0x10000000LL, 384LL, asimd_udot_vs_u32u8u8);
+        0x10000000LL, 768LL, asimd_udot_vs_u32u8u8);
     reg_new_isa("asimd_dp", "dp4a.vv(u32,u8,u8)", "GOPS",
-        0x10000000LL, 384LL, asimd_udot_vv_u32u8u8);
+        0x10000000LL, 768LL, asimd_udot_vv_u32u8u8);
 #endif
 
 #ifdef _ASIMD_HP_
