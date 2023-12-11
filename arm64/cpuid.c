@@ -7,6 +7,16 @@ int main()
 {
     uint64_t hwcaps = getauxval(AT_HWCAP);
 
+    if (hwcaps & HWCAP2_I8MM)
+    {
+        printf("_I8MM_\n");
+    }
+
+    if (hwcaps & HWCAP2_BF16)
+    {
+        printf("_BF16_\n");
+    }
+
     if (hwcaps & HWCAP_ASIMDDP)
     {
         printf("_ASIMD_DP_\n");
