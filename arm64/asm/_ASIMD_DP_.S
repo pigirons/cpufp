@@ -14,12 +14,12 @@
 	ldp d8, d9, [sp], #16
 .endm
 
-#ifdef __APPLE_
-.globl _asimd_sdot_vs_s32s8s8
-_asimd_sdot_vs_s32s8s8:
+#ifdef __APPLE__
+.globl _asimd_dp4a_vs_s32s8s8
+_asimd_dp4a_vs_s32s8s8:
 #else
-.globl asimd_sdot_vs_s32s8s8
-asimd_sdot_vs_s32s8s8:
+.globl asimd_dp4a_vs_s32s8s8
+asimd_dp4a_vs_s32s8s8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -48,7 +48,7 @@ asimd_sdot_vs_s32s8s8:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.sdot.vs.s32s8s8.L1:
+.asimd.dp4a.vs.s32s8s8.L1:
     sdot v8.4s, v0.16b, v1.4b[0]
     sdot v9.4s, v0.16b, v1.4b[0]
     sdot v10.4s, v0.16b, v1.4b[0]
@@ -74,16 +74,16 @@ asimd_sdot_vs_s32s8s8:
     sdot v29.4s, v0.16b, v1.4b[0]
     sdot v30.4s, v0.16b, v1.4b[0]
     sdot v31.4s, v0.16b, v1.4b[0]
-    bne .asimd.sdot.vs.s32s8s8.L1
+    bne .asimd.dp4a.vs.s32s8s8.L1
     restore_caller_vec
     ret
 
-#ifdef __APPLE_
-.globl _asimd_sdot_vv_s32s8s8
-_asimd_sdot_vv_s32s8s8:
+#ifdef __APPLE__
+.globl _asimd_dp4a_vv_s32s8s8
+_asimd_dp4a_vv_s32s8s8:
 #else
-.globl asimd_sdot_vv_s32s8s8
-asimd_sdot_vv_s32s8s8:
+.globl asimd_dp4a_vv_s32s8s8
+asimd_dp4a_vv_s32s8s8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -112,7 +112,7 @@ asimd_sdot_vv_s32s8s8:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.sdot.vv.s32s8s8.L1:
+.asimd.dp4a.vv.s32s8s8.L1:
     sdot v8.4s, v0.16b, v1.16b
     sdot v9.4s, v0.16b, v1.16b
     sdot v10.4s, v0.16b, v1.16b
@@ -138,16 +138,16 @@ asimd_sdot_vv_s32s8s8:
     sdot v29.4s, v0.16b, v1.16b
     sdot v30.4s, v0.16b, v1.16b
     sdot v31.4s, v0.16b, v1.16b
-    bne .asimd.sdot.vv.s32s8s8.L1
+    bne .asimd.dp4a.vv.s32s8s8.L1
     restore_caller_vec
     ret
 
-#ifdef __APPLE_
-.globl _asimd_udot_vs_u32u8u8
-_asimd_udot_vs_u32u8u8:
+#ifdef __APPLE__
+.globl _asimd_dp4a_vs_u32u8u8
+_asimd_dp4a_vs_u32u8u8:
 #else
-.globl asimd_udot_vs_u32u8u8
-asimd_udot_vs_u32u8u8:
+.globl asimd_dp4a_vs_u32u8u8
+asimd_dp4a_vs_u32u8u8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -176,7 +176,7 @@ asimd_udot_vs_u32u8u8:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.udot.vs.u32u8u8.L1:
+.asimd.dp4a.vs.u32u8u8.L1:
     udot v8.4s, v0.16b, v1.4b[0]
     udot v9.4s, v0.16b, v1.4b[0]
     udot v10.4s, v0.16b, v1.4b[0]
@@ -202,16 +202,16 @@ asimd_udot_vs_u32u8u8:
     udot v29.4s, v0.16b, v1.4b[0]
     udot v30.4s, v0.16b, v1.4b[0]
     udot v31.4s, v0.16b, v1.4b[0]
-    bne .asimd.udot.vs.u32u8u8.L1
+    bne .asimd.dp4a.vs.u32u8u8.L1
     restore_caller_vec
     ret
 
-#ifdef __APPLE_
-.globl _asimd_udot_vv_u32u8u8
-_asimd_udot_vv_u32u8u8:
+#ifdef __APPLE__
+.globl _asimd_dp4a_vv_u32u8u8
+_asimd_dp4a_vv_u32u8u8:
 #else
-.globl asimd_udot_vv_u32u8u8
-asimd_udot_vv_u32u8u8:
+.globl asimd_dp4a_vv_u32u8u8
+asimd_dp4a_vv_u32u8u8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -240,7 +240,7 @@ asimd_udot_vv_u32u8u8:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.udot.vv.u32u8u8.L1:
+.asimd.dp4a.vv.u32u8u8.L1:
     udot v8.4s, v0.16b, v1.16b
     udot v9.4s, v0.16b, v1.16b
     udot v10.4s, v0.16b, v1.16b
@@ -266,7 +266,7 @@ asimd_udot_vv_u32u8u8:
     udot v29.4s, v0.16b, v1.16b
     udot v30.4s, v0.16b, v1.16b
     udot v31.4s, v0.16b, v1.16b
-    bne .asimd.udot.vv.u32u8u8.L1
+    bne .asimd.dp4a.vv.u32u8u8.L1
     restore_caller_vec
     ret
 

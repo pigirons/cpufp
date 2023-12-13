@@ -27,10 +27,16 @@ extern "C"
 #endif
 
 #ifdef _ASIMD_DP_
-    void asimd_sdot_vs_s32s8s8(int64_t);
-    void asimd_sdot_vv_s32s8s8(int64_t);
-    void asimd_udot_vs_u32u8u8(int64_t);
-    void asimd_udot_vv_u32u8u8(int64_t);
+    void asimd_dp4a_vs_s32s8s8(int64_t);
+    void asimd_dp4a_vv_s32s8s8(int64_t);
+    void asimd_dp4a_vs_u32u8u8(int64_t);
+    void asimd_dp4a_vv_u32u8u8(int64_t);
+#endif
+
+#ifdef _BF16_
+    void asimd_mmla_fp32bf16bf16(int64_t);
+    void asimd_dp2a_vs_fp32bf16bf16(int64_t);
+    void asimd_dp2a_vv_fp32bf16bf16(int64_t);
 #endif
 }
 
@@ -238,15 +244,24 @@ static void parse_thread_pool(char *sets,
 
 static void cpufp_register_isa()
 {
+#ifdef _BF16_
+    reg_new_isa("bf16", "mmla(f32,bf16,bf16)", "GFLOPS",
+        0x10000000LL, 768LL, asimd_mmla_fp32bf16bf16);
+    reg_new_isa("bf16", "dp2a.vs(f32,bf16,bf16)", "GFLOPS",
+        0x10000000LL, 384LL, asimd_dp2a_vs_fp32bf16bf16);
+    reg_new_isa("bf16", "dp2a.vv(f32,bf16,bf16)", "GFLOPS",
+        0x10000000LL, 384LL, asimd_dp2a_vv_fp32bf16bf16);
+#endif
+
 #ifdef _ASIMD_DP_
     reg_new_isa("asimd_dp", "dp4a.vs(s32,s8,s8)", "GOPS",
-        0x10000000LL, 768LL, asimd_sdot_vs_s32s8s8);
+        0x10000000LL, 768LL, asimd_dp4a_vs_s32s8s8);
     reg_new_isa("asimd_dp", "dp4a.vv(s32,s8,s8)", "GOPS",
-        0x10000000LL, 768LL, asimd_sdot_vv_s32s8s8);
+        0x10000000LL, 768LL, asimd_dp4a_vv_s32s8s8);
     reg_new_isa("asimd_dp", "dp4a.vs(u32,u8,u8)", "GOPS",
-        0x10000000LL, 768LL, asimd_udot_vs_u32u8u8);
+        0x10000000LL, 768LL, asimd_dp4a_vs_u32u8u8);
     reg_new_isa("asimd_dp", "dp4a.vv(u32,u8,u8)", "GOPS",
-        0x10000000LL, 768LL, asimd_udot_vv_u32u8u8);
+        0x10000000LL, 768LL, asimd_dp4a_vv_u32u8u8);
 #endif
 
 #ifdef _ASIMD_HP_

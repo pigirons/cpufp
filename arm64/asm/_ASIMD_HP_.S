@@ -14,7 +14,7 @@
 	ldp d8, d9, [sp], #16
 .endm
 
-#ifdef __APPLE_
+#ifdef __APPLE__
 .globl _asimd_fmla_vs_fp16fp16fp16
 _asimd_fmla_vs_fp16fp16fp16:
 #else
@@ -78,7 +78,7 @@ asimd_fmla_vs_fp16fp16fp16:
     restore_caller_vec
     ret
 
-#ifdef __APPLE_
+#ifdef __APPLE__
 .globl _asimd_fmla_vv_fp16fp16fp16
 _asimd_fmla_vv_fp16fp16fp16:
 #else
