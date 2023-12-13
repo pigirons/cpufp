@@ -15,11 +15,11 @@
 .endm
 
 #ifdef __APPLE__
-.globl _asimd_mmla_fp32bf16bf16
-_asimd_mmla_fp32bf16bf16:
+.globl _asimd_mmla_s32s8s8
+_asimd_mmla_s32s8s8:
 #else
-.globl asimd_mmla_fp32bf16bf16
-asimd_mmla_fp32bf16bf16:
+.globl asimd_mmla_s32s8s8
+asimd_mmla_s32s8s8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -48,42 +48,42 @@ asimd_mmla_fp32bf16bf16:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.mmla.fp32bf16bf16.L1:
-    bfmmla v8.4s, v0.8h, v1.8h
-    bfmmla v9.4s, v0.8h, v1.8h
-    bfmmla v10.4s, v0.8h, v1.8h
-    bfmmla v11.4s, v0.8h, v1.8h
-    bfmmla v12.4s, v0.8h, v1.8h
-    bfmmla v13.4s, v0.8h, v1.8h
-    bfmmla v14.4s, v0.8h, v1.8h
-    bfmmla v15.4s, v0.8h, v1.8h
-    bfmmla v16.4s, v0.8h, v1.8h
-    bfmmla v17.4s, v0.8h, v1.8h
-    bfmmla v18.4s, v0.8h, v1.8h
-    bfmmla v19.4s, v0.8h, v1.8h
+.asimd.mmla.s32s8s8.L1:
+    smmla v8.4s, v0.16b, v1.16b
+    smmla v9.4s, v0.16b, v1.16b
+    smmla v10.4s, v0.16b, v1.16b
+    smmla v11.4s, v0.16b, v1.16b
+    smmla v12.4s, v0.16b, v1.16b
+    smmla v13.4s, v0.16b, v1.16b
+    smmla v14.4s, v0.16b, v1.16b
+    smmla v15.4s, v0.16b, v1.16b
+    smmla v16.4s, v0.16b, v1.16b
+    smmla v17.4s, v0.16b, v1.16b
+    smmla v18.4s, v0.16b, v1.16b
+    smmla v19.4s, v0.16b, v1.16b
     subs x0, x0, #1
-    bfmmla v20.4s, v0.8h, v1.8h
-    bfmmla v21.4s, v0.8h, v1.8h
-    bfmmla v22.4s, v0.8h, v1.8h
-    bfmmla v23.4s, v0.8h, v1.8h
-    bfmmla v24.4s, v0.8h, v1.8h
-    bfmmla v25.4s, v0.8h, v1.8h
-    bfmmla v26.4s, v0.8h, v1.8h
-    bfmmla v27.4s, v0.8h, v1.8h
-    bfmmla v28.4s, v0.8h, v1.8h
-    bfmmla v29.4s, v0.8h, v1.8h
-    bfmmla v30.4s, v0.8h, v1.8h
-    bfmmla v31.4s, v0.8h, v1.8h
-    bne .asimd.mmla.fp32bf16bf16.L1
+    smmla v20.4s, v0.16b, v1.16b
+    smmla v21.4s, v0.16b, v1.16b
+    smmla v22.4s, v0.16b, v1.16b
+    smmla v23.4s, v0.16b, v1.16b
+    smmla v24.4s, v0.16b, v1.16b
+    smmla v25.4s, v0.16b, v1.16b
+    smmla v26.4s, v0.16b, v1.16b
+    smmla v27.4s, v0.16b, v1.16b
+    smmla v28.4s, v0.16b, v1.16b
+    smmla v29.4s, v0.16b, v1.16b
+    smmla v30.4s, v0.16b, v1.16b
+    smmla v31.4s, v0.16b, v1.16b
+    bne .asimd.mmla.s32s8s8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _asimd_dp2a_vs_fp32bf16bf16
-_asimd_dp2a_vs_fp32bf16bf16:
+.globl _asimd_mmla_u32u8u8
+_asimd_mmla_u32u8u8:
 #else
-.globl asimd_dp2a_vs_fp32bf16bf16
-asimd_dp2a_vs_fp32bf16bf16:
+.globl asimd_mmla_u32u8u8
+asimd_mmla_u32u8u8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -112,42 +112,42 @@ asimd_dp2a_vs_fp32bf16bf16:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.dp2a.vs.fp32bf16bf16.L1:
-    bfdot v8.4s, v0.8h, v1.2h[0]
-    bfdot v9.4s, v0.8h, v1.2h[0]
-    bfdot v10.4s, v0.8h, v1.2h[0]
-    bfdot v11.4s, v0.8h, v1.2h[0]
-    bfdot v12.4s, v0.8h, v1.2h[0]
-    bfdot v13.4s, v0.8h, v1.2h[0]
-    bfdot v14.4s, v0.8h, v1.2h[0]
-    bfdot v15.4s, v0.8h, v1.2h[0]
-    bfdot v16.4s, v0.8h, v1.2h[0]
-    bfdot v17.4s, v0.8h, v1.2h[0]
-    bfdot v18.4s, v0.8h, v1.2h[0]
-    bfdot v19.4s, v0.8h, v1.2h[0]
+.asimd.mmla.u32u8u8.L1:
+    ummla v8.4s, v0.16b, v1.16b
+    ummla v9.4s, v0.16b, v1.16b
+    ummla v10.4s, v0.16b, v1.16b
+    ummla v11.4s, v0.16b, v1.16b
+    ummla v12.4s, v0.16b, v1.16b
+    ummla v13.4s, v0.16b, v1.16b
+    ummla v14.4s, v0.16b, v1.16b
+    ummla v15.4s, v0.16b, v1.16b
+    ummla v16.4s, v0.16b, v1.16b
+    ummla v17.4s, v0.16b, v1.16b
+    ummla v18.4s, v0.16b, v1.16b
+    ummla v19.4s, v0.16b, v1.16b
     subs x0, x0, #1
-    bfdot v20.4s, v0.8h, v1.2h[0]
-    bfdot v21.4s, v0.8h, v1.2h[0]
-    bfdot v22.4s, v0.8h, v1.2h[0]
-    bfdot v23.4s, v0.8h, v1.2h[0]
-    bfdot v24.4s, v0.8h, v1.2h[0]
-    bfdot v25.4s, v0.8h, v1.2h[0]
-    bfdot v26.4s, v0.8h, v1.2h[0]
-    bfdot v27.4s, v0.8h, v1.2h[0]
-    bfdot v28.4s, v0.8h, v1.2h[0]
-    bfdot v29.4s, v0.8h, v1.2h[0]
-    bfdot v30.4s, v0.8h, v1.2h[0]
-    bfdot v31.4s, v0.8h, v1.2h[0]
-    bne .asimd.dp2a.vs.fp32bf16bf16.L1
+    ummla v20.4s, v0.16b, v1.16b
+    ummla v21.4s, v0.16b, v1.16b
+    ummla v22.4s, v0.16b, v1.16b
+    ummla v23.4s, v0.16b, v1.16b
+    ummla v24.4s, v0.16b, v1.16b
+    ummla v25.4s, v0.16b, v1.16b
+    ummla v26.4s, v0.16b, v1.16b
+    ummla v27.4s, v0.16b, v1.16b
+    ummla v28.4s, v0.16b, v1.16b
+    ummla v29.4s, v0.16b, v1.16b
+    ummla v30.4s, v0.16b, v1.16b
+    ummla v31.4s, v0.16b, v1.16b
+    bne .asimd.mmla.u32u8u8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _asimd_dp2a_vv_fp32bf16bf16
-_asimd_dp2a_vv_fp32bf16bf16:
+.globl _asimd_mmla_s32u8s8
+_asimd_mmla_s32u8s8:
 #else
-.globl asimd_dp2a_vv_fp32bf16bf16
-asimd_dp2a_vv_fp32bf16bf16:
+.globl asimd_mmla_s32u8s8
+asimd_mmla_s32u8s8:
 #endif
     preserve_caller_vec
     eor v0.16b, v0.16b, v0.16b
@@ -176,33 +176,33 @@ asimd_dp2a_vv_fp32bf16bf16:
     eor v29.16b, v29.16b, v29.16b
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
-.asimd.dp2a.vv.fp32bf16bf16.L1:
-    bfdot v8.4s, v0.8h, v1.8h
-    bfdot v9.4s, v0.8h, v1.8h
-    bfdot v10.4s, v0.8h, v1.8h
-    bfdot v11.4s, v0.8h, v1.8h
-    bfdot v12.4s, v0.8h, v1.8h
-    bfdot v13.4s, v0.8h, v1.8h
-    bfdot v14.4s, v0.8h, v1.8h
-    bfdot v15.4s, v0.8h, v1.8h
-    bfdot v16.4s, v0.8h, v1.8h
-    bfdot v17.4s, v0.8h, v1.8h
-    bfdot v18.4s, v0.8h, v1.8h
-    bfdot v19.4s, v0.8h, v1.8h
+.asimd.mmla.s32u8s8.L1:
+    usmmla v8.4s, v0.16b, v1.16b
+    usmmla v9.4s, v0.16b, v1.16b
+    usmmla v10.4s, v0.16b, v1.16b
+    usmmla v11.4s, v0.16b, v1.16b
+    usmmla v12.4s, v0.16b, v1.16b
+    usmmla v13.4s, v0.16b, v1.16b
+    usmmla v14.4s, v0.16b, v1.16b
+    usmmla v15.4s, v0.16b, v1.16b
+    usmmla v16.4s, v0.16b, v1.16b
+    usmmla v17.4s, v0.16b, v1.16b
+    usmmla v18.4s, v0.16b, v1.16b
+    usmmla v19.4s, v0.16b, v1.16b
     subs x0, x0, #1
-    bfdot v20.4s, v0.8h, v1.8h
-    bfdot v21.4s, v0.8h, v1.8h
-    bfdot v22.4s, v0.8h, v1.8h
-    bfdot v23.4s, v0.8h, v1.8h
-    bfdot v24.4s, v0.8h, v1.8h
-    bfdot v25.4s, v0.8h, v1.8h
-    bfdot v26.4s, v0.8h, v1.8h
-    bfdot v27.4s, v0.8h, v1.8h
-    bfdot v28.4s, v0.8h, v1.8h
-    bfdot v29.4s, v0.8h, v1.8h
-    bfdot v30.4s, v0.8h, v1.8h
-    bfdot v31.4s, v0.8h, v1.8h
-    bne .asimd.dp2a.vv.fp32bf16bf16.L1
+    usmmla v20.4s, v0.16b, v1.16b
+    usmmla v21.4s, v0.16b, v1.16b
+    usmmla v22.4s, v0.16b, v1.16b
+    usmmla v23.4s, v0.16b, v1.16b
+    usmmla v24.4s, v0.16b, v1.16b
+    usmmla v25.4s, v0.16b, v1.16b
+    usmmla v26.4s, v0.16b, v1.16b
+    usmmla v27.4s, v0.16b, v1.16b
+    usmmla v28.4s, v0.16b, v1.16b
+    usmmla v29.4s, v0.16b, v1.16b
+    usmmla v30.4s, v0.16b, v1.16b
+    usmmla v31.4s, v0.16b, v1.16b
+    bne .asimd.mmla.s32u8s8.L1
     restore_caller_vec
     ret
 
