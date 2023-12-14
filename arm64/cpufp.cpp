@@ -43,6 +43,10 @@ extern "C"
     void asimd_mmla_s32s8s8(int64_t);
     void asimd_mmla_u32u8u8(int64_t);
     void asimd_mmla_s32u8s8(int64_t);
+
+    void asimd_dp4a_vs_s32s8u8(int64_t);
+    void asimd_dp4a_vs_s32u8s8(int64_t);
+    void asimd_dp4a_vv_s32u8s8(int64_t);
 #endif
 }
 
@@ -257,6 +261,13 @@ static void cpufp_register_isa()
         0x10000000LL, 1536LL, asimd_mmla_u32u8u8);
     reg_new_isa("i8mm", "mmla(s32,u8,s8)", "GOPS",
         0x10000000LL, 1536LL, asimd_mmla_s32u8s8);
+    
+    reg_new_isa("i8mm", "dp4a.vs(s32,s8,u8)", "GOPS",
+        0x10000000LL, 768LL, asimd_dp4a_vs_s32s8u8);
+    reg_new_isa("i8mm", "dp4a.vs(s32,u8,s8)", "GOPS",
+        0x10000000LL, 768LL, asimd_dp4a_vs_s32u8s8);
+    reg_new_isa("i8mm", "dp4a.vv(s32,u8,s8)", "GOPS",
+        0x10000000LL, 768LL, asimd_dp4a_vv_s32u8s8);
 #endif
 
 #ifdef _ASIMD_DP_
