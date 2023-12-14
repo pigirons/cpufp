@@ -28,7 +28,8 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 
 |ISA|Data Type|Description|
 | ------------ | ------------ | ------------ |
-|SSE|fp32/fp64|Before Sandy Bridge|
+|SSE|fp32|Before Sandy Bridge|
+|SSE2|fp64|Before Sandy Bridge|
 |AVX|fp32/fp64|From Sandy Bridge|
 |FMA|fp32/fp64|From Haswell/Zen|
 |AVX512f|fp32/fp64|From Skylake X/Zen4|
