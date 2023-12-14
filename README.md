@@ -44,7 +44,9 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 | ------------ | ------------ | ------------ |
 |asimd|fp32/fp64|From Cortex-A57/A53|
 |asimd_hp|fp16|From Cortex-A75/A55|
-|asimd_dp|int8|From Cortex-A76/A55|
+|asimd_dp|int8|From Cortex-A75/A55|
+|bf16|bf16|From Cortex-X2/A710/A510|
+|i8mm|int8|From Cortex-X2/A710/A510|
 
 ## Some x86-64 CPU benchmark results
 
