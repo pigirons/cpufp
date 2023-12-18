@@ -51,7 +51,7 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 
 ## Some x86-64 CPU benchmark results
 
-### AMD Ryzen9 6900HX(Zen3+)
+### AMD Ryzen9 6900HX(8 x Zen3+)
 
 For single core:
 
@@ -87,7 +87,7 @@ Thread Pool Binding: 0 2 4 6 8 10 12 14
 --------------------------------------------------------------
 </pre>
 
-### Intel N100(Alder Lake-N)
+### Intel N100(4 x Alder Lake-N)
 
 For single core:
 
@@ -129,9 +129,9 @@ Thread Pool Binding: 0 1 2 3
 
 ## Some arm64 CPU benchmark results
 
-### RaspBerry Pi4(Cortex-A72)
+### RaspBerry Pi4(4 x Cortex-A72)
 
-For Single Core:
+For single core:
 
 <pre>
 $ ./cpufp --thread_pool=[0]
@@ -161,9 +161,9 @@ Thread Pool Binding: 0 1 2 3
 -------------------------------------------------------------
 </pre>
 
-### RaspBerry Pi5(Cortex-A76)
+### RaspBerry Pi5(4 x Cortex-A76)
 
-For Single Core:
+For single core:
 
 <pre>
 $ ./cpufp --thread_pool=[0]
@@ -184,7 +184,7 @@ Thread Pool Binding: 0
 ----------------------------------------------------------------
 </pre>
 
-For Multi_Cores:
+For multi_cores:
 
 <pre>
 $ ./cpufp --thread_pool=[0-3]
@@ -202,6 +202,92 @@ Thread Pool Binding: 0 1 2 3
 | asimd           | fmla.vv(f32,f32,f32)    | 153.5 GFLOPS     |
 | asimd           | fmla.vs(f64,f64,f64)    | 74.513 GFLOPS    |
 | asimd           | fmla.vv(f64,f64,f64)    | 76.751 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+### Rockchip RK3588(4 x Cortex-A76 + 4 x Cortex-A55)
+
+For single core(Cortex-A55):
+
+<pre>
+$ ./cpufp --thread_pool=[0]
+Number Threads: 1
+Thread Pool Binding: 0
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 58.305 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 58.311 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 58.313 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 58.311 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 29.156 GFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 29.156 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 14.579 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 14.577 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 7.2891 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 7.2834 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+For multi_cores(Cortex-A55):
+
+<pre>
+$ ./cpufp --thread_pool=[0-3]
+Number Threads: 4
+Thread Pool Binding: 0 1 2 3
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 232.58 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 232.46 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 232.59 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 232.54 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 116.29 GFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 116.28 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 58.145 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 58.14 GFLOPS     |
+| asimd           | fmla.vs(f64,f64,f64)    | 29.072 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 29.07 GFLOPS     |
+----------------------------------------------------------------
+</pre>
+
+For single core(Cortex-A76):
+
+<pre>
+$ ./cpufp --thread_pool=[4]
+Number Threads: 1
+Thread Pool Binding: 4
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 151.74 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 151.75 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 151.75 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 151.74 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 75.862 GFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 75.862 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 37.927 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 37.925 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 18.961 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 18.961 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+For multi_cores(Cortex-A76):
+
+<pre>
+$ ./cpufp --thread_pool=[4-7]
+Number Threads: 4
+Thread Pool Binding: 4 5 6 7
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 599.34 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 600.34 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 600.04 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 598.17 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 298.94 GFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 298.91 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 150 GFLOPS       |
+| asimd           | fmla.vv(f32,f32,f32)    | 150.08 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 75.046 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 75.034 GFLOPS    |
 ----------------------------------------------------------------
 </pre>
 
