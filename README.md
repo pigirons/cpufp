@@ -20,7 +20,7 @@ benchmark:
 
 `./cpufp --thread_pool=[xxx] --idle_time=yyy`
 
-lack of apple bind thread support, coming soon
+note that apple doesn't support binding threads to specific cores, therefore threadpool is only for indicating number of threads used.
 
 clean:
 
