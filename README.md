@@ -1,12 +1,16 @@
 # cpufp
 
-This is a cpu tool for benchmarking the floating-points peak performance. Now it supports linux and x86-64 platform. It can automatically sense the local SIMD ISAs while compiling.
+This is a cpu tool for benchmarking the floating-points peak performance. It can automatically sense the local SIMD ISAs while compiling.
 
 ## How to use
 
 build x64 version:
 
 `./build_x64.sh`
+
+build apple m1 version:
+
+`./build_m1.sh`
 
 build arm64 version:
 
@@ -15,6 +19,8 @@ build arm64 version:
 benchmark:
 
 `./cpufp --thread_pool=[xxx] --idle_time=yyy`
+
+lack of apple bind thread support, coming soon
 
 clean:
 

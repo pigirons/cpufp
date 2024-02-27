@@ -49,6 +49,7 @@ struct smtl_tp_t
 
 static void thread_bind(int cpu)
 {
+// TODO: apple has its own affinity primitives, TBD
 #ifndef __APPLE__
     cpu_set_t cpu_set;
     CPU_ZERO(&cpu_set);
