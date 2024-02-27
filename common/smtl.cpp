@@ -49,6 +49,9 @@ struct smtl_tp_t
 
 static void thread_bind(int cpu)
 {
+// apple doesn't support binding thread to core, 
+// therefore not implemented
+#ifndef __APPLE__
     cpu_set_t cpu_set;
     CPU_ZERO(&cpu_set);
     CPU_SET(cpu, &cpu_set);
@@ -58,6 +61,7 @@ static void thread_bind(int cpu)
         fprintf(stderr, "Error: cpu[%d] bind failed.\n", cpu);
         exit(0);
     }
+#endif 
 }
 
 static void *smtl_thread_func(void *params)
