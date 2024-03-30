@@ -27,6 +27,17 @@ int main()
     cpuid_x86_exec(0x7, 0x0, &cpuid_0x7_0x0);
     cpuid_x86_exec(0x7, 0x1, &cpuid_0x7_0x1);
 
+    if (BIT_TEST(cpuid_0x7_0x0.edx, 24))
+    {
+        if (BIT_TEST(cpuid_0x7_0x0.edx, 25))
+        {
+            printf("_AMX_INT8_\n");
+        }
+        if (BIT_TEST(cpuid_0x7_0x0.edx, 22))
+        {
+            printf("_AMX_BF16_\n");
+        }
+    }
     if (BIT_TEST(cpuid_0x7_0x1.eax, 4))
     {
         printf("_AVX_VNNI_\n");

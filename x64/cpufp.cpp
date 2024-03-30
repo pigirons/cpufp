@@ -262,6 +262,12 @@ static void parse_thread_pool(char *sets,
 
 static void cpufp_register_isa()
 {
+#ifdef _AVX512_VNNI_
+    reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "GOPS",
+        0x20000000LL, 2048LL, avx512_vnni_dp4a_s32u8s8);
+    reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "GOPS",
+        0x20000000LL, 1024LL, avx512_vnni_dp2a_s32s16s16);
+#endif
 #ifdef _AVX_VNNI_
     reg_new_isa("AVX_VNNI", "DP4A(s32,u8,s8)", "GOPS",
         0x20000000LL, 1024LL, avx_vnni_dp4a_s32u8s8);
@@ -275,12 +281,6 @@ static void cpufp_register_isa()
         0x20000000LL, 1024LL, avx_vnni_int8_dp4a_s32s8u8);
     reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,u8,u8)", "GOPS",
         0x20000000LL, 1024LL, avx_vnni_int8_dp4a_s32u8u8);
-#endif
-#ifdef _AVX512_VNNI_
-    reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "GOPS",
-        0x20000000LL, 2048LL, avx512_vnni_dp4a_s32u8s8);
-    reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "GOPS",
-        0x20000000LL, 1024LL, avx512_vnni_dp2a_s32s16s16);
 #endif
 #ifdef _AVX512_BF16_
     reg_new_isa("AVX512_BF16", "DP2A(f32,bf16,bf16)", "GFLOPS",
