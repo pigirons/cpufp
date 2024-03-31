@@ -29,6 +29,7 @@ int main()
 
     if (BIT_TEST(cpuid_0x7_0x0.edx, 24))
     {
+        printf("_AMX_TILE_\n");
         if (BIT_TEST(cpuid_0x7_0x0.edx, 25))
         {
             printf("_AMX_INT8_\n");
