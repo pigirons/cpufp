@@ -1,19 +1,10 @@
-.data
-tile_cfg:
-.byte 0x0
-.byte 0x0
-.byte 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-.word 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-.byte 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0
-
-.text
 .globl amx_int8_mm_s32s8s8
 .globl amx_int8_mm_s32s8u8
 .globl amx_int8_mm_s32u8s8
 .globl amx_int8_mm_s32u8u8
 
 amx_int8_mm_s32s8s8:
-    ldtilecfg tile_cfg
+    ldtilecfg %rsi
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -30,7 +21,7 @@ amx_int8_mm_s32s8s8:
     ret
 
 amx_int8_mm_s32s8u8:
-    ldtilecfg tile_cfg
+    ldtilecfg %rsi
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -47,7 +38,7 @@ amx_int8_mm_s32s8u8:
     ret
 
 amx_int8_mm_s32u8s8:
-    ldtilecfg tile_cfg
+    ldtilecfg %rsi
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -64,7 +55,7 @@ amx_int8_mm_s32u8s8:
     ret
 
 amx_int8_mm_s32u8u8:
-    ldtilecfg tile_cfg
+    ldtilecfg %rsi
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
