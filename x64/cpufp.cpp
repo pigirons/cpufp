@@ -69,10 +69,7 @@ extern "C"
         uint8_t reserved_0[14];
         uint16_t colsb[16];
         uint8_t rows[16];
-    } __tilecfg = {0, 0,
-        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {64, 64, 64, 64, 64, 64, 64, 64, 0, 0, 0, 0, 0, 0, 0, 0}
-        {16, 16, 16, 16, 16, 16, 16, 16, 0, 0, 0, 0, 0, 0, 0, 0}};
+    } __tilecfg;
 #ifdef _AMX_INT8_
     void amx_int8_mm_s32s8s8(int64_t, void* tile_cfg);
     void amx_int8_mm_s32s8u8(int64_t, void* tile_cfg);
@@ -296,6 +293,23 @@ static void parse_thread_pool(char *sets,
 static void cpufp_register_isa()
 {
 #ifdef _AMX_TILE_
+    int i;
+    __tilecfg.palette_id = 0;
+    __tilecfg.start_row = 0;
+    for (i = 0; i < 14; i++)
+    {
+        __tilecfg.reserved_0[i] = 0;
+    }
+    for (i = 0; i < 8; i++)
+    {
+        __tilecfg.colsb[i] = 64;
+        __tilecfg.rows[i] = 16;
+    }
+    for (; i < 16; i++)
+    {
+        __tilecfg.colsb[i] = 0;
+        __tilecfg.rows[i] = 0;
+    }
 #ifdef _AMX_INT8_
     reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "GOPS",
         0x1000000LL, 131072LL, __tilecfg, amx_int8_mm_s32s8s8);
