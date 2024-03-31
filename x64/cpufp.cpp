@@ -60,6 +60,18 @@ extern "C"
     void avx_vnni_int8_dp4a_s32s8u8(int64_t);
     void avx_vnni_int8_dp4a_s32u8u8(int64_t);
 #endif
+
+#ifdef _AMX_TILE_
+#ifdef _AMX_INT8_
+    void amx_int8_mm_s32s8s8(int64_t);
+    void amx_int8_mm_s32s8u8(int64_t);
+    void amx_int8_mm_s32u8s8(int64_t);
+    void amx_int8_mm_s32u8u8(int64_t);
+#endif
+#ifdef _AMX_BF16_
+    void amx_bf16_mm_f32bf16bf16(int64_t);
+#endif
+#endif
 }
 
 typedef struct
@@ -262,18 +274,37 @@ static void parse_thread_pool(char *sets,
 
 static void cpufp_register_isa()
 {
+#ifdef _AMX_TILE_
+#ifdef _AMX_INT8_
+    reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "GOPS",
+        0x1000000LL, 131072LL, amx_int8_mm_s32s8s8);
+    reg_new_isa("AMX_INT8", "MM(s32,s8,u8)", "GOPS",
+        0x1000000LL, 131072LL, amx_int8_mm_s32s8u8);
+    reg_new_isa("AMX_INT8", "MM(s32,u8,s8)", "GOPS",
+        0x1000000LL, 131072LL, amx_int8_mm_s32u8s8);
+    reg_new_isa("AMX_INT8", "MM(s32,u8,u8)", "GOPS",
+        0x1000000LL, 131072LL, amx_int8_mm_s32u8u8);
+#endif
+#ifdef _AMX_BF16_
+    reg_new_isa("AMX_BF16", "MM(f32,bf16,bf16)", "GFLOPS",
+        0x1000000LL, 65536LL, amx_bf16_mm_f32bf16bf16);
+#endif
+#endif
+
 #ifdef _AVX512_VNNI_
     reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "GOPS",
         0x20000000LL, 2048LL, avx512_vnni_dp4a_s32u8s8);
     reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "GOPS",
         0x20000000LL, 1024LL, avx512_vnni_dp2a_s32s16s16);
 #endif
+
 #ifdef _AVX_VNNI_
     reg_new_isa("AVX_VNNI", "DP4A(s32,u8,s8)", "GOPS",
         0x20000000LL, 1024LL, avx_vnni_dp4a_s32u8s8);
     reg_new_isa("AVX_VNNI", "DP2A(s32,s16,s16)", "GOPS",
         0x20000000LL, 512LL, avx_vnni_dp2a_s32s16s16);
 #endif
+
 #ifdef _AVX_VNNI_INT8_
     reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,s8)", "GOPS",
         0x20000000LL, 1024LL, avx_vnni_int8_dp4a_s32s8s8);
@@ -282,36 +313,43 @@ static void cpufp_register_isa()
     reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,u8,u8)", "GOPS",
         0x20000000LL, 1024LL, avx_vnni_int8_dp4a_s32u8u8);
 #endif
+
 #ifdef _AVX512_BF16_
     reg_new_isa("AVX512_BF16", "DP2A(f32,bf16,bf16)", "GFLOPS",
         0x20000000LL, 1024LL, avx512_bf16_dp2a_f32bf16bf16);
 #endif
+
 #ifdef _AVX512_FP16_
     reg_new_isa("AVX512_FP16", "FMA(f16,f16,f16)", "GFLOPS",
         0x20000000LL, 1024LL, avx512_fp16_fma_f16f16f16);
 #endif
+
 #ifdef _AVX512F_
     reg_new_isa("AVX512F", "FMA(f32,f32,f32)", "GFLOPS",
         0x20000000LL, 512LL, avx512f_fma_f32f32f32);
     reg_new_isa("AVX512F", "FMA(f64,f64,f64)", "GFLOPS",
         0x20000000LL, 256LL, avx512f_fma_f64f64f64);
 #endif
+
 #ifdef _FMA_
     reg_new_isa("FMA", "FMA(f32,f32,f32)", "GFLOPS",
         0x20000000LL, 256LL, fma_f32f32f32);
     reg_new_isa("FMA", "FMA(f64,f64,f64)", "GFLOPS",
         0x20000000LL, 128LL, fma_f64f64f64);
 #endif
+
 #ifdef _AVX_
     reg_new_isa("AVX", "ADD(MUL(f32,f32),f32)", "GFLOPS",
         0x20000000LL, 128LL, avx_add_mul_f32f32_f32);
     reg_new_isa("AVX", "ADD(MUL(f64,f64),f64)", "GFLOPS",
         0x20000000LL, 64LL, avx_add_mul_f64f64_f64);
 #endif
+
 #ifdef _SSE_
     reg_new_isa("SSE", "ADD(MUL(f32,f32),f32)", "GFLOPS",
         0x20000000LL, 64LL, sse_add_mul_f32f32_f32);
 #endif
+
 #ifdef _SSE2_
     reg_new_isa("SSE2", "ADD(MUL(f64,f64),f64)", "GFLOPS",
         0x20000000LL, 32LL, sse2_add_mul_f64f64_f64);
