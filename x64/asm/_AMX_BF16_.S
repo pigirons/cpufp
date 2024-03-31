@@ -1,7 +1,7 @@
 .globl amx_bf16_mm_f32bf16bf16
 
 amx_bf16_mm_f32bf16bf16:
-    ldtilecfg %rsi
+    ldtilecfg (%rsi)
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2

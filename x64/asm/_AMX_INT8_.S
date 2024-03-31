@@ -4,7 +4,7 @@
 .globl amx_int8_mm_s32u8u8
 
 amx_int8_mm_s32s8s8:
-    ldtilecfg %rsi
+    ldtilecfg (%rsi)
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -21,7 +21,7 @@ amx_int8_mm_s32s8s8:
     ret
 
 amx_int8_mm_s32s8u8:
-    ldtilecfg %rsi
+    ldtilecfg (%rsi)
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -38,7 +38,7 @@ amx_int8_mm_s32s8u8:
     ret
 
 amx_int8_mm_s32u8s8:
-    ldtilecfg %rsi
+    ldtilecfg (%rsi)
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
@@ -55,7 +55,7 @@ amx_int8_mm_s32u8s8:
     ret
 
 amx_int8_mm_s32u8u8:
-    ldtilecfg %rsi
+    ldtilecfg (%rsi)
     tilezero %tmm0
     tilezero %tmm1
     tilezero %tmm2
