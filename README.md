@@ -38,6 +38,8 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 |AVX512_FP16|fp16|From Intel Sapphire Rapids|
 |AVX512_BF16|bf16|From AMD Zen4|
 |AVX_VNNI_INT8|int8|Unknown|
+|AMX_INT8|int8|From Intel Sapphire Rapids|
+|AMX_BF16|bf16|From Intel Sapphire Rapids|
 
 ## Support arm64 SIMD ISA
 
@@ -50,6 +52,38 @@ idle_time is the interval time(sec) between two benchmarks, default 0.
 |i8mm|int8|From Cortex-X2/A710/A510|
 
 ## Some x86-64 CPU benchmark results
+
+### Intel Xeon Platinum 8488C(Sapphire Rapids)
+
+For single core:
+
+<pre>
+$ ./cpufp --thread_pool=[0] --idle_time=10
+Number Threads: 1
+Thread Pool Binding: 0
+--------------------------------------------------------------
+| Instruction Set | Core Computation      | Peak Performance |
+| AMX_INT8        | MM(s32,s8,s8)         | 7673.9 GOPS      |
+| AMX_INT8        | MM(s32,s8,u8)         | 7664.1 GOPS      |
+| AMX_INT8        | MM(s32,u8,s8)         | 7676.3 GOPS      |
+| AMX_INT8        | MM(s32,u8,u8)         | 7668 GOPS        |
+| AMX_BF16        | MM(f32,bf16,bf16)     | 3839.9 GFLOPS    |
+| AVX512_VNNI     | DP4A(s32,u8,s8)       | 965.55 GOPS      |
+| AVX512_VNNI     | DP2A(s32,s16,s16)     | 479.62 GOPS      |
+| AVX_VNNI        | DP4A(s32,u8,s8)       | 479.92 GOPS      |
+| AVX_VNNI        | DP2A(s32,s16,s16)     | 240.2 GOPS       |
+| AVX512_BF16     | DP2A(f32,bf16,bf16)   | 117.7 GFLOPS     |
+| AVX512_FP16     | FMA(f16,f16,f16)      | 480.4 GFLOPS     |
+| AVX512F         | FMA(f32,f32,f32)      | 236.92 GFLOPS    |
+| AVX512F         | FMA(f64,f64,f64)      | 118.23 GFLOPS    |
+| FMA             | FMA(f32,f32,f32)      | 120.08 GFLOPS    |
+| FMA             | FMA(f64,f64,f64)      | 59.931 GFLOPS    |
+| AVX             | ADD(MUL(f32,f32),f32) | 87.921 GFLOPS    |
+| AVX             | ADD(MUL(f64,f64),f64) | 43.951 GFLOPS    |
+| SSE             | ADD(MUL(f32,f32),f32) | 44.677 GFLOPS    |
+| SSE2            | ADD(MUL(f64,f64),f64) | 22.415 GFLOPS    |
+--------------------------------------------------------------
+</pre>
 
 ### AMD Ryzen7 8845HS(8 x Zen4)
 
