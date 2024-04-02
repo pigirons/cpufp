@@ -10,11 +10,12 @@
 #include <sstream>
 #include <iomanip>
 
-using namespace std;
-
 #if defined(_AMX_INT8_) || defined(_AMX_BF16_)
+#include <sys/syscall.h>
 #define _AMX_TILE_
 #endif
+
+using namespace std;
 
 extern "C"
 {
@@ -89,7 +90,7 @@ struct
 void init_tile_cfg()
 {
     int i;
-    __tilecfg.palette_id = 0;
+    __tilecfg.palette_id = 1;
     __tilecfg.start_row = 0;
     for (i = 0; i < 14; i++)
     {
@@ -320,22 +321,23 @@ static void cpufp_register_isa()
 {
 #ifdef _AMX_TILE_
     init_tile_cfg();
+    syscall(SYS_arch_prctl, 0x1023, 18);
 #endif
 
 #ifdef _AMX_INT8_
     reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "GOPS",
-        0x1000000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8s8);
+        0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8s8);
     reg_new_isa("AMX_INT8", "MM(s32,s8,u8)", "GOPS",
-        0x1000000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8u8);
+        0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8u8);
     reg_new_isa("AMX_INT8", "MM(s32,u8,s8)", "GOPS",
-        0x1000000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8s8);
+        0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8s8);
     reg_new_isa("AMX_INT8", "MM(s32,u8,u8)", "GOPS",
-        0x1000000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8u8);
+        0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8u8);
 #endif
 
 #ifdef _AMX_BF16_
     reg_new_isa("AMX_BF16", "MM(f32,bf16,bf16)", "GFLOPS",
-        0x1000000LL, 65536LL, &__tilecfg, amx_bf16_mm_f32bf16bf16);
+        0x2500000LL, 65536LL, &__tilecfg, amx_bf16_mm_f32bf16bf16);
 #endif
 
 #ifdef _AVX512_VNNI_
