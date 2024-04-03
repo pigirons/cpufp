@@ -167,6 +167,7 @@ static void cpubm_x86_one(smtl_handle sh,
 {
     struct timespec start, end;
     double time_used, perf;
+    char perfUnit = 'G';
 
     int i;
     int num_threads = smtl_num_threads(sh);
@@ -190,10 +191,19 @@ static void cpubm_x86_one(smtl_handle sh,
 
     time_used = get_time(&start, &end);
     perf = item.loop_time * item.comp_pl * num_threads /
-        time_used * 1e-9;
+        time_used;
+    if (perf > 1e12)
+    {
+        perfUnit = 'T';
+        perf /= 1e12;
+    }
+    else
+    {
+        perf /= 1e9;
+    }
 
     stringstream ss;
-    ss << std::setprecision(5) << perf << " " << item.dim;
+    ss << std::setprecision(5) << perf << " " << perfUnit << item.dim;
 
     vector<string> cont;
     cont.resize(3);
