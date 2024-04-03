@@ -335,82 +335,82 @@ static void cpufp_register_isa()
 #endif
 
 #ifdef _AMX_INT8_
-    reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "GOPS",
+    reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "ops",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8s8);
-    reg_new_isa("AMX_INT8", "MM(s32,s8,u8)", "GOPS",
+    reg_new_isa("AMX_INT8", "MM(s32,s8,u8)", "ops",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8u8);
-    reg_new_isa("AMX_INT8", "MM(s32,u8,s8)", "GOPS",
+    reg_new_isa("AMX_INT8", "MM(s32,u8,s8)", "ops",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8s8);
-    reg_new_isa("AMX_INT8", "MM(s32,u8,u8)", "GOPS",
+    reg_new_isa("AMX_INT8", "MM(s32,u8,u8)", "ops",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8u8);
 #endif
 
 #ifdef _AMX_BF16_
-    reg_new_isa("AMX_BF16", "MM(f32,bf16,bf16)", "GFLOPS",
+    reg_new_isa("AMX_BF16", "MM(f32,bf16,bf16)", "flops",
         0x2500000LL, 65536LL, &__tilecfg, amx_bf16_mm_f32bf16bf16);
 #endif
 
 #ifdef _AVX512_VNNI_
-    reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "GOPS",
+    reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "ops",
         0x20000000LL, 2048LL, NULL, avx512_vnni_dp4a_s32u8s8);
-    reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "GOPS",
+    reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "ops",
         0x20000000LL, 1024LL, NULL, avx512_vnni_dp2a_s32s16s16);
 #endif
 
 #ifdef _AVX_VNNI_
-    reg_new_isa("AVX_VNNI", "DP4A(s32,u8,s8)", "GOPS",
+    reg_new_isa("AVX_VNNI", "DP4A(s32,u8,s8)", "ops",
         0x20000000LL, 1024LL, NULL, avx_vnni_dp4a_s32u8s8);
-    reg_new_isa("AVX_VNNI", "DP2A(s32,s16,s16)", "GOPS",
+    reg_new_isa("AVX_VNNI", "DP2A(s32,s16,s16)", "ops",
         0x20000000LL, 512LL, NULL, avx_vnni_dp2a_s32s16s16);
 #endif
 
 #ifdef _AVX_VNNI_INT8_
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,s8)", "GOPS",
+    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,s8)", "ops",
         0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32s8s8);
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,u8)", "GOPS",
+    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,u8)", "ops",
         0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32s8u8);
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,u8,u8)", "GOPS",
+    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,u8,u8)", "ops",
         0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32u8u8);
 #endif
 
 #ifdef _AVX512_BF16_
-    reg_new_isa("AVX512_BF16", "DP2A(f32,bf16,bf16)", "GFLOPS",
+    reg_new_isa("AVX512_BF16", "DP2A(f32,bf16,bf16)", "flops",
         0x20000000LL, 1024LL, NULL, avx512_bf16_dp2a_f32bf16bf16);
 #endif
 
 #ifdef _AVX512_FP16_
-    reg_new_isa("AVX512_FP16", "FMA(f16,f16,f16)", "GFLOPS",
+    reg_new_isa("AVX512_FP16", "FMA(f16,f16,f16)", "flops",
         0x20000000LL, 1024LL, NULL, avx512_fp16_fma_f16f16f16);
 #endif
 
 #ifdef _AVX512F_
-    reg_new_isa("AVX512F", "FMA(f32,f32,f32)", "GFLOPS",
+    reg_new_isa("AVX512F", "FMA(f32,f32,f32)", "flops",
         0x20000000LL, 512LL, NULL, avx512f_fma_f32f32f32);
-    reg_new_isa("AVX512F", "FMA(f64,f64,f64)", "GFLOPS",
+    reg_new_isa("AVX512F", "FMA(f64,f64,f64)", "flops",
         0x20000000LL, 256LL, NULL, avx512f_fma_f64f64f64);
 #endif
 
 #ifdef _FMA_
-    reg_new_isa("FMA", "FMA(f32,f32,f32)", "GFLOPS",
+    reg_new_isa("FMA", "FMA(f32,f32,f32)", "flops",
         0x20000000LL, 256LL, NULL, fma_f32f32f32);
-    reg_new_isa("FMA", "FMA(f64,f64,f64)", "GFLOPS",
+    reg_new_isa("FMA", "FMA(f64,f64,f64)", "flops",
         0x20000000LL, 128LL, NULL, fma_f64f64f64);
 #endif
 
 #ifdef _AVX_
-    reg_new_isa("AVX", "ADD(MUL(f32,f32),f32)", "GFLOPS",
+    reg_new_isa("AVX", "ADD(MUL(f32,f32),f32)", "flops",
         0x20000000LL, 128LL, NULL, avx_add_mul_f32f32_f32);
-    reg_new_isa("AVX", "ADD(MUL(f64,f64),f64)", "GFLOPS",
+    reg_new_isa("AVX", "ADD(MUL(f64,f64),f64)", "flops",
         0x20000000LL, 64LL, NULL, avx_add_mul_f64f64_f64);
 #endif
 
 #ifdef _SSE_
-    reg_new_isa("SSE", "ADD(MUL(f32,f32),f32)", "GFLOPS",
+    reg_new_isa("SSE", "ADD(MUL(f32,f32),f32)", "flops",
         0x20000000LL, 64LL, NULL, sse_add_mul_f32f32_f32);
 #endif
 
 #ifdef _SSE2_
-    reg_new_isa("SSE2", "ADD(MUL(f64,f64),f64)", "GFLOPS",
+    reg_new_isa("SSE2", "ADD(MUL(f64,f64),f64)", "flops",
         0x20000000LL, 32LL, NULL, sse2_add_mul_f64f64_f64);
 #endif
 }
