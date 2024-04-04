@@ -1,8 +1,45 @@
 # cpufp
 
-This is a cpu tool for benchmarking the floating-points peak performance. Now it supports linux and x86-64 platform. It can automatically sense the local SIMD ISAs while compiling.
+This is a cpu tool for benchmarking the floating-points and AI peak performance.
 
-## How to use
+It can automatically sense the local SIMD|DSA ISAs while compiling.
+
+## Support OS and ISA
+
+|OS|x86-64|arm64|
+| ------------ | ------------ | ------------ |
+|Linux|yes|yes|
+|MacOS|no|no|
+|Windows|no|no|
+
+## Support x86-64 SIMD|DSA ISA
+
+|Arch|ISA|Feature|Data Type|Description|
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+|SIMD|SSE|Vector|fp32|Before Sandy Bridge|
+|SIMD|SSE2|Vector|fp64|Before Sandy Bridge|
+|SIMD|AVX|Vector|fp32/fp64|From Sandy Bridge|
+|SIMD|FMA|Vector|fp32/fp64|From Haswell/Zen|
+|SIMD|AVX512f|Vector|fp32/fp64|From Skylake X/Zen4|
+|SIMD|AVX512_VNNI|Vector|int8/int16|From IceLake|
+|SIMD|AVX_VNNI|Vector|int8/int16|From Alder Lake|
+|SIMD|AVX512_FP16|Vector|fp16|From Intel Sapphire Rapids|
+|SIMD|AVX512_BF16|Vector|bf16|From AMD Zen4|
+|SIMD|AVX_VNNI_INT8|Vector|int8|Unknown|
+|DSA|AMX_INT8|Matrix|int8|From Intel Sapphire Rapids|
+|DSA|AMX_BF16|Matrix|bf16|From Intel Sapphire Rapids|
+
+## Support arm64 SIMD ISA
+
+|Arch|ISA|Feature|Data Type|Description|
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+|SIMD|asimd|Vector|fp32/fp64|From Cortex-A57/A53|
+|SIMD|asimd_hp|Vector|fp16|From Cortex-A75/A55|
+|SIMD|asimd_dp|Vector|int8|From Cortex-A75/A55|
+|SIMD|bf16|bf16|Matrix|From Cortex-X2/A710/A510|
+|SIMD|i8mm|int8|Matrix|From Cortex-X2/A710/A510|
+
+## How to build
 
 build x64 version:
 
@@ -12,44 +49,17 @@ build arm64 version:
 
 `./build_arm64.sh`
 
-benchmark:
-
-`./cpufp --thread_pool=[xxx] --idle_time=yyy`
-
 clean:
 
 `./clean.sh`
 
-xxx indicates that all the cores defined by xxx will be used for benchmarking(by affinity setting). For example, [0,3,5-8,13-15].
+## How to benchmark
 
-idle_time is the interval time(sec) between two benchmarks, default 0.
+`./cpufp --thread_pool=[xxx] --idle_time=yyy`
 
-## Support x86-64 SIMD ISA
+  --thread_pool: [xxx] is the list of cpu thread to benchmarking, from setting affinities. Please reference the result of lstopo command. For example, [0,3,5-8,13-15].
 
-|ISA|Data Type|Description|
-| ------------ | ------------ | ------------ |
-|SSE|fp32|Before Sandy Bridge|
-|SSE2|fp64|Before Sandy Bridge|
-|AVX|fp32/fp64|From Sandy Bridge|
-|FMA|fp32/fp64|From Haswell/Zen|
-|AVX512f|fp32/fp64|From Skylake X/Zen4|
-|AVX512_VNNI|int8/int16|From IceLake|
-|AVX_VNNI|int8/int16|From Alder Lake|
-|AVX512_FP16|fp16|From Intel Sapphire Rapids|
-|AVX512_BF16|bf16|From AMD Zen4|
-|AVX_VNNI_INT8|int8|Unknown|
-|AMX_INT8|int8|From Intel Sapphire Rapids|
-|AMX_BF16|bf16|From Intel Sapphire Rapids|
-
-## Support arm64 SIMD ISA
-
-|ISA|Data Type|Description|
-| ------------ | ------------ | ------------ |
-|asimd|fp32/fp64|From Cortex-A57/A53|
-|asimd_hp|fp16|From Cortex-A75/A55|
-|asimd_dp|int8|From Cortex-A75/A55|
-|bf16|bf16|From Cortex-X2/A710/A510|
-|i8mm|int8|From Cortex-X2/A710/A510|
+  --idle_time: the interval time(sec) between any two adjacent benchmarks, default is 0.
 
 ## Some x86-64 CPU benchmark results
 
@@ -401,7 +411,6 @@ Thread Pool Binding: 4 5 6 7
 ----------------------------------------------------------------
 </pre>
 
-
 ### Phytium,D2000/8
 
 For single core:
@@ -433,4 +442,3 @@ Thread Pool Binding: 0 1 2 3
 | asimd           | fmla.vv(f64,f64,f64) | 36.747 GFLOPS    |
 -------------------------------------------------------------
 </pre>
-
