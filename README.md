@@ -36,8 +36,8 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 |SIMD|asimd|Vector|fp32/fp64|From Cortex-A57/A53|
 |SIMD|asimd_hp|Vector|fp16|From Cortex-A75/A55|
 |SIMD|asimd_dp|Vector|int8|From Cortex-A75/A55|
-|SIMD|bf16|bf16|Matrix|From Cortex-X2/A710/A510|
-|SIMD|i8mm|int8|Matrix|From Cortex-X2/A710/A510|
+|SIMD|bf16|Matrix|bf16|From Cortex-X2/A710/A510|
+|SIMD|i8mm|Matrix|int8|From Cortex-X2/A710/A510|
 
 ## How to build
 
