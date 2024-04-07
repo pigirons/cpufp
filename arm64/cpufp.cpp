@@ -92,12 +92,13 @@ static void thread_func(void *params)
     bm->bench(bm->loop_time);
 }
 
-static void cpubm_x86_one(smtl_handle sh,
+static void cpubm_arm64_one(smtl_handle sh,
     cpubm_t &item,
     Table &table)
 {
     struct timespec start, end;
     double time_used, perf;
+    char perfUnit = 'G';
 
     int i;
     int num_threads = smtl_num_threads(sh);
@@ -121,10 +122,19 @@ static void cpubm_x86_one(smtl_handle sh,
 
     time_used = get_time(&start, &end);
     perf = item.loop_time * item.comp_pl * num_threads /
-        time_used * 1e-9;
+        time_used;
+    if (perf > 1e12)
+    {
+        perfUnit = 'T';
+        perf /= 1e12;
+    }
+    else
+    {
+        perf /= 1e9;
+    }
 
     stringstream ss;
-    ss << std::setprecision(5) << perf << " " << item.dim;
+    ss << std::setprecision(5) << perf << " " << perfUnit << item.dim;
 
     vector<string> cont;
     cont.resize(3);
@@ -167,11 +177,11 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
         smtl_init(&sh, set_of_threads);
 
         // traverse task list
-        cpubm_x86_one(sh, bm_list[0], table);
+        cpubm_arm64_one(sh, bm_list[0], table);
         for (i = 1; i < bm_list.size(); i++)
         {
             sleep(idle_time);
-            cpubm_x86_one(sh, bm_list[i], table);
+            cpubm_arm64_one(sh, bm_list[i], table);
         }
 
         table.print();
