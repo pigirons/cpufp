@@ -265,56 +265,56 @@ static void parse_thread_pool(char *sets,
 static void cpufp_register_isa()
 {
 #ifdef _I8MM_
-    reg_new_isa("i8mm", "mmla(s32,s8,s8)", "GOPS",
+    reg_new_isa("i8mm", "mmla(s32,s8,s8)", "OPS",
         0x10000000LL, 1536LL, asimd_mmla_s32s8s8);
-    reg_new_isa("i8mm", "mmla(u32,u8,u8)", "GOPS",
+    reg_new_isa("i8mm", "mmla(u32,u8,u8)", "OPS",
         0x10000000LL, 1536LL, asimd_mmla_u32u8u8);
-    reg_new_isa("i8mm", "mmla(s32,u8,s8)", "GOPS",
+    reg_new_isa("i8mm", "mmla(s32,u8,s8)", "OPS",
         0x10000000LL, 1536LL, asimd_mmla_s32u8s8);
     
-    reg_new_isa("i8mm", "dp4a.vs(s32,s8,u8)", "GOPS",
+    reg_new_isa("i8mm", "dp4a.vs(s32,s8,u8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vs_s32s8u8);
-    reg_new_isa("i8mm", "dp4a.vs(s32,u8,s8)", "GOPS",
+    reg_new_isa("i8mm", "dp4a.vs(s32,u8,s8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vs_s32u8s8);
-    reg_new_isa("i8mm", "dp4a.vv(s32,u8,s8)", "GOPS",
+    reg_new_isa("i8mm", "dp4a.vv(s32,u8,s8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vv_s32u8s8);
 #endif
 
 #ifdef _ASIMD_DP_
-    reg_new_isa("asimd_dp", "dp4a.vs(s32,s8,s8)", "GOPS",
+    reg_new_isa("asimd_dp", "dp4a.vs(s32,s8,s8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vs_s32s8s8);
-    reg_new_isa("asimd_dp", "dp4a.vv(s32,s8,s8)", "GOPS",
+    reg_new_isa("asimd_dp", "dp4a.vv(s32,s8,s8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vv_s32s8s8);
-    reg_new_isa("asimd_dp", "dp4a.vs(u32,u8,u8)", "GOPS",
+    reg_new_isa("asimd_dp", "dp4a.vs(u32,u8,u8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vs_u32u8u8);
-    reg_new_isa("asimd_dp", "dp4a.vv(u32,u8,u8)", "GOPS",
+    reg_new_isa("asimd_dp", "dp4a.vv(u32,u8,u8)", "OPS",
         0x10000000LL, 768LL, asimd_dp4a_vv_u32u8u8);
 #endif
 
 #ifdef _BF16_
-    reg_new_isa("bf16", "mmla(f32,bf16,bf16)", "GFLOPS",
+    reg_new_isa("bf16", "mmla(f32,bf16,bf16)", "FLOPS",
         0x10000000LL, 768LL, asimd_mmla_fp32bf16bf16);
-    reg_new_isa("bf16", "dp2a.vs(f32,bf16,bf16)", "GFLOPS",
+    reg_new_isa("bf16", "dp2a.vs(f32,bf16,bf16)", "FLOPS",
         0x10000000LL, 384LL, asimd_dp2a_vs_fp32bf16bf16);
-    reg_new_isa("bf16", "dp2a.vv(f32,bf16,bf16)", "GFLOPS",
+    reg_new_isa("bf16", "dp2a.vv(f32,bf16,bf16)", "FLOPS",
         0x10000000LL, 384LL, asimd_dp2a_vv_fp32bf16bf16);
 #endif
 
 #ifdef _ASIMD_HP_
-    reg_new_isa("asimd_hp", "fmla.vs(fp16,fp16,fp16)", "GFLOPS",
+    reg_new_isa("asimd_hp", "fmla.vs(fp16,fp16,fp16)", "FLOPS",
         0x10000000LL, 384LL, asimd_fmla_vs_fp16fp16fp16);
-    reg_new_isa("asimd_hp", "fmla.vv(fp16,fp16,fp16)", "GFLOPS",
+    reg_new_isa("asimd_hp", "fmla.vv(fp16,fp16,fp16)", "FLOPS",
         0x10000000LL, 384LL, asimd_fmla_vv_fp16fp16fp16);
 #endif
 
 #ifdef _ASIMD_
-    reg_new_isa("asimd", "fmla.vs(f32,f32,f32)", "GFLOPS",
+    reg_new_isa("asimd", "fmla.vs(f32,f32,f32)", "FLOPS",
         0x10000000LL, 192LL, asimd_fmla_vs_f32f32f32);
-    reg_new_isa("asimd", "fmla.vv(f32,f32,f32)", "GFLOPS",
+    reg_new_isa("asimd", "fmla.vv(f32,f32,f32)", "FLOPS",
         0x10000000LL, 192LL, asimd_fmla_vv_f32f32f32);
-    reg_new_isa("asimd", "fmla.vs(f64,f64,f64)", "GFLOPS",
+    reg_new_isa("asimd", "fmla.vs(f64,f64,f64)", "FLOPS",
         0x10000000LL, 96LL, asimd_fmla_vs_f64f64f64);
-    reg_new_isa("asimd", "fmla.vv(f64,f64,f64)", "GFLOPS",
+    reg_new_isa("asimd", "fmla.vv(f64,f64,f64)", "FLOPS",
         0x10000000LL, 96LL, asimd_fmla_vv_f64f64f64);
 #endif
 }
