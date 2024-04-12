@@ -14,12 +14,12 @@ using namespace std;
 
 extern "C"
 {
-#ifdef _TME_
-    void tme_vmadot_s32s8s8(int64_t);
-    void tme_vmadotu_u32u8u8(int64_t);
-    void tme_vmadotus_s32u8s8(int64_t);
-    void tme_vmadotsu_s32s8u8(int64_t);
-    void tme_vmadotslide_s32s8s8(int64_t);
+#ifdef _IME_
+    void ime_vmadot_s32s8s8(int64_t);
+    void ime_vmadotu_u32u8u8(int64_t);
+    void ime_vmadotus_s32u8s8(int64_t);
+    void ime_vmadotsu_s32s8u8(int64_t);
+    void ime_vmadotslide_s32s8s8(int64_t);
 #endif
 
 #ifdef _VECTOR_
@@ -246,17 +246,17 @@ static void parse_thread_pool(char *sets,
 
 static void cpufp_register_isa()
 {
-#ifdef _TME_
-    reg_new_isa("tme", "vmadot(s32,s8,s8)", "OPS",
-        0x10000000LL, 3584LL, tme_vmadot_s32s8s8);
-    reg_new_isa("tme", "vmadotu(u32,u8,u8)", "OPS",
-        0x10000000LL, 3584LL, tme_vmadotu_u32u8u8);
-    reg_new_isa("tme", "vmadotus(s32,u8,s8)", "OPS",
-        0x10000000LL, 3584LL, tme_vmadotus_s32u8s8);
-    reg_new_isa("tme", "vmadotsu(s32,s8,u8)", "OPS",
-        0x10000000LL, 3584LL, tme_vmadotsu_s32s8u8);
-    reg_new_isa("tme", "vmadotslide(s32,s8,s8)", "OPS",
-        0x10000000LL, 3072LL, tme_vmadotslide_s32s8s8);
+#ifdef _IME_
+    reg_new_isa("ime", "vmadot(s32,s8,s8)", "OPS",
+        0x10000000LL, 3584LL, ime_vmadot_s32s8s8);
+    reg_new_isa("ime", "vmadotu(u32,u8,u8)", "OPS",
+        0x10000000LL, 3584LL, ime_vmadotu_u32u8u8);
+    reg_new_isa("ime", "vmadotus(s32,u8,s8)", "OPS",
+        0x10000000LL, 3584LL, ime_vmadotus_s32u8s8);
+    reg_new_isa("ime", "vmadotsu(s32,s8,u8)", "OPS",
+        0x10000000LL, 3584LL, ime_vmadotsu_s32s8u8);
+    reg_new_isa("ime", "vmadotslide(s32,s8,s8)", "OPS",
+        0x10000000LL, 3072LL, ime_vmadotslide_s32s8s8);
 #endif
 
 #ifdef _VECTOR_

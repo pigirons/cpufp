@@ -37,7 +37,7 @@ int main()
 
     if (vendor_id) {
         if (strncmp(vendor_id, "0x710", 5) == 0) {
-            printf("_TME_\n");
+            printf("_IME_\n");
         }
     }
 

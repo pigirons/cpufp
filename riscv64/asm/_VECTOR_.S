@@ -1,29 +1,30 @@
 .align 4
 
 .macro preserve_caller_vec
-    csrr t0, vtype
-    csrr t1, vl
-    vsetvli t2, x0, e8, m8
-    sub sp, sp, t2
+    csrr x5, vtype
+    csrr x6, vl
+    vsetvli x7, x0, e8, m8
+    sub sp, sp, x7
     vse8.v v0, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v8, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v16, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v24, (sp)
 .endm
 
 .macro restore_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vle8.v v24, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v16, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v8, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v0, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
+    vsetvl x7, x6, x5
 .endm
 
 #ifdef __APPLE__
@@ -34,13 +35,13 @@ _vector_vfmacc_vf_f16f16f16:
 vector_vfmacc_vf_f16f16f16:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vf.f16f16f16.L1:
-    vsetvli t2, x0, e16, m1
+    vsetvli x7, x0, e16, m1
     vfmacc.vf v9, f0, v1
     vfmacc.vf v10, f0, v1
     vfmacc.vf v11, f0, v1
@@ -77,13 +78,13 @@ _vector_vfmacc_vv_f16f16f16:
 vector_vfmacc_vv_f16f16f16:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vv.f16f16f16.L1:
-    vsetvli t2, x0, e16, m1
+    vsetvli x7, x0, e16, m1
     vfmacc.vv v8, v0, v1
     vfmacc.vv v9, v0, v1
     vfmacc.vv v10, v0, v1
@@ -121,13 +122,13 @@ _vector_vfmacc_vf_f32f32f32:
 vector_vfmacc_vf_f32f32f32:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vf.f32f32f32.L1:
-    vsetvli t2, x0, e32, m1
+    vsetvli x7, x0, e32, m1
     vfmacc.vf v9, f0, v1
     vfmacc.vf v10, f0, v1
     vfmacc.vf v11, f0, v1
@@ -164,13 +165,13 @@ _vector_vfmacc_vv_f32f32f32:
 vector_vfmacc_vv_f32f32f32:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vv.f32f32f32.L1:
-    vsetvli t2, x0, e32, m1
+    vsetvli x7, x0, e32, m1
     vfmacc.vv v8, v0, v1
     vfmacc.vv v9, v0, v1
     vfmacc.vv v10, v0, v1
@@ -208,13 +209,13 @@ _vector_vfmacc_vf_f64f64f64:
 vector_vfmacc_vf_f64f64f64:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vf.f64f64f64.L1:
-    vsetvli t2, x0, e64, m1
+    vsetvli x7, x0, e64, m1
     vfmacc.vf v9, f0, v1
     vfmacc.vf v10, f0, v1
     vfmacc.vf v11, f0, v1
@@ -251,13 +252,13 @@ _vector_vfmacc_vv_f64f64f64:
 vector_vfmacc_vv_f64f64f64:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
 .vector.vfmacc.vv.f64f64f64.L1:
-    vsetvli t2, x0, e64, m1
+    vsetvli x7, x0, e64, m1
     vfmacc.vv v8, v0, v1
     vfmacc.vv v9, v0, v1
     vfmacc.vv v10, v0, v1
