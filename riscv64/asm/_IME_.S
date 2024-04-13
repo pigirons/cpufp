@@ -1,46 +1,47 @@
 .align 4
 
 .macro preserve_caller_vec
-    csrr t0, vtype
-    csrr t1, vl
-    vsetvli t2, x0, e8, m8
-    sub sp, sp, t2
+    csrr x5, vtype
+    csrr x6, vl
+    vsetvli x7, x0, e8, m8
+    sub sp, sp, x7
     vse8.v v0, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v8, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v16, (sp)
-    sub sp, sp, t2
+    sub sp, sp, x7
     vse8.v v24, (sp)
 .endm
 
 .macro restore_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vle8.v v24, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v16, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v8, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
     vle8.v v0, (sp)
-    add sp, sp, t2
+    add sp, sp, x7
+    vsetvl x7, x6, x5
 .endm
 
 #ifdef __APPLE__
-.globl _tme_vmadot_s32s8s8
-_tme_vmadot_s32s8s8:
+.globl _ime_vmadot_s32s8s8
+_ime_vmadot_s32s8s8:
 #else
-.globl tme_vmadot_s32s8s8
-tme_vmadot_s32s8s8:
+.globl ime_vmadot_s32s8s8
+ime_vmadot_s32s8s8:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
-.tme.vmadot.s32s8s8.L1:
-    vsetvli t2, x0, e8, m1
+.ime.vmadot.s32s8s8.L1:
+    vsetvli x7, x0, e8, m1
     vmadot v4, v0, v1
     vmadot v6, v0, v1
     vmadot v8, v0, v1
@@ -56,25 +57,25 @@ tme_vmadot_s32s8s8:
     vmadot v26, v0, v1
     vmadot v28, v0, v1
     vmadot v30, v0, v1
-    bnez a0, .tme.vmadot.s32s8s8.L1
+    bnez a0, .ime.vmadot.s32s8s8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _tme_vmadotu_u32u8u8
-_tme_vmadotu_u32u8u8:
+.globl _ime_vmadotu_u32u8u8
+_ime_vmadotu_u32u8u8:
 #else
-.globl tme_vmadotu_u32u8u8
-tme_vmadotu_u32u8u8:
+.globl ime_vmadotu_u32u8u8
+ime_vmadotu_u32u8u8:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
-.tme.vmadotu.u32u8u8.L1:
-    vsetvli t2, x0, e8, m1
+.ime.vmadotu.u32u8u8.L1:
+    vsetvli x7, x0, e8, m1
     vmadotu v4, v0, v1
     vmadotu v6, v0, v1
     vmadotu v8, v0, v1
@@ -90,25 +91,25 @@ tme_vmadotu_u32u8u8:
     vmadotu v26, v0, v1
     vmadotu v28, v0, v1
     vmadotu v30, v0, v1
-    bnez a0, .tme.vmadotu.u32u8u8.L1
+    bnez a0, .ime.vmadotu.u32u8u8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _tme_vmadotus_s32u8s8
-_tme_vmadotus_s32u8s8:
+.globl _ime_vmadotus_s32u8s8
+_ime_vmadotus_s32u8s8:
 #else
-.globl tme_vmadotus_s32u8s8
-tme_vmadotus_s32u8s8:
+.globl ime_vmadotus_s32u8s8
+ime_vmadotus_s32u8s8:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
-.tme.vmadotus.s32u8s8.L1:
-    vsetvli t2, x0, e8, m1
+.ime.vmadotus.s32u8s8.L1:
+    vsetvli x7, x0, e8, m1
     vmadotus v4, v0, v1
     vmadotus v6, v0, v1
     vmadotus v8, v0, v1
@@ -124,25 +125,25 @@ tme_vmadotus_s32u8s8:
     vmadotus v26, v0, v1
     vmadotus v28, v0, v1
     vmadotus v30, v0, v1
-    bnez a0, .tme.vmadotus.s32u8s8.L1
+    bnez a0, .ime.vmadotus.s32u8s8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _tme_vmadotsu_s32s8u8
-_tme_vmadotsu_s32s8u8:
+.globl _ime_vmadotsu_s32s8u8
+_ime_vmadotsu_s32s8u8:
 #else
-.globl tme_vmadotsu_s32s8u8
-tme_vmadotsu_s32s8u8:
+.globl ime_vmadotsu_s32s8u8
+ime_vmadotsu_s32s8u8:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
-.tme.vmadotsu.s32s8u8.L1:
-    vsetvli t2, x0, e8, m1
+.ime.vmadotsu.s32s8u8.L1:
+    vsetvli x7, x0, e8, m1
     vmadotsu v4, v0, v1
     vmadotsu v6, v0, v1
     vmadotsu v8, v0, v1
@@ -158,25 +159,25 @@ tme_vmadotsu_s32s8u8:
     vmadotsu v26, v0, v1
     vmadotsu v28, v0, v1
     vmadotsu v30, v0, v1
-    bnez a0, .tme.vmadotsu.s32s8u8.L1
+    bnez a0, .ime.vmadotsu.s32s8u8.L1
     restore_caller_vec
     ret
 
 #ifdef __APPLE__
-.globl _tme_vmadotslide_s32s8s8
-_tme_vmadotslide_s32s8s8:
+.globl _ime_vmadotslide_s32s8s8
+_ime_vmadotslide_s32s8s8:
 #else
-.globl tme_vmadotslide_s32s8s8
-tme_vmadotslide_s32s8s8:
+.globl ime_vmadotslide_s32s8s8
+ime_vmadotslide_s32s8s8:
 #endif
     preserve_caller_vec
-    vsetvli t2, x0, e8, m8
+    vsetvli x7, x0, e8, m8
     vxor.vv v0, v0, v0
     vxor.vv v8, v8, v8
     vxor.vv v16, v16, v16
     vxor.vv v24, v24, v24
-.tme.vmadotslide.s32s8s8.L1:
-    vsetvli t2, x0, e8, m1
+.ime.vmadotslide.s32s8s8.L1:
+    vsetvli x7, x0, e8, m1
     vmadot v4, v0, v2
     vmadot1 v6, v0, v2
     vmadot2 v8, v0, v2
@@ -190,6 +191,6 @@ tme_vmadotslide_s32s8s8:
     vmadot1 v22, v0, v2
     vmadot2 v24, v0, v2
     vmadot3 v26, v0, v2
-    bnez a0, .tme.vmadotslide.s32s8s8.L1
+    bnez a0, .ime.vmadotslide.s32s8s8.L1
     restore_caller_vec
     ret
