@@ -80,3 +80,9 @@ clean:
 
 [riscv64 cpufp benchmark results](benchmark_result/riscv64.md)
 
+## Todo list
+
+[1] For arm64, add armv9(SVE, SVE2 & SME) Supports
+
+[2] Add LoongArch64 Support.
+
