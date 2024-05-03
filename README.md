@@ -1,16 +1,16 @@
 # cpufp
 
-This is a cpu tool for benchmarking the floating-points and AI peak performance.
+This is a cpu tool for benchmarking the peak performance of floating-points and AI ISAs.
 
 It can automatically sense the local SIMD|DSA ISAs while compiling.
 
 ## Support OS and ISA
 
-|OS|x86-64|arm64|riscv64|
-| ------------ | ------------ | ------------ | ------------ |
-|Linux|yes|yes|yes|
-|MacOS|no|no|no|
-|Windows|no|no|no|
+|OS|x86-64|arm64|riscv64|loongarch64|
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+|Linux|yes|yes|yes|yes|
+|MacOS|no|no|no|no|
+|Windows|no|no|no|no|
 
 ## Support x86-64 SIMD|DSA ISA
 
@@ -43,8 +43,17 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 
 |Arch|ISA|Feature|Data Type|Description|
 | ------------ | ------------ | ------------ | ------------ | ------------ |
-|Vector|vector|Vector|fp16/fp32/fp64|From RISC-V "V" vector extension. Version 1.0|
+|SIMD|V|Vector|fp16/fp32/fp64|From RISC-V "V" vector extension. Version 1.0|
 |DSA|ime|Matrix|int8|From SpacemiT-X60|
+
+NOTE: ime is a SpacemiT custom vendor extension.
+
+## Support loongarch64 ISA
+|Arch|ISA|Feature|Data Type|Description|
+| ------------ | ------------ | ------------ | ------------ | ------------ |
+|SIMD|LASX|Vector|fp32/fp64|From Loongson 3A5000|
+|SIMD|LSX|Vector|fp32/fp64|From Loongson 3A5000|
+|Scalar|FP|Scalar|fp32/fp64|From Loongson 3A5000|
 
 ## How to build
 
@@ -59,6 +68,10 @@ build arm64 version:
 build riscv64 version:
 
 `./build_riscv64.sh`
+
+build loongarch64 version:
+
+`./build_loongarch64.sh`
 
 clean:
 
@@ -80,9 +93,9 @@ clean:
 
 [riscv64 cpufp benchmark results](benchmark_result/riscv64.md)
 
+[loongarch64 cpufp benchmark results](benchmark_result/loongarch64.md)
+
 ## Todo list
 
-[1] For arm64, add armv9(SVE, SVE2 & SME) Supports
-
-[2] Add LoongArch64 Support.
+Add armv9(SVE, SVE2 & SME) Supports.
 
