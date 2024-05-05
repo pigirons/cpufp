@@ -20,7 +20,7 @@ fp32_fmadd_f32f32f32:
 .fp32.fmadd.f32f32f32:
     fmadd.s $f0, $f16, $f16, $f0
     fmadd.s $f1, $f16, $f16, $f1
-    fmadd.s $f2, $f16, $f16, $f1
+    fmadd.s $f2, $f16, $f16, $f2
     fmadd.s $f3, $f16, $f16, $f3
     fmadd.s $f4, $f16, $f16, $f4
     fmadd.s $f5, $f16, $f16, $f5

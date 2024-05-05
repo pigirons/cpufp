@@ -22,7 +22,7 @@ lsx_fp32_fmadd_f32f32f32:
 .lsx.fp32.fmadd.f32f32f32:
     vfmadd.s $vr0, $vr16, $vr16, $vr0
     vfmadd.s $vr1, $vr16, $vr16, $vr1
-    vfmadd.s $vr2, $vr16, $vr16, $vr1
+    vfmadd.s $vr2, $vr16, $vr16, $vr2
     vfmadd.s $vr3, $vr16, $vr16, $vr3
     vfmadd.s $vr4, $vr16, $vr16, $vr4
     vfmadd.s $vr5, $vr16, $vr16, $vr5
@@ -61,7 +61,7 @@ lsx_fp64_fmadd_f64f64f64:
 .lsx.fp64.fmadd.f64f64f64:
     vfmadd.d $vr0, $vr16, $vr16, $vr0
     vfmadd.d $vr1, $vr16, $vr16, $vr1
-    vfmadd.d $vr2, $vr16, $vr16, $vr1
+    vfmadd.d $vr2, $vr16, $vr16, $vr2
     vfmadd.d $vr3, $vr16, $vr16, $vr3
     vfmadd.d $vr4, $vr16, $vr16, $vr4
     vfmadd.d $vr5, $vr16, $vr16, $vr5

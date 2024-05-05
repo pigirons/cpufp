@@ -22,7 +22,7 @@ lasx_fp32_fmadd_f32f32f32:
 .lasx.fp32.fmadd.f32f32f32:
     xvfmadd.s $xr0, $xr16, $xr16, $xr0
     xvfmadd.s $xr1, $xr16, $xr16, $xr1
-    xvfmadd.s $xr2, $xr16, $xr16, $xr1
+    xvfmadd.s $xr2, $xr16, $xr16, $xr2
     xvfmadd.s $xr3, $xr16, $xr16, $xr3
     xvfmadd.s $xr4, $xr16, $xr16, $xr4
     xvfmadd.s $xr5, $xr16, $xr16, $xr5
@@ -61,7 +61,7 @@ lasx_fp64_fmadd_f64f64f64:
 .lasx.fp64.fmadd.f64f64f64:
     xvfmadd.d $xr0, $xr16, $xr16, $xr0
     xvfmadd.d $xr1, $xr16, $xr16, $xr1
-    xvfmadd.d $xr2, $xr16, $xr16, $xr1
+    xvfmadd.d $xr2, $xr16, $xr16, $xr2
     xvfmadd.d $xr3, $xr16, $xr16, $xr3
     xvfmadd.d $xr4, $xr16, $xr16, $xr4
     xvfmadd.d $xr5, $xr16, $xr16, $xr5

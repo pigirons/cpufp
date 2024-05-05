@@ -20,7 +20,7 @@ fp64_fmadd_f64f64f64:
 .fp64.fmadd.f64f64f64:
     fmadd.d $f0, $f16, $f16, $f0
     fmadd.d $f1, $f16, $f16, $f1
-    fmadd.d $f2, $f16, $f16, $f1
+    fmadd.d $f2, $f16, $f16, $f2
     fmadd.d $f3, $f16, $f16, $f3
     fmadd.d $f4, $f16, $f16, $f4
     fmadd.d $f5, $f16, $f16, $f5
