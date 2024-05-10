@@ -14,18 +14,19 @@ using namespace std;
 
 extern "C"
 {
-    void pfmul_adds(int64_t, void *params);
-    void fmul_addd(int64_t, void *params);
-
-#if __iset__ >= 5
-    void qpfmul_adds(int64_t, void *params);
-    void qpfmul_addd(int64_t, void *params);
-#endif
 
 #if __iset__ >= 6
-    void qpfmas(int64_t, void *params);
-    void qpfmad(int64_t, void *params);
+    void bench_qpfmas(int64_t, void *params);
+    void bench_qpfmad(int64_t, void *params);
 #endif
+
+#if __iset__ >= 5
+    void bench_qpfmul_adds(int64_t, void *params);
+    void bench_qpfmul_addd(int64_t, void *params);
+#endif
+
+    void bench_pfmul_adds(int64_t, void *params);
+    void bench_fmul_addd(int64_t, void *params);
 }
 
 typedef struct
@@ -251,30 +252,30 @@ static void cpufp_register_isa()
     // NOTE: do not use values greater than UINT32_MAX
     const uint32_t loop_time = 0x20000000;
 
-#if __iset__ <= 3
-    reg_new_isa("v1", "ADD(MUL(f32,f32),f32)", "FLOPS",
-        loop_time, 16LL, NULL, pfmul_adds);
-    reg_new_isa("v1", "ADD(MUL(f64,f64),f64)", "FLOPS",
-        loop_time,  8LL, NULL, fmul_addd);
-#elif __iset__ >= 4
-    reg_new_isa("v4", "ADD(MUL(f32,f32),f32)", "FLOPS",
-        loop_time, 24LL, NULL, pfmul_adds);
-    reg_new_isa("v4", "ADD(MUL(f64,f64),f64)", "FLOPS",
-        loop_time, 12LL, NULL, fmul_addd);
+#if __iset__ >= 6
+    reg_new_isa("v6", "FMA(f32,f32,f32)", "FLOPS",
+        loop_time, 48LL, NULL, bench_qpfmas);
+    reg_new_isa("v6", "FMA(f64,f64,f64)", "FLOPS",
+        loop_time, 24LL, NULL, bench_qpfmad);
 #endif
 
 #if __iset__ >= 5
-    reg_new_isa("v5", "ADD(MUL(f32,f32),f32)", "FLOPS",
-        loop_time, 48LL, NULL, qpfmul_adds);
-    reg_new_isa("v5", "ADD(MUL(f64,f64),f64)", "FLOPS",
-        loop_time, 24LL, NULL, qpfmul_addd);
+    reg_new_isa("v5", "ADD(f32,MUL(f32,f32))", "FLOPS",
+        loop_time, 48LL, NULL, bench_qpfmul_adds);
+    reg_new_isa("v5", "ADD(f64,MUL(f64,f64))", "FLOPS",
+        loop_time, 24LL, NULL, bench_qpfmul_addd);
 #endif
 
-#if __iset__ >= 6
-    reg_new_isa("v6", "FMA(f32,f32,f32)", "FLOPS",
-        loop_time, 48LL, NULL, qpfmas);
-    reg_new_isa("v6", "FMA(f64,f64,f64)", "FLOPS",
-        loop_time, 24LL, NULL, qpfmad);
+#if __iset__ >= 4
+    reg_new_isa("v4", "ADD(f32,MUL(f32,f32))", "FLOPS",
+        loop_time, 24LL, NULL, bench_pfmul_adds);
+    reg_new_isa("v4", "ADD(f64,MUL(f64,f64))", "FLOPS",
+        loop_time, 12LL, NULL, bench_fmul_addd);
+#else
+    reg_new_isa("v1", "ADD(f32,MUL(f32,f32))", "FLOPS",
+        loop_time, 16LL, NULL, bench_pfmul_adds);
+    reg_new_isa("v1", "ADD(f64,MUL(f64,f64))", "FLOPS",
+        loop_time,  8LL, NULL, bench_fmul_addd);
 #endif
 }
 
@@ -316,4 +317,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
