@@ -61,7 +61,7 @@ Thread Pool Binding: 0
 -------------------------------------------------------------------------------
 </pre>
 
-For 4 cores:
+For 16 cores:
 
 <pre>
 $ ./cpufp --thread_pool=[0-15]
