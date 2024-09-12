@@ -17,39 +17,23 @@ fp32_fmadd_f32f32f32:
 	movgr2fr.w $f14, $r0
 	movgr2fr.w $f15, $r0
 	movgr2fr.w $f16, $r0
-	movgr2fr.w $f17, $r0
-	movgr2fr.w $f18, $r0
-	movgr2fr.w $f19, $r0
-	movgr2fr.w $f20, $r0
-	movgr2fr.w $f21, $r0
-	movgr2fr.w $f22, $r0
-	movgr2fr.w $f23, $r0
-	movgr2fr.w $f24, $r0
 .fp32.fmadd.f32f32f32:
-    fmadd.s $f0, $f24, $f24, $f0
-    fmadd.s $f1, $f24, $f24, $f1
-    fadd.s  $f2, $f24, $f24
-    fadd.s  $f3, $f24, $f24
-    fmadd.s $f4, $f24, $f24, $f4
-    fmadd.s $f5, $f24, $f24, $f5
-    fadd.s  $f6, $f24, $f24
-    fadd.s  $f7, $f24, $f24
-    fmadd.s $f8, $f24, $f24, $f8
-    fmadd.s $f9, $f24, $f24, $f9
-    fadd.s  $f10, $f24, $f24
-    fadd.s  $f11, $f24, $f24
-    fmadd.s $f12, $f24, $f24, $f12
-    fmadd.s $f13, $f24, $f24, $f13
-    fadd.s  $f14, $f24, $f24
-    fadd.s  $f15, $f24, $f24
-    fmadd.s $f16, $f24, $f24, $f16
-    fmadd.s $f17, $f24, $f24, $f17
-    fadd.s  $f18, $f24, $f24
-    fadd.s  $f19, $f24, $f24
-    fmadd.s $f20, $f24, $f24, $f20
-    fmadd.s $f21, $f24, $f24, $f21
-    fadd.s  $f22, $f24, $f24
-    fadd.s  $f23, $f24, $f24
+    fmadd.s $f0, $f16, $f16, $f0
+    fmadd.s $f1, $f16, $f16, $f1
+    fmadd.s $f2, $f16, $f16, $f2
+    fmadd.s $f3, $f16, $f16, $f3
+    fmadd.s $f4, $f16, $f16, $f4
+    fmadd.s $f5, $f16, $f16, $f5
+    fmadd.s $f6, $f16, $f16, $f6
+    fmadd.s $f7, $f16, $f16, $f7
+    fmadd.s $f8, $f16, $f16, $f8
+    fmadd.s $f9, $f16, $f16, $f9
+    fmadd.s $f10, $f16, $f16, $f10
+    fmadd.s $f11, $f16, $f16, $f11
+    fmadd.s $f12, $f16, $f16, $f12
+    fmadd.s $f13, $f16, $f16, $f13
+    fmadd.s $f14, $f16, $f16, $f14
+    fmadd.s $f15, $f16, $f16, $f15
     addi.d $a0, $a0, -1
     bne $a0, $r0, .fp32.fmadd.f32f32f32
 	jr $r1
