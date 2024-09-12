@@ -244,26 +244,26 @@ static void parse_thread_pool(char *sets,
 static void cpufp_register_isa()
 {
 #ifdef _LASX_
-    reg_new_isa("LASX", "fmadd(f32,f32,f32) + fadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("LASX", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 256LL, lasx_fp32_fmadd_f32f32f32);
-    reg_new_isa("LASX", "fmadd(f64,f64,f64) + fadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("LASX", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 128LL, lasx_fp64_fmadd_f64f64f64);
 #endif
 
 #ifdef _LSX_
-    reg_new_isa("LSX", "fmadd(f32,f32,f32) + fadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("LSX", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 128LL, lsx_fp32_fmadd_f32f32f32);
-    reg_new_isa("LSX", "fmadd(f64,f64,f64) + fadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("LSX", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 64LL, lsx_fp64_fmadd_f64f64f64);
 #endif
 
 #ifdef _FP_SP_
-    reg_new_isa("FP_SP", "fmadd(f32,f32,f32) + fadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("FP_SP", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 32LL, fp32_fmadd_f32f32f32);
 #endif
 
 #ifdef _FP_DP_
-    reg_new_isa("FP_DP", "fmadd(f64,f64,f64) + fadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("FP_DP", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 32LL, fp64_fmadd_f64f64f64);
 #endif
 }
