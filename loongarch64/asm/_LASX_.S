@@ -108,30 +108,30 @@ lasx_fp32_add_mul_f32f32_f32:
     xvxor.v $xr23, $xr23, $xr23
     xvxor.v $xr24, $xr24, $xr24
 .lasx.fp32.add.mul.f32f32.f32:
-    xvfmul.s $xr0, $xr24, $xr24, $xr0
-    xvfadd.s $xr1, $xr24, $xr24, $xr1
-    xvfmul.s $xr2, $xr24, $xr24, $xr2
-    xvfadd.s $xr3, $xr24, $xr24, $xr3
-    xvfmul.s $xr4, $xr24, $xr24, $xr4
-    xvfadd.s $xr5, $xr24, $xr24, $xr5
-    xvfmul.s $xr6, $xr24, $xr24, $xr6
-    xvfadd.s $xr7, $xr24, $xr24, $xr7
-    xvfmul.s $xr8, $xr24, $xr24, $xr8
-    xvfadd.s $xr9, $xr24, $xr24, $xr9
-    xvfmul.s $xr10, $xr24, $xr24, $xr10
-    xvfadd.s $xr11, $xr24, $xr24, $xr11
-    xvfmul.s $xr12, $xr24, $xr24, $xr12
-    xvfadd.s $xr13, $xr24, $xr24, $xr13
-    xvfmul.s $xr14, $xr24, $xr24, $xr14
-    xvfadd.s $xr15, $xr24, $xr24, $xr15
-    xvfmul.s $xr16, $xr24, $xr24, $xr16
-    xvfadd.s $xr17, $xr24, $xr24, $xr17
-    xvfmul.s $xr18, $xr24, $xr24, $xr18
-    xvfadd.s $xr19, $xr24, $xr24, $xr19
-    xvfmul.s $xr20, $xr24, $xr24, $xr20
-    xvfadd.s $xr21, $xr24, $xr24, $xr21
-    xvfmul.s $xr22, $xr24, $xr24, $xr22
-    xvfadd.s $xr23, $xr24, $xr24, $xr23
+    xvfmul.s $xr0, $xr24, $xr24
+    xvfadd.s $xr1, $xr24, $xr24
+    xvfmul.s $xr2, $xr24, $xr24
+    xvfadd.s $xr3, $xr24, $xr24
+    xvfmul.s $xr4, $xr24, $xr24
+    xvfadd.s $xr5, $xr24, $xr24
+    xvfmul.s $xr6, $xr24, $xr24
+    xvfadd.s $xr7, $xr24, $xr24
+    xvfmul.s $xr8, $xr24, $xr24
+    xvfadd.s $xr9, $xr24, $xr24
+    xvfmul.s $xr10, $xr24, $xr24
+    xvfadd.s $xr11, $xr24, $xr24
+    xvfmul.s $xr12, $xr24, $xr24
+    xvfadd.s $xr13, $xr24, $xr24
+    xvfmul.s $xr14, $xr24, $xr24
+    xvfadd.s $xr15, $xr24, $xr24
+    xvfmul.s $xr16, $xr24, $xr24
+    xvfadd.s $xr17, $xr24, $xr24
+    xvfmul.s $xr18, $xr24, $xr24
+    xvfadd.s $xr19, $xr24, $xr24
+    xvfmul.s $xr20, $xr24, $xr24
+    xvfadd.s $xr21, $xr24, $xr24
+    xvfmul.s $xr22, $xr24, $xr24
+    xvfadd.s $xr23, $xr24, $xr24
     addi.d $a0, $a0, -1
     bne $a0, $r0, .lasx.fp32.add.mul.f32f32.f32
 	jr $r1
@@ -163,30 +163,30 @@ lasx_fp64_add_mul_f64f64_f64:
     xvxor.v $xr23, $xr23, $xr23
     xvxor.v $xr24, $xr24, $xr24
 .lasx.fp64.add.mul.f64f64.f64:
-    xvfmul.d $xr0, $xr24, $xr24, $xr0
-    xvfadd.d $xr1, $xr24, $xr24, $xr1
-    xvfmul.d $xr2, $xr24, $xr24, $xr2
-    xvfadd.d $xr3, $xr24, $xr24, $xr3
-    xvfmul.d $xr4, $xr24, $xr24, $xr4
-    xvfadd.d $xr5, $xr24, $xr24, $xr5
-    xvfmul.d $xr6, $xr24, $xr24, $xr6
-    xvfadd.d $xr7, $xr24, $xr24, $xr7
-    xvfmul.d $xr8, $xr24, $xr24, $xr8
-    xvfadd.d $xr9, $xr24, $xr24, $xr9
-    xvfmul.d $xr10, $xr24, $xr24, $xr10
-    xvfadd.d $xr11, $xr24, $xr24, $xr11
-    xvfmul.d $xr12, $xr24, $xr24, $xr12
-    xvfadd.d $xr13, $xr24, $xr24, $xr13
-    xvfmul.d $xr14, $xr24, $xr24, $xr14
-    xvfadd.d $xr15, $xr24, $xr24, $xr15
-    xvfmul.d $xr16, $xr24, $xr24, $xr16
-    xvfadd.d $xr17, $xr24, $xr24, $xr17
-    xvfmul.d $xr18, $xr24, $xr24, $xr18
-    xvfadd.d $xr19, $xr24, $xr24, $xr19
-    xvfmul.d $xr20, $xr24, $xr24, $xr20
-    xvfadd.d $xr21, $xr24, $xr24, $xr21
-    xvfmul.d $xr22, $xr24, $xr24, $xr22
-    xvfadd.d $xr23, $xr24, $xr24, $xr23
+    xvfmul.d $xr0, $xr24, $xr24
+    xvfadd.d $xr1, $xr24, $xr24
+    xvfmul.d $xr2, $xr24, $xr24
+    xvfadd.d $xr3, $xr24, $xr24
+    xvfmul.d $xr4, $xr24, $xr24
+    xvfadd.d $xr5, $xr24, $xr24
+    xvfmul.d $xr6, $xr24, $xr24
+    xvfadd.d $xr7, $xr24, $xr24
+    xvfmul.d $xr8, $xr24, $xr24
+    xvfadd.d $xr9, $xr24, $xr24
+    xvfmul.d $xr10, $xr24, $xr24
+    xvfadd.d $xr11, $xr24, $xr24
+    xvfmul.d $xr12, $xr24, $xr24
+    xvfadd.d $xr13, $xr24, $xr24
+    xvfmul.d $xr14, $xr24, $xr24
+    xvfadd.d $xr15, $xr24, $xr24
+    xvfmul.d $xr16, $xr24, $xr24
+    xvfadd.d $xr17, $xr24, $xr24
+    xvfmul.d $xr18, $xr24, $xr24
+    xvfadd.d $xr19, $xr24, $xr24
+    xvfmul.d $xr20, $xr24, $xr24
+    xvfadd.d $xr21, $xr24, $xr24
+    xvfmul.d $xr22, $xr24, $xr24
+    xvfadd.d $xr23, $xr24, $xr24
     addi.d $a0, $a0, -1
     bne $a0, $r0, .lasx.fp64.add.mul.f64f64.f64
 	jr $r1

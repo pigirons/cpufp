@@ -108,30 +108,30 @@ lsx_fp32_add_mul_f32f32_f32:
     vxor.v $vr23, $vr23, $vr23
     vxor.v $vr24, $vr24, $vr24
 .lsx.fp32.add.mul.f32f32.f32:
-    vfmul.s $vr0, $vr24, $vr24, $vr0
-    vfadd.s $vr1, $vr24, $vr24, $vr1
-    vfmul.s $vr2, $vr24, $vr24, $vr2
-    vfadd.s $vr3, $vr24, $vr24, $vr3
-    vfmul.s $vr4, $vr24, $vr24, $vr4
-    vfadd.s $vr5, $vr24, $vr24, $vr5
-    vfmul.s $vr6, $vr24, $vr24, $vr6
-    vfadd.s $vr7, $vr24, $vr24, $vr7
-    vfmul.s $vr8, $vr24, $vr24, $vr8
-    vfadd.s $vr9, $vr24, $vr24, $vr9
-    vfmul.s $vr10, $vr24, $vr24, $vr10
-    vfadd.s $vr11, $vr24, $vr24, $vr11
-    vfmul.s $vr12, $vr24, $vr24, $vr12
-    vfadd.s $vr13, $vr24, $vr24, $vr13
-    vfmul.s $vr14, $vr24, $vr24, $vr14
-    vfadd.s $vr15, $vr24, $vr24, $vr15
-    vfmul.s $vr16, $vr24, $vr24, $vr16
-    vfadd.s $vr17, $vr24, $vr24, $vr17
-    vfmul.s $vr18, $vr24, $vr24, $vr18
-    vfadd.s $vr19, $vr24, $vr24, $vr19
-    vfmul.s $vr20, $vr24, $vr24, $vr20
-    vfadd.s $vr21, $vr24, $vr24, $vr21
-    vfmul.s $vr22, $vr24, $vr24, $vr22
-    vfadd.s $vr23, $vr24, $vr24, $vr23
+    vfmul.s $vr0, $vr24, $vr24
+    vfadd.s $vr1, $vr24, $vr24
+    vfmul.s $vr2, $vr24, $vr24
+    vfadd.s $vr3, $vr24, $vr24
+    vfmul.s $vr4, $vr24, $vr24
+    vfadd.s $vr5, $vr24, $vr24
+    vfmul.s $vr6, $vr24, $vr24
+    vfadd.s $vr7, $vr24, $vr24
+    vfmul.s $vr8, $vr24, $vr24
+    vfadd.s $vr9, $vr24, $vr24
+    vfmul.s $vr10, $vr24, $vr24
+    vfadd.s $vr11, $vr24, $vr24
+    vfmul.s $vr12, $vr24, $vr24
+    vfadd.s $vr13, $vr24, $vr24
+    vfmul.s $vr14, $vr24, $vr24
+    vfadd.s $vr15, $vr24, $vr24
+    vfmul.s $vr16, $vr24, $vr24
+    vfadd.s $vr17, $vr24, $vr24
+    vfmul.s $vr18, $vr24, $vr24
+    vfadd.s $vr19, $vr24, $vr24
+    vfmul.s $vr20, $vr24, $vr24
+    vfadd.s $vr21, $vr24, $vr24
+    vfmul.s $vr22, $vr24, $vr24
+    vfadd.s $vr23, $vr24, $vr24
     addi.d $a0, $a0, -1
     bne $a0, $r0, .lsx.fp32.add.mul.f32f32.f32
 	jr $r1
@@ -163,30 +163,30 @@ lsx_fp64_add_mul_f64f64_f64:
     vxor.v $vr23, $vr23, $vr23
     vxor.v $vr24, $vr24, $vr24
 .lsx.fp64.add.mul.f64f64.f64:
-    vfmul.d $vr0, $vr24, $vr24, $vr0
-    vfadd.d $vr1, $vr24, $vr24, $vr1
-    vfmul.d $vr2, $vr24, $vr24, $vr2
-    vfadd.d $vr3, $vr24, $vr24, $vr3
-    vfmul.d $vr4, $vr24, $vr24, $vr4
-    vfadd.d $vr5, $vr24, $vr24, $vr5
-    vfmul.d $vr6, $vr24, $vr24, $vr6
-    vfadd.d $vr7, $vr24, $vr24, $vr7
-    vfmul.d $vr8, $vr24, $vr24, $vr8
-    vfadd.d $vr9, $vr24, $vr24, $vr9
-    vfmul.d $vr10, $vr24, $vr24, $vr10
-    vfadd.d $vr11, $vr24, $vr24, $vr11
-    vfmul.d $vr12, $vr24, $vr24, $vr12
-    vfadd.d $vr13, $vr24, $vr24, $vr13
-    vfmul.d $vr14, $vr24, $vr24, $vr14
-    vfadd.d $vr15, $vr24, $vr24, $vr15
-    vfmul.d $vr16, $vr24, $vr24, $vr16
-    vfadd.d $vr17, $vr24, $vr24, $vr17
-    vfmul.d $vr18, $vr24, $vr24, $vr18
-    vfadd.d $vr19, $vr24, $vr24, $vr19
-    vfmul.d $vr20, $vr24, $vr24, $vr20
-    vfadd.d $vr21, $vr24, $vr24, $vr21
-    vfmul.d $vr22, $vr24, $vr24, $vr22
-    vfadd.d $vr23, $vr24, $vr24, $vr23
+    vfmul.d $vr0, $vr24, $vr24
+    vfadd.d $vr1, $vr24, $vr24
+    vfmul.d $vr2, $vr24, $vr24
+    vfadd.d $vr3, $vr24, $vr24
+    vfmul.d $vr4, $vr24, $vr24
+    vfadd.d $vr5, $vr24, $vr24
+    vfmul.d $vr6, $vr24, $vr24
+    vfadd.d $vr7, $vr24, $vr24
+    vfmul.d $vr8, $vr24, $vr24
+    vfadd.d $vr9, $vr24, $vr24
+    vfmul.d $vr10, $vr24, $vr24
+    vfadd.d $vr11, $vr24, $vr24
+    vfmul.d $vr12, $vr24, $vr24
+    vfadd.d $vr13, $vr24, $vr24
+    vfmul.d $vr14, $vr24, $vr24
+    vfadd.d $vr15, $vr24, $vr24
+    vfmul.d $vr16, $vr24, $vr24
+    vfadd.d $vr17, $vr24, $vr24
+    vfmul.d $vr18, $vr24, $vr24
+    vfadd.d $vr19, $vr24, $vr24
+    vfmul.d $vr20, $vr24, $vr24
+    vfadd.d $vr21, $vr24, $vr24
+    vfmul.d $vr22, $vr24, $vr24
+    vfadd.d $vr23, $vr24, $vr24
     addi.d $a0, $a0, -1
     bne $a0, $r0, .lsx.fp64.add.mul.f64f64.f64
 	jr $r1

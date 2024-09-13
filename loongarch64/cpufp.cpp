@@ -27,7 +27,7 @@ extern "C"
     void lsx_fp64_fmadd_f64f64f64(int64_t);
 
     void lsx_fp32_add_mul_f32f32_f32(int64_t);
-    void lsx_fp64_add_mul_f32f32_f32(int64_t);
+    void lsx_fp64_add_mul_f64f64_f64(int64_t);
 #endif
 
 #ifdef _LASX_
@@ -35,7 +35,7 @@ extern "C"
     void lasx_fp64_fmadd_f64f64f64(int64_t);
 
     void lasx_fp32_add_mul_f32f32_f32(int64_t);
-    void lasx_fp64_add_mul_f32f32_f32(int64_t);
+    void lasx_fp64_add_mul_f64f64_f64(int64_t);
 #endif
 }
 
