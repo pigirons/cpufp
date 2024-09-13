@@ -25,11 +25,17 @@ extern "C"
 #ifdef _LSX_
     void lsx_fp32_fmadd_f32f32f32(int64_t);
     void lsx_fp64_fmadd_f64f64f64(int64_t);
+
+    void lsx_fp32_add_mul_f32f32_f32(int64_t);
+    void lsx_fp64_add_mul_f32f32_f32(int64_t);
 #endif
 
 #ifdef _LASX_
     void lasx_fp32_fmadd_f32f32f32(int64_t);
     void lasx_fp64_fmadd_f64f64f64(int64_t);
+
+    void lasx_fp32_add_mul_f32f32_f32(int64_t);
+    void lasx_fp64_add_mul_f32f32_f32(int64_t);
 #endif
 }
 
@@ -248,6 +254,10 @@ static void cpufp_register_isa()
         0x20000000LL, 256LL, lasx_fp32_fmadd_f32f32f32);
     reg_new_isa("LASX", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 128LL, lasx_fp64_fmadd_f64f64f64);
+    reg_new_isa("LASX", "add(mul(f32,f32),f32)", "FLOPS",
+        0x20000000LL, 192LL, lasx_fp32_add_mul_f32f32_f32);
+    reg_new_isa("LASX", "add(mul(f64,f64),f64)", "FLOPS",
+        0x20000000LL, 96LL, lasx_fp64_add_mul_f64f64_f64);
 #endif
 
 #ifdef _LSX_
@@ -255,6 +265,10 @@ static void cpufp_register_isa()
         0x20000000LL, 128LL, lsx_fp32_fmadd_f32f32f32);
     reg_new_isa("LSX", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 64LL, lsx_fp64_fmadd_f64f64f64);
+    reg_new_isa("LSX", "add(mul(f32,f32),f32)", "FLOPS",
+        0x20000000LL, 96LL, lsx_fp32_add_mul_f32f32_f32);
+    reg_new_isa("LSX", "add(mul(f64,f64),f64)", "FLOPS",
+        0x20000000LL, 48LL, lsx_fp64_add_mul_f64f64_f64);
 #endif
 
 #ifdef _FP_SP_
