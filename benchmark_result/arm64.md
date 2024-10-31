@@ -462,3 +462,88 @@ Thread Pool Binding: 0 1 2 3
 -------------------------------------------------------------
 </pre>
 
+## Apple Silicon M1 Ultra
+
+For 1x e-core (Icestorm):
+
+<pre>
+$ ./cpufp --thread_pool=[0]
+Number Threads: 1
+Thread Pool Binding: 0
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 131.74 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 131.83 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 131.72 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 131.81 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 65.88 GFLOPS     |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 65.886 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 32.892 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 32.953 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 16.452 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 16.476 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+For 4x e-core (Icestorm):
+
+<pre>
+$ ./cpufp --thread_pool=[0,1,10,11]
+Number Threads: 4
+Thread Pool Binding: 0 1 10 11
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 526.63 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 526.62 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 526.36 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 526.64 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 263.3 GFLOPS     |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 263.36 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 131.65 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 131.66 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 65.815 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 65.816 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+For 1x p-core (Firestorm):
+
+<pre>
+$ ./cpufp --thread_pool=[2]
+Number Threads: 1
+Thread Pool Binding: 2
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 411.79 GOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 412.35 GOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 412.47 GOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 411.79 GOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 206.26 GFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 206.25 GFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 103.14 GFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 103.12 GFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 51.562 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 51.518 GFLOPS    |
+----------------------------------------------------------------
+</pre>
+
+For 16x p-core (Firestorm):
+
+<pre>
+$ ./cpufp --thread_pool=[2-9,12-19]
+Number Threads: 16
+Thread Pool Binding: 2 3 4 5 6 7 8 9 12 13 14 15 16 17 18 19
+----------------------------------------------------------------
+| Instruction Set | Core Computation        | Peak Performance |
+| asimd_dp        | dp4a.vs(s32,s8,s8)      | 6.2011 TOPS      |
+| asimd_dp        | dp4a.vv(s32,s8,s8)      | 6.2024 TOPS      |
+| asimd_dp        | dp4a.vs(u32,u8,u8)      | 6.2013 TOPS      |
+| asimd_dp        | dp4a.vv(u32,u8,u8)      | 6.2026 TOPS      |
+| asimd_hp        | fmla.vs(fp16,fp16,fp16) | 3.1016 TFLOPS    |
+| asimd_hp        | fmla.vv(fp16,fp16,fp16) | 3.1012 TFLOPS    |
+| asimd           | fmla.vs(f32,f32,f32)    | 1.5507 TFLOPS    |
+| asimd           | fmla.vv(f32,f32,f32)    | 1.5507 TFLOPS    |
+| asimd           | fmla.vs(f64,f64,f64)    | 774.91 GFLOPS    |
+| asimd           | fmla.vv(f64,f64,f64)    | 775.4 GFLOPS     |
+----------------------------------------------------------------
+</pre>
