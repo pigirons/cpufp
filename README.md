@@ -119,6 +119,10 @@ build e2k version:
 
 `./build_e2k.sh`
 
+build arm64 version (for Apple Silicon M series on Asahi Linux):
+
+`./build_applem.sh`
+
 clean:
 
 `./clean.sh`
