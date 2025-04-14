@@ -20,7 +20,7 @@ public:
 private:
     int col;
     std::vector<int> colWidths;
-    std::vector<std::vector<std::string>> contents;
+    std::vector<std::vector<std::string> > contents;
 };
 
 #endif

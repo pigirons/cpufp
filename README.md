@@ -8,7 +8,7 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 
 | Arch          |Linux| MacOS| Windows|
 |:--------------|:---:|:----:|:------:|
-| arm64         | yes |  no  |   no   |
+| arm64         | yes |  yes |   no   |
 | e2k           | yes |  no  |   no   |
 | loongarch64   | yes |  no  |   no   |
 | riscv64       | yes |  no  |   no   |
