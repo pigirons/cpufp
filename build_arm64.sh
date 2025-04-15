@@ -12,8 +12,13 @@ else
 fi
 
 # build common tools
+if [ "${OS}" == "Darwin" ]; then
 g++ -O3 -std=gnu++17 -c $COMM/table.cpp -o $BUILD_DIR/table.o
 g++ -O3 -std=gnu++17 -pthread -c $COMM/smtl.cpp -o $BUILD_DIR/smtl.o
+else
+g++ -O3 -c $COMM/table.cpp -o $BUILD_DIR/table.o
+g++ -O3 -pthread -c $COMM/smtl.cpp -o $BUILD_DIR/smtl.o
+fi
 
 # gen benchmark macro according to cpuid feature
 gcc $SRC/cpuid.c -o $BUILD_DIR/cpuid
@@ -31,9 +36,10 @@ do
 done
 
 # compile cpufp
-EXTRA_CFLAGS=""
 if [ "${OS}" != "Darwin" ]; then
-    EXTRA_CFLAGS="-z noexecstack"
-fi
 g++ -std=gnu++17 -O3 -I$COMM $SIMD_MACRO -c $SRC/cpufp.cpp -o $BUILD_DIR/cpufp.o
-g++ -std=gnu++17 -O3 ${EXTRA_CFLAGS} -pthread -o cpufp $BUILD_DIR/cpufp.o $BUILD_DIR/smtl.o $BUILD_DIR/table.o $SIMD_OBJ
+g++ -std=gnu++17 -O3 -z noexecstack -pthread -o cpufp $BUILD_DIR/cpufp.o $BUILD_DIR/smtl.o $BUILD_DIR/table.o $SIMD_OBJ
+else
+g++ -O3 -I$COMM $SIMD_MACRO -c $SRC/cpufp.cpp -o $BUILD_DIR/cpufp.o
+g++ -O3 -pthread -o cpufp $BUILD_DIR/cpufp.o $BUILD_DIR/smtl.o $BUILD_DIR/table.o $SIMD_OBJ
+fi
