@@ -147,13 +147,14 @@ clean:
 |:------|
 |[Apple Silicon M4 Max](benchmark_result/arm64/Apple_Silicon_M4_Max.md)|
 |[Apple Silicon M2 Max](benchmark_result/arm64/Apple_Silicon_M2_Max.md)|
+|[Qualcomm Snapdragon X Elite X1E80100](benchmark_result/arm64/Qualcomm_Snapdragon_X_Elite_X1E80100.md)|
 |[AWS Graviton 3E](benchmark_result/arm64/AWS_Graviton_3E.md)|
 |[Broadcom BCM2712](benchmark_result/arm64/Broadcom_BCM2712.md)|
 |[Broadcom BCM2711](benchmark_result/arm64/Broadcom_BCM2711.md)|
+|[CIX CD8180](benchmark_result/arm64/CIX_CD8180.md)|
 |[HUAWEI Kunpeng 920 7260](benchmark_result/arm64/HUAWEI_Kunpeng_920_7260.md)|
 |[HUAWEI Kunpeng D920 2249K](benchmark_result/arm64/HUAWEI_Kunpeng_D920_2249K.md)|
 |[Phytium D2000/8](benchmark_result/arm64/Phytium_D2000.md)|
-|[Qualcomm Snapdragon X Elite X1E80100](benchmark_result/arm64/Qualcomm_Snapdragon_X_Elite_X1E80100.md)|
 |[RockChip RK3588](benchmark_result/arm64/RockChip_RK3588.md)|
 |[RockChip RK3399](benchmark_result/arm64/RockChip_RK3399.md)|
 
