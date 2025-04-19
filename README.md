@@ -137,7 +137,7 @@ clean:
 |:-------|
 |[AMD Ryzen7 9700X](benchmark_result/x64/AMD_Ryzen7_9700X.md)|
 |[AMD Ryzen7 8845HS](benchmark_result/x64/AMD_Ryzen7_8845HS.md)|
-|[AMD Ryzen9 6900HX](benchmark_result/x64/AMD_Ryzen7_6900HX.md)|
+|[AMD Ryzen9 6900HX](benchmark_result/x64/AMD_Ryzen9_6900HX.md)|
 |[Intel Xeon Gold 6455B](benchmark_result/x64/Intel_Xeon_Gold_6455B.md)|
 |[Intel Xeon W9-3495X](benchmark_result/x64/Intel_Xeon_W9_3495X.md)|
 |[Intel Core i5 1340P](benchmark_result/x64/Intel_Core_i5_1340P.md)|
