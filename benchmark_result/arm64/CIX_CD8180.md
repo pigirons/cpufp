@@ -1,13 +1,13 @@
 # CIX CD8180(Radxa Orion O6)
 
 Settings:  
-Cortex-A720\@2.5GHz: 0,11  
-Cortex-A720\@2.4GHz: 9,10  
-Cortex-A720\@2.3GHz: 5,6  
-Cortex-A720\@2.2GHz: 7,8  
-Cortex-A520\@1.8GHz: 1-4
+Cortex-A720 @ 2.5GHz: 0,11  
+Cortex-A720 @ 2.4GHz: 9,10  
+Cortex-A720 @ 2.3GHz: 5,6  
+Cortex-A720 @ 2.2GHz: 7,8  
+Cortex-A520 @ 1.8GHz: 1-4
 
-For single P-Core\@2.5GHz:
+For single P-Core @ 2.5GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[0]
@@ -37,7 +37,7 @@ Thread Pool Binding: 0
 ----------------------------------------------------------------
 </pre>
 
-For 2 P-Cores\@2.5GHz:
+For 2 P-Cores @ 2.5GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[0,11]
@@ -67,7 +67,7 @@ Thread Pool Binding: 0 11
 ----------------------------------------------------------------
 </pre>
 
-For single P-Core\@2.4GHz:
+For single P-Core @ 2.4GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[9]
@@ -97,7 +97,7 @@ Thread Pool Binding: 9
 ----------------------------------------------------------------
 </pre>
 
-For 2 P-Cores\@2.4GHz:
+For 2 P-Cores @ 2.4GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[9,10]
@@ -127,7 +127,7 @@ Thread Pool Binding: 9 10
 ----------------------------------------------------------------
 </pre>
 
-For single P-Core\@2.3GHz:
+For single P-Core @ 2.3GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[5]
@@ -157,7 +157,7 @@ Thread Pool Binding: 5
 ----------------------------------------------------------------
 </pre>
 
-For 2 P-Cores\@2.3GHz:
+For 2 P-Cores @ 2.3GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[5,6]
@@ -187,7 +187,7 @@ Thread Pool Binding: 5 6
 ----------------------------------------------------------------
 </pre>
 
-For single P-Core\@2.2GHz:
+For single P-Core @ 2.2GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[7]
@@ -217,7 +217,7 @@ Thread Pool Binding: 7
 ----------------------------------------------------------------
 </pre>
 
-For 2 P-Cores\@2.2GHz:
+For 2 P-Cores @ 2.2GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[7,8]
@@ -247,7 +247,7 @@ Thread Pool Binding: 7 8
 ----------------------------------------------------------------
 </pre>
 
-For single E-core\@1.8GHz:
+For single E-core @ 1.8GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[1]
@@ -277,7 +277,7 @@ Thread Pool Binding: 1
 ----------------------------------------------------------------
 </pre>
 
-For 4 E-Cores\@1.8GHz:
+For 4 E-Cores @ 1.8GHz:
 
 <pre>
 $ ./cpufp --thread_pool=[1-4]
