@@ -30,6 +30,7 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 |SIMD|AVX_VNNI_INT8|Vector|int8|Unknown|
 |DSA|AMX_INT8|Matrix|int8|From Intel Sapphire Rapids|
 |DSA|AMX_BF16|Matrix|bf16|From Intel Sapphire Rapids|
+|DSA|AMX_FP16|Matrix|fp16|From Intel Granite Rapids|
 
 ## Support arm64 SIMD ISA
 
@@ -161,69 +162,69 @@ clean:
 <td><a href="benchmark_result/x64/Intel_N100.md">Intel N100</a></td>
 </tr>
 <tr>
-        <td rowspan="12">arm64</td>
-        <td><a href="benchmark_result/arm64/Apple_Silicon_M4_Max.md">Apple Silicon M4 Max</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/Apple_Silicon_M2_Max.md">Apple Silicon M2 Max</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/Qualcomm_Snapdragon_X_Elite_X1E80100.md">Qualcomm Snapdragon X Elite X1E80100</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/AWS_Graviton_3E.md">AWS Graviton 3E</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/Broadcom_BCM2712.md">Broadcom BCM2712</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/Broadcom_BCM2711.md">Broadcom BCM2711</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/CIX_CD8180.md">CIX CD8180</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/HUAWEI_Kunpeng_920_7260.md">HUAWEI Kunpeng 920 7260</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/HUAWEI_Kunpeng_D920_2249K.md">HUAWEI Kunpeng D920 2249K</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/Phytium_D2000.md">Phytium D2000/8</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/RockChip_RK3588.md">RockChip RK3588</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/arm64/RockChip_RK3399.md">RockChip RK3399</a></td>
-    </tr>
-    <tr>
-        <td rowspan="2">riscv64</td>
-        <td><a href="benchmark_result/riscv64/SpacemiT_K1.md">SpacemiT K1</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/riscv64/Kendryte_K230.md">Kendryte K230</a></td>
-    </tr>
-    <tr>
-        <td rowspan="3">loongarch64</td>
-        <td><a href="benchmark_result/loongarch64/Loongson_3A6000.md">Loongson 3A6000</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/loongarch64/Loongson_3C5000.md">Loongson 3C5000</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/loongarch64/Loongson_3A5000M.md">Loongson 3A5000M</a></td>
-    </tr>
-    <tr>
-        <td rowspan="3">e2k</td>
-        <td><a href="benchmark_result/e2k/Elbrus_8C2.md">Elbrus 8C2</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/e2k/Elbrus_8C.md">Elbrus 8C</a></td>
-    </tr>
-    <tr>
-        <td><a href="benchmark_result/e2k/Elbrus_4C.md">Elbrus 4C</a></td>
-    </tr>
+<td rowspan="12">arm64</td>
+<td><a href="benchmark_result/arm64/Apple_Silicon_M4_Max.md">Apple Silicon M4 Max</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/Apple_Silicon_M2_Max.md">Apple Silicon M2 Max</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/Qualcomm_Snapdragon_X_Elite_X1E80100.md">Qualcomm Snapdragon X Elite X1E80100</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/AWS_Graviton_3E.md">AWS Graviton 3E</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/Broadcom_BCM2712.md">Broadcom BCM2712</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/Broadcom_BCM2711.md">Broadcom BCM2711</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/CIX_CD8180.md">CIX CD8180</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/HUAWEI_Kunpeng_920_7260.md">HUAWEI Kunpeng 920 7260</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/HUAWEI_Kunpeng_D920_2249K.md">HUAWEI Kunpeng D920 2249K</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/Phytium_D2000.md">Phytium D2000/8</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/RockChip_RK3588.md">RockChip RK3588</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/arm64/RockChip_RK3399.md">RockChip RK3399</a></td>
+</tr>
+<tr>
+<td rowspan="2">riscv64</td>
+<td><a href="benchmark_result/riscv64/SpacemiT_K1.md">SpacemiT K1</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/riscv64/Kendryte_K230.md">Kendryte K230</a></td>
+</tr>
+<tr>
+<td rowspan="3">loongarch64</td>
+<td><a href="benchmark_result/loongarch64/Loongson_3A6000.md">Loongson 3A6000</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/loongarch64/Loongson_3C5000.md">Loongson 3C5000</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/loongarch64/Loongson_3A5000M.md">Loongson 3A5000M</a></td>
+</tr>
+<tr>
+<td rowspan="3">e2k</td>
+<td><a href="benchmark_result/e2k/Elbrus_8C2.md">Elbrus 8C2</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/e2k/Elbrus_8C.md">Elbrus 8C</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/e2k/Elbrus_4C.md">Elbrus 4C</a></td>
+</tr>
 </table>
 
 ## Todo list
