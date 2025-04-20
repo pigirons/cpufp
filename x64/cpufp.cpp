@@ -75,6 +75,9 @@ extern "C"
 #ifdef _AMX_BF16_
     void amx_bf16_mm_f32bf16bf16(int64_t, void* tile_cfg);
 #endif
+#ifdef _AMX_FP16_
+    void amx_fp16_mm_f32f16f16(int64_t, void* tile_cfg);
+#endif
 }
 
 #ifdef _AMX_TILE_
@@ -350,6 +353,11 @@ static void cpufp_register_isa()
         0x2500000LL, 65536LL, &__tilecfg, amx_bf16_mm_f32bf16bf16);
 #endif
 
+#ifdef _AMX_FP16_
+    reg_new_isa("AMX_FP16", "MM(f32,f16,f16)", "FLOPS",
+        0x2500000LL, 65536LL, &__tilecfg, amx_fp16_mm_f32f16f16);
+#endif
+
 #ifdef _AVX512_VNNI_
     reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "OPS",
         0x20000000LL, 2048LL, NULL, avx512_vnni_dp4a_s32u8s8);
@@ -453,4 +461,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-

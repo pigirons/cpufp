@@ -37,6 +37,10 @@ int main()
         {
             printf("_AMX_BF16_\n");
         }
+        if (BIT_TEST(cpuid_0x7_0x1.eax, 21))
+        {
+            printf("_AMX_FP16_\n");
+        }
     }
     if (BIT_TEST(cpuid_0x7_0x1.eax, 4))
     {
