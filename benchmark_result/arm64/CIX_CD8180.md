@@ -7,6 +7,8 @@ Cortex-A720 @ 2.3GHz: 5,6
 Cortex-A720 @ 2.2GHz: 7,8  
 Cortex-A520 @ 1.8GHz: 1-4
 
+Power policy: Balance
+
 For single P-Core @ 2.5GHz:
 
 <pre>
