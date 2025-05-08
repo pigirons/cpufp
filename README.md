@@ -140,7 +140,7 @@ clean:
 <td>Benchmark</td>
 </tr>
 <tr>
-<td rowspan="7">x86-64</td>
+<td rowspan="8">x86-64</td>
 <td><a href="benchmark_result/x64/AMD_Ryzen7_9700X.md">AMD Ryzen7 9700X</a></td>
 </tr>
 <tr>
@@ -162,6 +162,9 @@ clean:
 <td><a href="benchmark_result/x64/Intel_N100.md">Intel N100</a></td>
 </tr>
 <tr>
+<td><a href="benchmark_result/x64/ZHAOXIN_KX_6640MA.md">ZHAOXIN KX-6640MA</a></td>
+</tr>
+<tr>
 <td rowspan="12">arm64</td>
 <td><a href="benchmark_result/arm64/Apple_Silicon_M4_Max.md">Apple Silicon M4 Max</a></td>
 </tr>
@@ -181,7 +184,7 @@ clean:
 <td><a href="benchmark_result/arm64/Broadcom_BCM2711.md">Broadcom BCM2711</a></td>
 </tr>
 <tr>
-<td><a href="benchmark_result/arm64/CIX_CD8180.md">CIX CD8180</a></td>
+<td><a href="benchmark_result/arm64/CIX_P1_CD8180.md">CIX P1 CD8180</a></td>
 </tr>
 <tr>
 <td><a href="benchmark_result/arm64/HUAWEI_Kunpeng_920_7260.md">HUAWEI Kunpeng 920 7260</a></td>

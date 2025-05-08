@@ -1,4 +1,4 @@
-# CIX CD8180(Radxa Orion O6)
+# CIX P1 CD8180(Radxa Orion O6)
 
 Settings:  
 Cortex-A720 @ 2.5GHz: 0,11  
