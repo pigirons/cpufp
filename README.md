@@ -140,7 +140,7 @@ clean:
 <td>Benchmark</td>
 </tr>
 <tr>
-<td rowspan="8">x86-64</td>
+<td rowspan="9">x86-64</td>
 <td><a href="benchmark_result/x64/AMD_Ryzen7_9700X.md">AMD Ryzen7 9700X</a></td>
 </tr>
 <tr>
@@ -157,6 +157,9 @@ clean:
 </tr>
 <tr>
 <td><a href="benchmark_result/x64/Intel_Core_i5_1340P.md">Intel Core i5 1340P</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/x64/Intel_Ultra7_255H.md">Intel Ultra7 255H</a></td>
 </tr>
 <tr>
 <td><a href="benchmark_result/x64/Intel_N100.md">Intel N100</a></td>
