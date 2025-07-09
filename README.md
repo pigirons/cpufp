@@ -27,7 +27,7 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 |SIMD|AVX_VNNI|Vector|int8/int16|From Alder Lake|
 |SIMD|AVX512_FP16|Vector|fp16|From Intel Sapphire Rapids|
 |SIMD|AVX512_BF16|Vector|bf16|From AMD Zen4|
-|SIMD|AVX_VNNI_INT8|Vector|int8|Unknown|
+|SIMD|AVX_VNNI_INT8|Vector|int8|From Intel Lion Cove|
 |DSA|AMX_INT8|Matrix|int8|From Intel Sapphire Rapids|
 |DSA|AMX_BF16|Matrix|bf16|From Intel Sapphire Rapids|
 |DSA|AMX_FP16|Matrix|fp16|From Intel Granite Rapids|
