@@ -58,7 +58,7 @@ avx512_bf16_256b_dp2a_f32bf16bf16:
     vpxor %ymm13, %ymm13, %ymm13
     vpxor %ymm14, %ymm14, %ymm14
     vpxor %ymm15, %ymm15, %ymm15
-    vpxor %ymm16, %ymm16, %ymm16
+    vpxord %zmm16, %zmm16, %zmm16
 .avx512.bf16.256b.dp2a.fp32bf16bf16.L1:
     vdpbf16ps %ymm16, %ymm16, %ymm0
     vdpbf16ps %ymm16, %ymm16, %ymm1
@@ -97,7 +97,7 @@ avx512_bf16_128b_dp2a_f32bf16bf16:
     pxor %xmm13, %xmm13
     pxor %xmm14, %xmm14
     pxor %xmm15, %xmm15
-    pxor %xmm16, %xmm16
+    vpxord %zmm16, %zmm16, %zmm16
 .avx512.bf16.128b.dp2a.fp32bf16bf16.L1:
     vdpbf16ps %xmm16, %xmm16, %xmm0
     vdpbf16ps %xmm16, %xmm16, %xmm1
