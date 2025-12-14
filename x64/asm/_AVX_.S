@@ -1,7 +1,7 @@
-.globl avx_add_mul_f32f32_f32
-.globl avx_add_mul_f64f64_f64
+.globl avx_256b_add_mul_f32f32_f32
+.globl avx_256b_add_mul_f64f64_f64
 
-avx_add_mul_f32f32_f32:
+avx_256b_add_mul_f32f32_f32:
     vxorps %ymm0, %ymm0, %ymm0
     vxorps %ymm1, %ymm1, %ymm1
     vxorps %ymm2, %ymm2, %ymm2
@@ -18,7 +18,7 @@ avx_add_mul_f32f32_f32:
     vxorps %ymm13, %ymm13, %ymm13
     vxorps %ymm14, %ymm14, %ymm14
     vxorps %ymm15, %ymm15, %ymm15
-.avx.add.mul.f32f32.f32.L1:
+.avx.256b.add.mul.f32f32.f32.L1:
     vmulps %ymm0, %ymm0, %ymm0
     vaddps %ymm1, %ymm1, %ymm1
     vmulps %ymm2, %ymm2, %ymm2
@@ -36,10 +36,10 @@ avx_add_mul_f32f32_f32:
     vmulps %ymm14, %ymm14, %ymm14
     vaddps %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .avx.add.mul.f32f32.f32.L1
+    jne .avx.256b.add.mul.f32f32.f32.L1
     ret
 
-avx_add_mul_f64f64_f64:
+avx_256b_add_mul_f64f64_f64:
     vxorpd %ymm0, %ymm0, %ymm0
     vxorpd %ymm1, %ymm1, %ymm1
     vxorpd %ymm2, %ymm2, %ymm2
@@ -56,7 +56,7 @@ avx_add_mul_f64f64_f64:
     vxorpd %ymm13, %ymm13, %ymm13
     vxorpd %ymm14, %ymm14, %ymm14
     vxorpd %ymm15, %ymm15, %ymm15
-.avx.add.mul.f64f64.f64.L1:
+.avx.256b.add.mul.f64f64.f64.L1:
     vmulpd %ymm0, %ymm0, %ymm0
     vaddpd %ymm1, %ymm1, %ymm1
     vmulpd %ymm2, %ymm2, %ymm2
@@ -74,6 +74,6 @@ avx_add_mul_f64f64_f64:
     vmulpd %ymm14, %ymm14, %ymm14
     vaddpd %ymm15, %ymm15, %ymm15
     sub $0x1, %rdi
-    jne .avx.add.mul.f64f64.f64.L1
+    jne .avx.256b.add.mul.f64f64.f64.L1
     ret
 

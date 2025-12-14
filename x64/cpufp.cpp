@@ -10,7 +10,7 @@
 #include <sstream>
 #include <iomanip>
 
-#if defined(_AMX_INT8_) || defined(_AMX_BF16_)
+#if defined(_AMX_INT8_) || defined(_AMX_BF16_) || defined(_AMX_FP16_)
 #include <sys/syscall.h>
 #define _AMX_TILE_
 #endif
@@ -20,50 +20,76 @@ using namespace std;
 extern "C"
 {
 #ifdef _SSE_
-    void sse_add_mul_f32f32_f32(int64_t, void *params);
+    void sse_128b_add_mul_f32f32_f32(int64_t, void *params);
 #endif
 
 #ifdef _SSE2_
-    void sse2_add_mul_f64f64_f64(int64_t, void *params);
+    void sse2_128b_add_mul_f64f64_f64(int64_t, void *params);
 #endif
 
 #ifdef _AVX_
-    void avx_add_mul_f32f32_f32(int64_t, void *params);
-    void avx_add_mul_f64f64_f64(int64_t, void *params);
+    void avx_256b_add_mul_f32f32_f32(int64_t, void *params);
+    void avx_256b_add_mul_f64f64_f64(int64_t, void *params);
 #endif
 
 #ifdef _FMA_
-    void fma_f32f32f32(int64_t, void *params);
-    void fma_f64f64f64(int64_t, void *params);
+    void fma_256b_fma_f32f32f32(int64_t, void *params);
+    void fma_256b_fma_f64f64f64(int64_t, void *params);
+    void fma_128b_fma_f32f32f32(int64_t, void *params);
+    void fma_128b_fma_f64f64f64(int64_t, void *params);
 #endif
 
 #ifdef _AVX512F_
-    void avx512f_fma_f32f32f32(int64_t, void *params);
-    void avx512f_fma_f64f64f64(int64_t, void *params);
+    void avx512f_512b_fma_f32f32f32(int64_t, void *params);
+    void avx512f_512b_fma_f64f64f64(int64_t, void *params);
+    void avx512f_512b_add_mul_f32f32_f32(int64_t, void *params);
+    void avx512f_512b_add_mul_f64f64_f64(int64_t, void *params);
 #endif
 
 #ifdef _AVX512_BF16_
-    void avx512_bf16_dp2a_f32bf16bf16(int64_t, void *params);
+    void avx512_bf16_512b_dp2a_f32bf16bf16(int64_t, void *params);
+    void avx512_bf16_256b_dp2a_f32bf16bf16(int64_t, void *params);
+    void avx512_bf16_128b_dp2a_f32bf16bf16(int64_t, void *params);
 #endif
 
 #ifdef _AVX512_FP16_
-    void avx512_fp16_fma_f16f16f16(int64_t, void *params);
+    void avx512_fp16_512b_fma_f16f16f16(int64_t, void *params);
+    void avx512_fp16_256b_fma_f16f16f16(int64_t, void *params);
+    void avx512_fp16_128b_fma_f16f16f16(int64_t, void *params);
 #endif
 
 #ifdef _AVX512_VNNI_
-    void avx512_vnni_dp4a_s32u8s8(int64_t, void *params);
-    void avx512_vnni_dp2a_s32s16s16(int64_t, void *params);
+    void avx512_vnni_512b_dp4a_s32u8s8(int64_t, void *params);
+    void avx512_vnni_256b_dp4a_s32u8s8(int64_t, void *params);
+    void avx512_vnni_128b_dp4a_s32u8s8(int64_t, void *params);
+    void avx512_vnni_512b_dp2a_s32s16s16(int64_t, void *params);
+    void avx512_vnni_256b_dp2a_s32s16s16(int64_t, void *params);
+    void avx512_vnni_128b_dp2a_s32s16s16(int64_t, void *params);
 #endif
 
 #ifdef _AVX_VNNI_
-    void avx_vnni_dp4a_s32u8s8(int64_t, void *params);
-    void avx_vnni_dp2a_s32s16s16(int64_t, void *params);
+    void avx_vnni_256b_dp4a_s32u8s8(int64_t, void *params);
+    void avx_vnni_128b_dp4a_s32u8s8(int64_t, void *params);
+    void avx_vnni_256b_dp2a_s32s16s16(int64_t, void *params);
+    void avx_vnni_128b_dp2a_s32s16s16(int64_t, void *params);
 #endif
 
 #ifdef _AVX_VNNI_INT8_
-    void avx_vnni_int8_dp4a_s32s8s8(int64_t, void *params);
-    void avx_vnni_int8_dp4a_s32s8u8(int64_t, void *params);
-    void avx_vnni_int8_dp4a_s32u8u8(int64_t, void *params);
+    void avx_vnni_int8_256b_dp4a_s32s8s8(int64_t, void *params);
+    void avx_vnni_int8_128b_dp4a_s32s8s8(int64_t, void *params);
+    void avx_vnni_int8_256b_dp4a_s32s8u8(int64_t, void *params);
+    void avx_vnni_int8_128b_dp4a_s32s8u8(int64_t, void *params);
+    void avx_vnni_int8_256b_dp4a_s32u8u8(int64_t, void *params);
+    void avx_vnni_int8_128b_dp4a_s32u8u8(int64_t, void *params);
+#endif
+
+#ifdef _AVX_VNNI_INT16_
+    void avx_vnni_int16_256b_dp4a_s32s16u16(int64_t, void *params);
+    void avx_vnni_int16_128b_dp4a_s32s16u16(int64_t, void *params);
+    void avx_vnni_int16_256b_dp4a_s32u16s16(int64_t, void *params);
+    void avx_vnni_int16_128b_dp4a_s32u16s16(int64_t, void *params);
+    void avx_vnni_int16_256b_dp4a_s32u16u16(int64_t, void *params);
+    void avx_vnni_int16_128b_dp4a_s32u16u16(int64_t, void *params);
 #endif
 
 #ifdef _AMX_INT8_
@@ -115,6 +141,7 @@ void init_tile_cfg()
 typedef struct
 {
     std::string isa;
+    std::string vlen;
     std::string type;
     std::string dim;
     int64_t loop_time;
@@ -132,6 +159,7 @@ static double get_time(struct timespec *start,
 }
 
 static void reg_new_isa(std::string isa,
+    std::string vlen,
     std::string type,
     std::string dim,
     int64_t loop_time,
@@ -141,6 +169,7 @@ static void reg_new_isa(std::string isa,
 {
     cpubm_t new_one;
     new_one.isa = isa;
+    new_one.vlen = vlen;
     new_one.type = type;
     new_one.dim = dim;
     new_one.loop_time = loop_time;
@@ -209,10 +238,11 @@ static void cpubm_x64_one(smtl_handle sh,
     ss << std::setprecision(5) << perf << " " << perfUnit << item.dim;
 
     vector<string> cont;
-    cont.resize(3);
+    cont.resize(4);
     cont[0] = item.isa;
-    cont[1] = item.type;
-    cont[2] = ss.str();
+    cont[1] = item.vlen;
+    cont[2] = item.type;
+    cont[3] = ss.str();
     table.addOneItem(cont);
 }
 
@@ -235,13 +265,14 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
 
         // set table head
         vector<string> ti;
-        ti.resize(3);
+        ti.resize(4);
         ti[0] = "Instruction Set";
-        ti[1] = "Core Computation";
-        ti[2] = "Peak Performance";
+        ti[1] = "Vector Length";
+        ti[2] = "Core Computation";
+        ti[3] = "Peak Performance";
 
         Table table;
-        table.setColumnNum(3);
+        table.setColumnNum(4);
         table.addOneItem(ti);
 
         // set thread pool
@@ -332,94 +363,190 @@ static void parse_thread_pool(char *sets,
 
 static void cpufp_register_isa()
 {
+
+/* Register AMX DSA */
 #ifdef _AMX_TILE_
     init_tile_cfg();
     syscall(SYS_arch_prctl, 0x1023, 18);
 #endif
 
 #ifdef _AMX_INT8_
-    reg_new_isa("AMX_INT8", "MM(s32,s8,s8)", "OPS",
+    reg_new_isa("AMX_INT8", "DSA", "MM(s32,s8,s8)", "OPS",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8s8);
-    reg_new_isa("AMX_INT8", "MM(s32,s8,u8)", "OPS",
+    reg_new_isa("AMX_INT8", "DSA", "MM(s32,s8,u8)", "OPS",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32s8u8);
-    reg_new_isa("AMX_INT8", "MM(s32,u8,s8)", "OPS",
+    reg_new_isa("AMX_INT8", "DSA", "MM(s32,u8,s8)", "OPS",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8s8);
-    reg_new_isa("AMX_INT8", "MM(s32,u8,u8)", "OPS",
+    reg_new_isa("AMX_INT8", "DSA", "MM(s32,u8,u8)", "OPS",
         0x2500000LL, 131072LL, &__tilecfg, amx_int8_mm_s32u8u8);
 #endif
 
 #ifdef _AMX_BF16_
-    reg_new_isa("AMX_BF16", "MM(f32,bf16,bf16)", "FLOPS",
+    reg_new_isa("AMX_BF16", "DSA", "MM(f32,bf16,bf16)", "FLOPS",
         0x2500000LL, 65536LL, &__tilecfg, amx_bf16_mm_f32bf16bf16);
 #endif
 
 #ifdef _AMX_FP16_
-    reg_new_isa("AMX_FP16", "MM(f32,f16,f16)", "FLOPS",
+    reg_new_isa("AMX_FP16", "DSA", "MM(f32,f16,f16)", "FLOPS",
         0x2500000LL, 65536LL, &__tilecfg, amx_fp16_mm_f32f16f16);
 #endif
 
+/* Register 512b SIMD ISA */
 #ifdef _AVX512_VNNI_
-    reg_new_isa("AVX512_VNNI", "DP4A(s32,u8,s8)", "OPS",
-        0x20000000LL, 2048LL, NULL, avx512_vnni_dp4a_s32u8s8);
-    reg_new_isa("AVX512_VNNI", "DP2A(s32,s16,s16)", "OPS",
-        0x20000000LL, 1024LL, NULL, avx512_vnni_dp2a_s32s16s16);
-#endif
-
-#ifdef _AVX_VNNI_
-    reg_new_isa("AVX_VNNI", "DP4A(s32,u8,s8)", "OPS",
-        0x20000000LL, 1024LL, NULL, avx_vnni_dp4a_s32u8s8);
-    reg_new_isa("AVX_VNNI", "DP2A(s32,s16,s16)", "OPS",
-        0x20000000LL, 512LL, NULL, avx_vnni_dp2a_s32s16s16);
-#endif
-
-#ifdef _AVX_VNNI_INT8_
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,s8)", "OPS",
-        0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32s8s8);
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,s8,u8)", "OPS",
-        0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32s8u8);
-    reg_new_isa("AVX_VNNI_INT8", "DP4A(s32,u8,u8)", "OPS",
-        0x20000000LL, 1024LL, NULL, avx_vnni_int8_dp4a_s32u8u8);
+    reg_new_isa("AVX512_VNNI", "512b", "DP4A(s32,u8,s8)", "OPS",
+        0x20000000LL, 2048LL, NULL, avx512_vnni_512b_dp4a_s32u8s8);
+    reg_new_isa("AVX512_VNNI", "512b", "DP2A(s32,s16,s16)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx512_vnni_512b_dp2a_s32s16s16);
 #endif
 
 #ifdef _AVX512_BF16_
-    reg_new_isa("AVX512_BF16", "DP2A(f32,bf16,bf16)", "FLOPS",
-        0x20000000LL, 1024LL, NULL, avx512_bf16_dp2a_f32bf16bf16);
+    reg_new_isa("AVX512_BF16", "512b", "DP2A(f32,bf16,bf16)", "FLOPS",
+        0x20000000LL, 1024LL, NULL, avx512_bf16_512b_dp2a_f32bf16bf16);
 #endif
 
 #ifdef _AVX512_FP16_
-    reg_new_isa("AVX512_FP16", "FMA(f16,f16,f16)", "FLOPS",
-        0x20000000LL, 1024LL, NULL, avx512_fp16_fma_f16f16f16);
+    reg_new_isa("AVX512_FP16", "512b", "FMA(f16,f16,f16)", "FLOPS",
+        0x20000000LL, 1024LL, NULL, avx512_fp16_512b_fma_f16f16f16);
 #endif
 
 #ifdef _AVX512F_
-    reg_new_isa("AVX512F", "FMA(f32,f32,f32)", "FLOPS",
-        0x20000000LL, 512LL, NULL, avx512f_fma_f32f32f32);
-    reg_new_isa("AVX512F", "FMA(f64,f64,f64)", "FLOPS",
-        0x20000000LL, 256LL, NULL, avx512f_fma_f64f64f64);
+    reg_new_isa("AVX512F", "512b", "FMA(f32,f32,f32)", "FLOPS",
+        0x20000000LL, 512LL, NULL, avx512f_512b_fma_f32f32f32);
+    reg_new_isa("AVX512F", "512b", "FMA(f64,f64,f64)", "FLOPS",
+        0x20000000LL, 256LL, NULL, avx512f_512b_fma_f64f64f64);
+    reg_new_isa("AVX512F", "512b", "ADD(MUL(f32,f32),f32)", "FLOPS",
+        0x20000000LL, 256LL, NULL, avx512f_512b_add_mul_f32f32_f32);
+    reg_new_isa("AVX512F", "512b", "ADD(MUL(f64,f64),f64)", "FLOPS",
+        0x20000000LL, 128LL, NULL, avx512f_512b_add_mul_f64f64_f64);
+#endif
+
+/* Register 256b SIMD ISA */
+#ifdef _AVX512_VNNI_
+    reg_new_isa("AVX512_VNNI", "256b", "DP4A(s32,u8,s8)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx512_vnni_256b_dp4a_s32u8s8);
+#endif
+
+#ifdef _AVX_VNNI_
+    reg_new_isa("AVX_VNNI", "256b", "DP4A(s32,u8,s8)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx_vnni_256b_dp4a_s32u8s8);
+#endif
+
+#ifdef _AVX_VNNI_INT8_
+    reg_new_isa("AVX_VNNI_INT8", "256b", "DP4A(s32,s8,s8)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx_vnni_int8_256b_dp4a_s32s8s8);
+    reg_new_isa("AVX_VNNI_INT8", "256b", "DP4A(s32,s8,u8)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx_vnni_int8_256b_dp4a_s32s8u8);
+    reg_new_isa("AVX_VNNI_INT8", "256b", "DP4A(s32,u8,u8)", "OPS",
+        0x20000000LL, 1024LL, NULL, avx_vnni_int8_256b_dp4a_s32u8u8);
+#endif
+
+#ifdef _AVX512_VNNI_
+    reg_new_isa("AVX512_VNNI", "256b", "DP2A(s32,s16,s16)", "OPS",
+        0x20000000LL, 512LL, NULL, avx512_vnni_256b_dp2a_s32s16s16);
+#endif
+
+#ifdef _AVX_VNNI_
+    reg_new_isa("AVX_VNNI", "256b", "DP2A(s32,s16,s16)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_256b_dp2a_s32s16s16);
+#endif
+
+#ifdef _AVX_VNNI_INT16_
+    reg_new_isa("AVX_VNNI_INT16", "256b", "DP2A(s32,s16,u16)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int16_256b_dp2a_s32s16u16);
+    reg_new_isa("AVX_VNNI_INT16", "256b", "DP2A(s32,u16,s16)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int16_256b_dp2a_s32u16s16);
+    reg_new_isa("AVX_VNNI_INT16", "256b", "DP2A(s32,u16,u16)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int16_256b_dp2a_s32u16u16);
+#endif
+
+#ifdef _AVX512_BF16_
+    reg_new_isa("AVX512_BF16", "256b", "DP2A(f32,bf16,bf16)", "FLOPS",
+        0x20000000LL, 512LL, NULL, avx512_bf16_256b_dp2a_f32bf16bf16);
+#endif
+
+#ifdef _AVX512_FP16_
+    reg_new_isa("AVX512_FP16", "256b", "FMA(f16,f16,f16)", "FLOPS",
+        0x20000000LL, 512LL, NULL, avx512_fp16_256b_fma_f16f16f16);
 #endif
 
 #ifdef _FMA_
-    reg_new_isa("FMA", "FMA(f32,f32,f32)", "FLOPS",
-        0x20000000LL, 256LL, NULL, fma_f32f32f32);
-    reg_new_isa("FMA", "FMA(f64,f64,f64)", "FLOPS",
-        0x20000000LL, 128LL, NULL, fma_f64f64f64);
+    reg_new_isa("FMA", "256b", "FMA(f32,f32,f32)", "FLOPS",
+        0x20000000LL, 256LL, NULL, fma_256b_fma_f32f32f32);
+    reg_new_isa("FMA", "256b", "FMA(f64,f64,f64)", "FLOPS",
+        0x20000000LL, 128LL, NULL, fma_256b_fma_f64f64f64);
 #endif
 
 #ifdef _AVX_
-    reg_new_isa("AVX", "ADD(MUL(f32,f32),f32)", "FLOPS",
-        0x20000000LL, 128LL, NULL, avx_add_mul_f32f32_f32);
-    reg_new_isa("AVX", "ADD(MUL(f64,f64),f64)", "FLOPS",
-        0x20000000LL, 64LL, NULL, avx_add_mul_f64f64_f64);
+    reg_new_isa("AVX", "256b", "ADD(MUL(f32,f32),f32)", "FLOPS",
+        0x20000000LL, 128LL, NULL, avx_256b_add_mul_f32f32_f32);
+    reg_new_isa("AVX", "256b", "ADD(MUL(f64,f64),f64)", "FLOPS",
+        0x20000000LL, 64LL, NULL, avx_256b_add_mul_f64f64_f64);
+#endif
+
+/* Register 128b SIMD ISA */
+#ifdef _AVX512_VNNI_
+    reg_new_isa("AVX512_VNNI", "128b", "DP4A(s32,u8,s8)", "OPS",
+        0x20000000LL, 512LL, NULL, avx512_vnni_128b_dp4a_s32u8s8);
+#endif
+
+#ifdef _AVX_VNNI_
+    reg_new_isa("AVX_VNNI", "128b", "DP4A(s32,u8,s8)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_128b_dp4a_s32u8s8);
+#endif
+
+#ifdef _AVX_VNNI_INT8_
+    reg_new_isa("AVX_VNNI_INT8", "128b", "DP4A(s32,s8,s8)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int8_128b_dp4a_s32s8s8);
+    reg_new_isa("AVX_VNNI_INT8", "128b", "DP4A(s32,s8,u8)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int8_128b_dp4a_s32s8u8);
+    reg_new_isa("AVX_VNNI_INT8", "128b", "DP4A(s32,u8,u8)", "OPS",
+        0x20000000LL, 512LL, NULL, avx_vnni_int8_128b_dp4a_s32u8u8);
+#endif
+
+#ifdef _AVX512_VNNI_
+    reg_new_isa("AVX512_VNNI", "128b", "DP2A(s32,s16,s16)", "OPS",
+        0x20000000LL, 256LL, NULL, avx512_vnni_128b_dp2a_s32s16s16);
+#endif
+
+#ifdef _AVX_VNNI_
+    reg_new_isa("AVX_VNNI", "128b", "DP2A(s32,s16,s16)", "OPS",
+        0x20000000LL, 256LL, NULL, avx_vnni_128b_dp2a_s32s16s16);
+#endif
+
+#ifdef _AVX_VNNI_INT16_
+    reg_new_isa("AVX_VNNI_INT16", "128b", "DP2A(s32,s16,u16)", "OPS",
+        0x20000000LL, 256LL, NULL, avx_vnni_int16_128b_dp2a_s32s16u16);
+    reg_new_isa("AVX_VNNI_INT16", "128b", "DP2A(s32,u16,s16)", "OPS",
+        0x20000000LL, 256LL, NULL, avx_vnni_int16_128b_dp2a_s32u16s16);
+    reg_new_isa("AVX_VNNI_INT16", "128b", "DP2A(s32,u16,u16)", "OPS",
+        0x20000000LL, 256LL, NULL, avx_vnni_int16_128b_dp2a_s32u16u16);
+#endif
+
+#ifdef _AVX512_BF16_
+    reg_new_isa("AVX512_BF16", "128b", "DP2A(f32,bf16,bf16)", "FLOPS",
+        0x20000000LL, 256LL, NULL, avx512_bf16_128b_dp2a_f32bf16bf16);
+#endif
+
+#ifdef _AVX512_FP16_
+    reg_new_isa("AVX512_FP16", "128b", "FMA(f16,f16,f16)", "FLOPS",
+        0x20000000LL, 256LL, NULL, avx512_fp16_128b_fma_f16f16f16);
+#endif
+
+#ifdef _FMA_
+    reg_new_isa("FMA", "128b", "FMA(f32,f32,f32)", "FLOPS",
+        0x20000000LL, 128LL, NULL, fma_128b_fma_f32f32f32);
+    reg_new_isa("FMA", "128b", "FMA(f64,f64,f64)", "FLOPS",
+        0x20000000LL, 64LL, NULL, fma_128b_fma_f64f64f64);
 #endif
 
 #ifdef _SSE_
-    reg_new_isa("SSE", "ADD(MUL(f32,f32),f32)", "FLOPS",
-        0x20000000LL, 64LL, NULL, sse_add_mul_f32f32_f32);
+    reg_new_isa("SSE", "128b", "ADD(MUL(f32,f32),f32)", "FLOPS",
+        0x20000000LL, 64LL, NULL, sse_128b_add_mul_f32f32_f32);
 #endif
 
 #ifdef _SSE2_
-    reg_new_isa("SSE2", "ADD(MUL(f64,f64),f64)", "FLOPS",
-        0x20000000LL, 32LL, NULL, sse2_add_mul_f64f64_f64);
+    reg_new_isa("SSE2", "128b", "ADD(MUL(f64,f64),f64)", "FLOPS",
+        0x20000000LL, 32LL, NULL, sse2_128b_add_mul_f64f64_f64);
 #endif
 }
 

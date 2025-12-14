@@ -1,6 +1,6 @@
-.globl sse2_add_mul_f64f64_f64
+.globl sse2_128b_add_mul_f64f64_f64
 
-sse2_add_mul_f64f64_f64:
+sse2_128b_add_mul_f64f64_f64:
     xorpd %xmm0, %xmm0
     xorpd %xmm1, %xmm1
     xorpd %xmm2, %xmm2
@@ -17,7 +17,7 @@ sse2_add_mul_f64f64_f64:
     xorpd %xmm13, %xmm13
     xorpd %xmm14, %xmm14
     xorpd %xmm15, %xmm15
-.sse2.add.mul.f64f64.f64.L1:
+.sse2.128b.add.mul.f64f64.f64.L1:
     mulpd %xmm0, %xmm0
     addpd %xmm1, %xmm1
     mulpd %xmm2, %xmm2
@@ -35,6 +35,6 @@ sse2_add_mul_f64f64_f64:
     addpd %xmm13, %xmm13
     mulpd %xmm14, %xmm14
     addpd %xmm15, %xmm15
-    jne .sse2.add.mul.f64f64.f64.L1
+    jne .sse2.128b.add.mul.f64f64.f64.L1
     ret
 

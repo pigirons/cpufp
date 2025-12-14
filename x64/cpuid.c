@@ -50,6 +50,10 @@ int main()
     {
         printf("_AVX_VNNI_INT8_\n");
     }
+    if (BIT_TEST(cpuid_0x7_0x1.edx, 10))
+    {
+        printf("_AVX_VNNI_INT16_\n");
+    }
     if (BIT_TEST(cpuid_0x7_0x0.ecx, 11))
     {
         printf("_AVX512_VNNI_\n");
