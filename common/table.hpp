@@ -15,11 +15,13 @@ public:
 
     void setColumnNum(int col);
     void addOneItem(std::vector<std::string> &item);
+    void addSeparator();
     void print();
 
 private:
     int col;
     std::vector<int> colWidths;
+    std::vector<int> pSep;
     std::vector<std::vector<std::string> > contents;
 };
 
