@@ -163,7 +163,7 @@ clean:
 <td><a href="benchmark_result/x64/Intel_Ultra7_255H.md">Intel Ultra7 255H</a></td>
 </tr>
 <tr>
-<td><a href="benchmark_result/x64/Intel_N100.md">Intel N100</a></td>
+<td><a href="benchmark_result/x64/Intel_N150.md">Intel N150</a></td>
 </tr>
 <tr>
 <td><a href="benchmark_result/x64/ZHAOXIN_KX_6640MA.md">ZHAOXIN KX-6640MA</a></td>
