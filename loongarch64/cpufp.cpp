@@ -42,13 +42,17 @@ extern "C"
 typedef struct
 {
     std::string isa;
+    std::string vlen;
     std::string type;
     std::string dim;
     int64_t loop_time;
     int64_t comp_pl;
     void (*bench)(int64_t);
 } cpubm_t;
-static vector<cpubm_t> bm_list;
+static int num_simd_256b = 0;
+static int num_simd_128b = 0;
+static int num_scalar = 0;
+static std::vector<cpubm_t> bm_list;
 
 static double get_time(struct timespec *start,
     struct timespec *end)
@@ -58,6 +62,7 @@ static double get_time(struct timespec *start,
 }
 
 static void reg_new_isa(std::string isa,
+    std::string vlen,
     std::string type,
     std::string dim,
     int64_t loop_time,
@@ -66,6 +71,7 @@ static void reg_new_isa(std::string isa,
 {
     cpubm_t new_one;
     new_one.isa = isa;
+    new_one.vlen = vlen;
     new_one.type = type;
     new_one.dim = dim;
     new_one.loop_time = loop_time;
@@ -125,11 +131,12 @@ static void cpubm_x64_one(smtl_handle sh,
     stringstream ss;
     ss << std::setprecision(5) << perf << " " << perfUnit << item.dim;
 
-    vector<string> cont;
-    cont.resize(3);
+    std::vector<string> cont;
+    cont.resize(4);
     cont[0] = item.isa;
-    cont[1] = item.type;
-    cont[2] = ss.str();
+    cont[1] = item.vlen;
+    cont[2] = item.type;
+    cont[3] = ss.str();
     table.addOneItem(cont);
 }
 
@@ -151,14 +158,15 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
         printf("\n");
 
         // set table head
-        vector<string> ti;
-        ti.resize(3);
+        std::vector<string> ti;
+        ti.resize(4);
         ti[0] = "Instruction Set";
-        ti[1] = "Core Computation";
-        ti[2] = "Peak Performance";
+        ti[1] = "Vector Length";
+        ti[2] = "Core Computation";
+        ti[3] = "Peak Performance";
 
         Table table;
-        table.setColumnNum(3);
+        table.setColumnNum(4);
         table.addOneItem(ti);
 
         // set thread pool
@@ -166,11 +174,36 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
         smtl_init(&sh, set_of_threads);
 
         // traverse task list
-        cpubm_x64_one(sh, bm_list[0], table);
-        for (i = 1; i < bm_list.size(); i++)
+        int bm_idx = 0;
+        if (num_simd_256b)
         {
-            sleep(idle_time);
-            cpubm_x64_one(sh, bm_list[i], table);
+            table.addSeparator();
+            for (i = 0; i < num_simd_256b; i++)
+            {
+                sleep(idle_time);
+                cpubm_x64_one(sh, bm_list[bm_idx], table);
+                bm_idx++;
+            }
+        }
+        if (num_simd_128b)
+        {
+            table.addSeparator();
+            for (i = 0; i < num_simd_128b; i++)
+            {
+                sleep(idle_time);
+                cpubm_x64_one(sh, bm_list[bm_idx], table);
+                bm_idx++;
+            }
+        }
+        if (num_scalar)
+        {
+            table.addSeparator();
+            for (i = 0; i < num_scalar; i++)
+            {
+                sleep(idle_time);
+                cpubm_x64_one(sh, bm_list[bm_idx], table);
+                bm_idx++;
+            }
         }
 
         table.print();
@@ -180,7 +213,7 @@ static void cpubm_do_bench(std::vector<int> &set_of_threads,
 }
 
 static void parse_thread_pool(char *sets,
-    vector<int> &set_of_threads)
+    std::vector<int> &set_of_threads)
 {
     if (sets[0] != '[')
     {
@@ -250,41 +283,45 @@ static void parse_thread_pool(char *sets,
 static void cpufp_register_isa()
 {
 #ifdef _LASX_
-    reg_new_isa("LASX", "fmadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("LASX", "256b", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 256LL, lasx_fp32_fmadd_f32f32f32);
-    reg_new_isa("LASX", "fmadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("LASX", "256b", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 128LL, lasx_fp64_fmadd_f64f64f64);
-    reg_new_isa("LASX", "add(mul(f32,f32),f32)", "FLOPS",
+    reg_new_isa("LASX", "256b", "add(mul(f32,f32),f32)", "FLOPS",
         0x20000000LL, 192LL, lasx_fp32_add_mul_f32f32_f32);
-    reg_new_isa("LASX", "add(mul(f64,f64),f64)", "FLOPS",
+    reg_new_isa("LASX", "256b", "add(mul(f64,f64),f64)", "FLOPS",
         0x20000000LL, 96LL, lasx_fp64_add_mul_f64f64_f64);
+    num_simd_256b += 4;
 #endif
 
 #ifdef _LSX_
-    reg_new_isa("LSX", "fmadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("LSX", "128b", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 128LL, lsx_fp32_fmadd_f32f32f32);
-    reg_new_isa("LSX", "fmadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("LSX", "128b", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 64LL, lsx_fp64_fmadd_f64f64f64);
-    reg_new_isa("LSX", "add(mul(f32,f32),f32)", "FLOPS",
+    reg_new_isa("LSX", "128b", "add(mul(f32,f32),f32)", "FLOPS",
         0x20000000LL, 96LL, lsx_fp32_add_mul_f32f32_f32);
-    reg_new_isa("LSX", "add(mul(f64,f64),f64)", "FLOPS",
+    reg_new_isa("LSX", "128b", "add(mul(f64,f64),f64)", "FLOPS",
         0x20000000LL, 48LL, lsx_fp64_add_mul_f64f64_f64);
+    num_simd_128b += 4;
 #endif
 
 #ifdef _FP_SP_
-    reg_new_isa("FP_SP", "fmadd(f32,f32,f32)", "FLOPS",
+    reg_new_isa("FP_SP", "scalar", "fmadd(f32,f32,f32)", "FLOPS",
         0x20000000LL, 32LL, fp32_fmadd_f32f32f32);
+    num_scalar++;
 #endif
 
 #ifdef _FP_DP_
-    reg_new_isa("FP_DP", "fmadd(f64,f64,f64)", "FLOPS",
+    reg_new_isa("FP_DP", "scalar", "fmadd(f64,f64,f64)", "FLOPS",
         0x20000000LL, 32LL, fp64_fmadd_f64f64f64);
+    num_scalar++;
 #endif
 }
 
 int main(int argc, char *argv[])
 {
-    vector<int> set_of_threads;
+    std::vector<int> set_of_threads;
     uint32_t idle_time = 0;
 
     bool params_enough = false;
