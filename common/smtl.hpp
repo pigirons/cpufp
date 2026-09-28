@@ -19,7 +19,7 @@ void smtl_add_task(smtl_handle sh,
 
 void smtl_begin_tasks(smtl_handle sh);
 
-void smtl_wait_tasks_finished(smtl_handle sh);
+double smtl_wait_tasks_finished(smtl_handle sh);
 
 #endif
 
