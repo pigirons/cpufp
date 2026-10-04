@@ -2,15 +2,15 @@
 
 Settings:
 
-BIOS: v1.3.1
-OS: debian 13.7
-Kernel: 6.12.111+deb13-arm64
+BIOS: v1.3.1  
+OS: debian 13.7  
+Kernel: 6.12.111+deb13-arm64  
 
-Cortex-A720 @ 2.6GHz: 0,1
-Cortex-A720 @ 2.5GHz: 10,11
-Cortex-A720 @ 2.3GHz: 6,7
-Cortex-A720 @ 2.2GHz: 8,9
-Cortex-A520 @ 1.8GHz: 2-5
+Cortex-A720 @ 2.6GHz: 0,1  
+Cortex-A720 @ 2.5GHz: 10,11  
+Cortex-A720 @ 2.3GHz: 6,7  
+Cortex-A720 @ 2.2GHz: 8,9  
+Cortex-A520 @ 1.8GHz: 2-5  
 
 Power policy: Balance
 
