@@ -49,31 +49,31 @@ asimd_fmla_vs_fp16fp16fp16:
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
 .asimd.fmla.vs.fp16fp16fp16.L1:
-    fmla v8.8h, v0.8h, v1.h[0]
-    fmla v9.8h, v0.8h, v1.h[0]
-    fmla v10.8h, v0.8h, v1.h[0]
-    fmla v11.8h, v0.8h, v1.h[0]
-    fmla v12.8h, v0.8h, v1.h[0]
-    fmla v13.8h, v0.8h, v1.h[0]
-    fmla v14.8h, v0.8h, v1.h[0]
-    fmla v15.8h, v0.8h, v1.h[0]
-    fmla v16.8h, v0.8h, v1.h[0]
-    fmla v17.8h, v0.8h, v1.h[0]
-    fmla v18.8h, v0.8h, v1.h[0]
-    fmla v19.8h, v0.8h, v1.h[0]
+    fmla v8.8h, v8.8h, v0.h[0]
+    fmla v9.8h, v9.8h, v1.h[0]
+    fmla v10.8h, v10.8h, v2.h[0]
+    fmla v11.8h, v11.8h, v3.h[0]
+    fmla v12.8h, v12.8h, v4.h[0]
+    fmla v13.8h, v13.8h, v5.h[0]
+    fmla v14.8h, v14.8h, v6.h[0]
+    fmla v15.8h, v15.8h, v7.h[0]
+    fmla v16.8h, v16.8h, v0.h[0]
+    fmla v17.8h, v17.8h, v1.h[0]
+    fmla v18.8h, v18.8h, v2.h[0]
+    fmla v19.8h, v19.8h, v3.h[0]
     subs x0, x0, #1
-    fmla v20.8h, v0.8h, v1.h[0]
-    fmla v21.8h, v0.8h, v1.h[0]
-    fmla v22.8h, v0.8h, v1.h[0]
-    fmla v23.8h, v0.8h, v1.h[0]
-    fmla v24.8h, v0.8h, v1.h[0]
-    fmla v25.8h, v0.8h, v1.h[0]
-    fmla v26.8h, v0.8h, v1.h[0]
-    fmla v27.8h, v0.8h, v1.h[0]
-    fmla v28.8h, v0.8h, v1.h[0]
-    fmla v29.8h, v0.8h, v1.h[0]
-    fmla v30.8h, v0.8h, v1.h[0]
-    fmla v31.8h, v0.8h, v1.h[0]
+    fmla v20.8h, v20.8h, v4.h[0]
+    fmla v21.8h, v21.8h, v5.h[0]
+    fmla v22.8h, v22.8h, v6.h[0]
+    fmla v23.8h, v23.8h, v7.h[0]
+    fmla v24.8h, v24.8h, v0.h[0]
+    fmla v25.8h, v25.8h, v1.h[0]
+    fmla v26.8h, v26.8h, v2.h[0]
+    fmla v27.8h, v27.8h, v3.h[0]
+    fmla v28.8h, v28.8h, v4.h[0]
+    fmla v29.8h, v29.8h, v5.h[0]
+    fmla v30.8h, v30.8h, v6.h[0]
+    fmla v31.8h, v31.8h, v7.h[0]
     bne .asimd.fmla.vs.fp16fp16fp16.L1
     restore_caller_vec
     ret
@@ -113,31 +113,31 @@ asimd_fmla_vv_fp16fp16fp16:
     eor v30.16b, v30.16b, v30.16b
     eor v31.16b, v31.16b, v31.16b
 .asimd.fmla.vv.fp16fp16fp16.L1:
-    fmla v8.8h, v0.8h, v1.8h
-    fmla v9.8h, v0.8h, v1.8h
-    fmla v10.8h, v0.8h, v1.8h
-    fmla v11.8h, v0.8h, v1.8h
-    fmla v12.8h, v0.8h, v1.8h
-    fmla v13.8h, v0.8h, v1.8h
-    fmla v14.8h, v0.8h, v1.8h
-    fmla v15.8h, v0.8h, v1.8h
-    fmla v16.8h, v0.8h, v1.8h
-    fmla v17.8h, v0.8h, v1.8h
-    fmla v18.8h, v0.8h, v1.8h
-    fmla v19.8h, v0.8h, v1.8h
+    fmla v8.8h, v8.8h, v8.8h
+    fmla v9.8h, v9.8h, v9.8h
+    fmla v10.8h, v10.8h, v10.8h
+    fmla v11.8h, v11.8h, v11.8h
+    fmla v12.8h, v12.8h, v12.8h
+    fmla v13.8h, v13.8h, v13.8h
+    fmla v14.8h, v14.8h, v14.8h
+    fmla v15.8h, v15.8h, v15.8h
+    fmla v16.8h, v16.8h, v16.8h
+    fmla v17.8h, v17.8h, v17.8h
+    fmla v18.8h, v18.8h, v18.8h
+    fmla v19.8h, v19.8h, v19.8h
     subs x0, x0, #1
-    fmla v20.8h, v0.8h, v1.8h
-    fmla v21.8h, v0.8h, v1.8h
-    fmla v22.8h, v0.8h, v1.8h
-    fmla v23.8h, v0.8h, v1.8h
-    fmla v24.8h, v0.8h, v1.8h
-    fmla v25.8h, v0.8h, v1.8h
-    fmla v26.8h, v0.8h, v1.8h
-    fmla v27.8h, v0.8h, v1.8h
-    fmla v28.8h, v0.8h, v1.8h
-    fmla v29.8h, v0.8h, v1.8h
-    fmla v30.8h, v0.8h, v1.8h
-    fmla v31.8h, v0.8h, v1.8h
+    fmla v20.8h, v20.8h, v20.8h
+    fmla v21.8h, v21.8h, v21.8h
+    fmla v22.8h, v22.8h, v22.8h
+    fmla v23.8h, v23.8h, v23.8h
+    fmla v24.8h, v24.8h, v24.8h
+    fmla v25.8h, v25.8h, v25.8h
+    fmla v26.8h, v26.8h, v26.8h
+    fmla v27.8h, v27.8h, v27.8h
+    fmla v28.8h, v28.8h, v28.8h
+    fmla v29.8h, v29.8h, v29.8h
+    fmla v30.8h, v30.8h, v30.8h
+    fmla v31.8h, v31.8h, v31.8h
     bne .asimd.fmla.vv.fp16fp16fp16.L1
     restore_caller_vec
     ret

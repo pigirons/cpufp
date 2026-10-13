@@ -106,18 +106,15 @@ static void cpubm_x64_one(smtl_handle sh,
     smtl_begin_tasks(sh);
     smtl_wait_tasks_finished(sh);
 
-    clock_gettime(CLOCK_MONOTONIC_RAW, &start);
     for (i = 0; i < num_threads; i++)
     {
         smtl_add_task(sh, thread_func, (void*)&item);
     }
     smtl_begin_tasks(sh);
-    smtl_wait_tasks_finished(sh);
-    clock_gettime(CLOCK_MONOTONIC_RAW, &end);
+    double inv_tm = smtl_wait_tasks_finished(sh);
 
     time_used = get_time(&start, &end);
-    perf = item.loop_time * item.comp_pl * num_threads /
-        time_used;
+    perf = item.loop_time * item.comp_pl * inv_tm;
     if (perf > 1e12)
     {
         perfUnit = 'T';

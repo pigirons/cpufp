@@ -1,5 +1,6 @@
 #include "smtl.hpp"
 
+#include <chrono>
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
@@ -12,6 +13,10 @@
 #include <sched.h>
 
 #define SMTL_MAX_THREADS 512
+
+std::chrono::steady_clock Clock;
+std::chrono::steady_clock::time_point tp;
+double sumofinvTm;
 
 enum smtl_status
 {
@@ -150,6 +155,8 @@ static void *smtl_thread_func(void *params)
         }
         sh->status[tid] = SMTL_IDLE;
         sh->thread_holds--;
+        auto x = std::chrono::duration_cast<std::chrono::microseconds>(Clock.now() - tp).count();
+        sumofinvTm += 1000000.0 / x;
         if (sh->thread_holds == 0)
         {
             err = pthread_cond_signal(pt_cv);
@@ -352,6 +359,8 @@ void smtl_add_task(smtl_handle sh,
 
 void smtl_begin_tasks(smtl_handle sh)
 {
+    tp = Clock.now();
+    sumofinvTm = 0;
     int i, err = 0;
     sh->thread_holds = sh->num_threads;
     for (i = 0; i < sh->num_threads; i++)
@@ -378,7 +387,7 @@ void smtl_begin_tasks(smtl_handle sh)
     }
 }
 
-void smtl_wait_tasks_finished(smtl_handle sh)
+double smtl_wait_tasks_finished(smtl_handle sh)
 {
     int err = 0;
 
@@ -404,5 +413,6 @@ void smtl_wait_tasks_finished(smtl_handle sh)
         fprintf(stderr, "ERROR: pt_mtx unlock failed.\n");
         exit(0);
     }
+    return sumofinvTm;
 }
 
