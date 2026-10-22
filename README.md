@@ -141,7 +141,7 @@ clean:
 <td>Benchmark</td>
 </tr>
 <tr>
-<td rowspan="11">x86-64</td>
+<td rowspan="12">x86-64</td>
 <td><a href="benchmark_result/x64/AMD_Ryzen7_9700X.md">AMD Ryzen7 9700X</a></td>
 </tr>
 <tr>
@@ -149,6 +149,9 @@ clean:
 </tr>
 <tr>
 <td><a href="benchmark_result/x64/AMD_Ryzen9_6900HX.md">AMD Ryzen9 6900HX</a></td>
+</tr>
+<tr>
+<td><a href="benchmark_result/x64/AMD_Ryzen7_5825U.md">AMD Ryzen7 5825U</a></td>
 </tr>
 <tr>
 <td><a href="benchmark_result/x64/Intel_Xeon_Gold_6455B.md">Intel Xeon Gold 6455B</a></td>
