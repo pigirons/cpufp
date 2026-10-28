@@ -247,16 +247,22 @@ static void parse_thread_pool(char *sets,
 static void cpufp_register_isa()
 {
 #ifdef _IME_
+    size_t vlenb = 0;
+    __asm__ volatile("csrr %[vlenb], vlenb\n\t"
+                    : [vlenb] "=r" (vlenb)
+                    :
+                    :);
+    int64_t ime_scale = (vlenb == 128) ? 8LL : 1LL;
     reg_new_isa("ime", "vmadot(s32,s8,s8)", "OPS",
-        0x10000000LL, 3584LL, ime_vmadot_s32s8s8);
+        0x10000000LL, 3584LL * ime_scale, ime_vmadot_s32s8s8);
     reg_new_isa("ime", "vmadotu(u32,u8,u8)", "OPS",
-        0x10000000LL, 3584LL, ime_vmadotu_u32u8u8);
+        0x10000000LL, 3584LL * ime_scale, ime_vmadotu_u32u8u8);
     reg_new_isa("ime", "vmadotus(s32,u8,s8)", "OPS",
-        0x10000000LL, 3584LL, ime_vmadotus_s32u8s8);
+        0x10000000LL, 3584LL * ime_scale, ime_vmadotus_s32u8s8);
     reg_new_isa("ime", "vmadotsu(s32,s8,u8)", "OPS",
-        0x10000000LL, 3584LL, ime_vmadotsu_s32s8u8);
+        0x10000000LL, 3584LL * ime_scale, ime_vmadotsu_s32s8u8);
     reg_new_isa("ime", "vmadotslide(s32,s8,s8)", "OPS",
-        0x10000000LL, 3072LL, ime_vmadotslide_s32s8s8);
+        0x10000000LL, 3072LL * ime_scale, ime_vmadotslide_s32s8s8);
 #endif
 
 #ifdef _VECTOR_
