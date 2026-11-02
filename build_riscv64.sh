@@ -1,3 +1,4 @@
+
 SRC=riscv64
 ASM=$SRC/asm
 COMM=common
@@ -22,7 +23,11 @@ for SIMD in `$BUILD_DIR/cpuid`;
 do
     SIMD_MACRO="$SIMD_MACRO-D$SIMD "
     SIMD_OBJ="$SIMD_OBJ$BUILD_DIR/$SIMD.o "
-    as -march=rv64gcv_zfh -c $ASM/$SIMD.S -o $BUILD_DIR/$SIMD.o
+    if [ "$SIMD" = "_IME_" ]; then
+        as -march=rv64gcv_zfh_xsmtvdotii -c $ASM/$SIMD.S -o $BUILD_DIR/$SIMD.o
+    else
+        as -march=rv64gcv_zfh -c $ASM/$SIMD.S -o $BUILD_DIR/$SIMD.o
+    fi
 done
 
 # compile cpufp

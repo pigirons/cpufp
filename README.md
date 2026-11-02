@@ -221,7 +221,10 @@ clean:
 <td><a href="benchmark_result/arm64/RockChip_RK3399.md">RockChip RK3399</a></td>
 </tr>
 <tr>
-<td rowspan="2">riscv64</td>
+<td rowspan="3">riscv64</td>
+<td><a href="benchmark_result/riscv64/SpacemiT_K3.md">SpacemiT K3</a></td>
+</tr>
+<tr>
 <td><a href="benchmark_result/riscv64/SpacemiT_K1.md">SpacemiT K1</a></td>
 </tr>
 <tr>
