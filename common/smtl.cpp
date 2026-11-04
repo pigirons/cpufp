@@ -3,13 +3,12 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#ifdef __APPLE__
-#include <mach/thread_policy.h>
-#include <mach/thread_act.h>
-#include <mach/arm/kern_return.h>
-#endif
 #include <pthread.h>
+#if defined(__APPLE__)
+#include <pthread/qos.h>
+#else
 #include <sched.h>
+#endif
 
 #define SMTL_MAX_THREADS 512
 
@@ -54,7 +53,12 @@ struct smtl_tp_t
 
 static void thread_bind(int cpu)
 {
-#ifndef __APPLE__
+#if defined(__APPLE__)
+    // Darwin has no supported API to pin a pthread to a logical CPU. Request
+    // performance-oriented scheduling; the OS still chooses the actual core.
+    (void)cpu;
+    pthread_set_qos_class_self_np(QOS_CLASS_USER_INTERACTIVE, 0);
+#else
     cpu_set_t cpu_set;
     CPU_ZERO(&cpu_set);
     CPU_SET(cpu, &cpu_set);
@@ -62,20 +66,8 @@ static void thread_bind(int cpu)
             sizeof(cpu_set_t), &cpu_set) != 0)
     {
         fprintf(stderr, "Error: cpu[%d] bind failed.\n", cpu);
-        exit(0);
+        exit(1);
     }
-#else
-    thread_policy_t cpu_set = &cpu;
-    kern_return_t res = thread_policy_set(pthread_mach_thread_np(pthread_self()),
-        THREAD_AFFINITY_POLICY, (thread_policy_t)&cpu_set, 1);
-    if (res == KERN_NOT_SUPPORTED) {
-        fprintf(stderr, "Warning: cpu thread policy is not supported by OS\n");
-        return;
-    }
-    if (res != KERN_SUCCESS) {
-        fprintf(stderr, "Error: cpu[%d] bind failed, return code %i\n", cpu, res);
-        exit(0);
-        }
 #endif
 }
 

@@ -33,7 +33,7 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 |DSA|AMX_BF16|Matrix|bf16|From Intel Sapphire Rapids|
 |DSA|AMX_FP16|Matrix|fp16|From Intel Granite Rapids|
 
-## Support arm64 SIMD ISA
+## Support arm64 SIMD and matrix ISA
 
 |Arch|ISA|Feature|Data Type|Description|
 | ------------ | ------------ | ------------ | ------------ | ------------ |
@@ -42,6 +42,11 @@ It can automatically sense the local SIMD|DSA ISAs while compiling.
 |SIMD|asimd_dp|Vector|int8|From Cortex-A75/A55|
 |SIMD|bf16|Matrix|bf16|From Cortex-X2/A710/A510|
 |SIMD|i8mm|Matrix|int8|From Cortex-X2/A710/A510|
+|SIMD|SVE (SVE1)|Scalable vector|fp16/fp32/fp64, int8|FMLA, SDOT, UDOT|
+|SIMD|SVE2|Scalable vector|int8/int16/int32|SMLALB and SMLALT, widening accumulation|
+|Matrix|SME (SME1)|ZA outer product|fp32, fp16/bf16 to fp32, int8 to int32|FMOPA, BFMOPA, SMOPA, UMOPA|
+|Matrix|SME2|ZA multi-vector (VGx4)|fp32, fp16/bf16 to fp32, int8 to int32|FMLA, FDOT, BFDOT, SDOT, UDOT|
+
 
 ## Support riscv64 VECTOR ISA
 
@@ -181,7 +186,10 @@ clean:
 <td><a href="benchmark_result/x64/ZHAOXIN_KX_6640MA.md">ZHAOXIN KX-6640MA</a></td>
 </tr>
 <tr>
-<td rowspan="13">arm64</td>
+<td rowspan="14">arm64</td>
+<td><a href="benchmark_result/arm64/Apple_Silicon_M4.md">Apple Silicon M4 (SME/SME2)</a></td>
+</tr>
+<tr>
 <td><a href="benchmark_result/arm64/Apple_Silicon_M4_Max.md">Apple Silicon M4 Max</a></td>
 </tr>
 <tr>
@@ -254,4 +262,90 @@ clean:
 
 ## Todo list
 
-Add armv9(SVE, SVE2 & SME) Supports.
+Extend coverage of optional Arm extensions (for example SME FP64, INT16-to-INT64 and non-widening FP16/BF16).
+
+## Arm scalable benchmarks
+
+Build natively with `./build_arm64.sh`. `CC` and `CXX` select the C/C++ compilers.
+SVE/SVE2 require a supporting assembler; SME/SME2 additionally require
+`<arm_sme.h>` and ACLE `__arm_locally_streaming` / `__arm_new("za")` support.
+Verified with Apple Clang 21 and upstream Clang 20. A compiler that cannot build
+one of the new extensions reports a warning and saves its diagnostic in
+`build_dir/_<ISA>_.log`; other supported tests remain available.
+
+On Linux, the compiler runtime must also provide the SME ABI helpers. With
+Clang and an older libgcc, the build retries with the matching AArch64
+compiler-rt. Install that runtime if the retry reports missing libraries.
+It can also be selected explicitly with
+`LDFLAGS="--rtlib=compiler-rt --unwindlib=libgcc" CC=clang CXX=clang++ ./build_arm64.sh`.
+An explicit runtime archive can instead be supplied through `LDLIBS`.
+Do not substitute dummy SME ABI functions: they preserve live caller state.
+
+```sh
+./build_arm64.sh
+./cpufp --list
+./cpufp --thread_pool='[0]' --isa=sme,sme2
+./cpufp --thread_pool='[0-3]' --isa=sve,sve2 --iterations=16777216
+./tests/test_arm64.sh
+python3 tests/test_features.py
+```
+
+The Arm executable accepts `--isa=` (comma-separated names), `--list`, and
+`--iterations=N`, in addition to the existing thread-pool and idle-time options.
+`sve1` and `sme1` are accepted aliases for `sve` and `sme`.
+`--iterations` sets the loop count per worker; each new loop executes 24
+arithmetic instructions. Short runs are useful for smoke tests, but include
+thread dispatch and mode-transition overhead and should not be used as peak
+performance results.
+
+Both build-time selection and runtime dispatch check OS-advertised capabilities:
+Linux uses `AT_HWCAP` / `AT_HWCAP2`, and macOS uses `sysctlbyname`. Optional
+Linux SME arithmetic types are gated separately. Unsupported tests are never
+called. Build-time feature detection is native by default; advanced cross builds
+can set `CPUFP_ARM_ISAS` to a space-separated list such as
+`"_ASIMD_ _SVE_ _SVE2_ _SME_ _SME2_"`. Include `_SVE_` with `_SVE2_` and `_SME_`
+with `_SME2_`. This selects objects to compile and does **not** override runtime
+CPU/OS detection.
+
+SVE uses the non-streaming vector length (VL). SME/SME2 use the independent
+streaming vector length (SVL). `--list` shows the main thread's VL/SVL and the
+operation count per loop. Timed execution obtains VL/SVL in each worker and
+sums its actual operations; no 128/512-bit width is assumed. Multiply plus add
+counts as two FLOPs/OPS. For a vector with `L` accumulator lanes:
+
+| Test | Operations per arithmetic instruction |
+| --- | --- |
+| SVE FMLA / SVE2 SMLALB/SMLALT | `2 * L` |
+| SVE INT8 SDOT/UDOT | `2 * 4 * L` |
+| SME FP32 outer product | `2 * L * L` |
+| SME FP16/BF16 outer product | `2 * 2 * L * L` |
+| SME INT8 outer product | `2 * 4 * L * L` |
+| SME2 FP32 VGx4 FMLA | `2 * 4 * L` |
+| SME2 FP16/BF16 VGx4 dot product | `2 * 2 * 4 * L` |
+| SME2 INT8 VGx4 dot product | `2 * 4 * 4 * L` |
+
+These measure register arithmetic throughput, with no matrix packing or data
+loads in the inner loop. SME2 rows execute SME2-specific multi-vector
+instructions, rather than reusing the SME1 outer-product loop. They measure
+different instruction families and are not interchangeable GEMM baselines.
+
+On Apple Silicon, SME support does **not** imply ordinary SVE/SVE2 support.
+Apple M4 runs the SME/SME2 rows and skips non-streaming SVE/SVE2. macOS does not
+provide Linux-style CPU affinity: the thread-pool list selects the number of
+workers and labels them, while user-interactive QoS requests fast scheduling.
+The OS chooses their actual cores. Multiple threads can share SME hardware;
+throughput is measured for the whole worker pool, not multiplied from a
+single-thread result.
+
+The numerical test covers zero/one/three iterations, all stored accumulator
+lanes, output guards, the no-store benchmark path, and a newly created worker.
+SME tests also check SM/ZA return state and preservation of a live caller ZA
+matrix. On Linux, `CPUFP_TEST_VL_BYTES` / `CPUFP_TEST_SVL_BYTES` optionally change
+the test thread's VL/SVL through `prctl`; they do not change benchmark defaults.
+`CPUFP_RUNNER` can prefix the test executable with QEMU for functional checks.
+Emulator timings are not hardware performance measurements.
+
+Architecture and ABI references:
+[Arm ACLE](https://arm-software.github.io/acle/main/acle.html),
+[Linux SME userspace support](https://www.kernel.org/doc/html/latest/arch/arm64/sme.html),
+[Apple XNU SME state management](https://github.com/apple-oss-distributions/xnu/blob/main/doc/arm/sme.md).

@@ -1,83 +1,17 @@
 #include <stdio.h>
-#include <stdint.h>
-#ifndef __APPLE__
-#include <asm/hwcap.h>
-#include <sys/auxv.h>
-#else
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include <string.h>
-#endif
+#include "arm64_features.h"
 
-int main()
+int main(void)
 {
-#ifndef __APPLE__
-    uint64_t hwcaps = getauxval(AT_HWCAP);
-
-#ifdef HWCAP2_I8MM
-    if (hwcaps & HWCAP2_I8MM)
-    {
-        printf("_I8MM_\n");
-    }
-#endif
-
-#ifdef HWCAP2_BF16
-    if (hwcaps & HWCAP2_BF16)
-    {
-        printf("_BF16_\n");
-    }
-#endif
-
-#ifdef HWCAP_ASIMDDP
-    if (hwcaps & HWCAP_ASIMDDP)
-    {
-        printf("_ASIMD_DP_\n");
-    }
-#endif
-
-#ifdef HWCAP_ASIMDHP
-    if (hwcaps & HWCAP_ASIMDHP)
-    {
-        printf("_ASIMD_HP_\n");
-    }
-#endif
-
-#ifdef HWCAP_ASIMD
-    if (hwcaps & HWCAP_ASIMD)
-    {
-        printf("_ASIMD_\n");
-    }
-#endif
-#else
-    size_t size = 4;
-    uint32_t res;
-
-    sysctlbyname("hw.optional.arm.FEAT_I8MM", &res, &size, NULL, 0);
-    if (res == 1) {
-        printf("_I8MM_\n");
-    }
-
-    sysctlbyname("hw.optional.arm.FEAT_BF16", &res, &size, NULL, 0);
-    if (res == 1) {
-        printf("_BF16_\n");
-    }
-
-    sysctlbyname("hw.optional.arm.FEAT_DotProd", &res, &size, NULL, 0);
-    if (res == 1) {
-        printf("_ASIMD_DP_\n");
-    }
-
-    sysctlbyname("hw.optional.AdvSIMD_HPFPCv", &res, &size, NULL, 0);
-    if (res == 1) {
-        printf("_ASIMD_HP_\n");
-    }
-
-    sysctlbyname("hw.optional.AdvSIMD", &res, &size, NULL, 0);
-    if (res == 1) {
-        printf("_ASIMD_\n");
-    }
-#endif
-
+    const uint64_t features = arm64_get_features();
+    if (features & ARM64_I8MM) puts("_I8MM_");
+    if (features & ARM64_BF16) puts("_BF16_");
+    if (features & ARM64_DOT) puts("_ASIMD_DP_");
+    if (features & ARM64_FP16) puts("_ASIMD_HP_");
+    if (features & ARM64_ASIMD) puts("_ASIMD_");
+    if (features & ARM64_SVE) puts("_SVE_");
+    if (features & ARM64_SME) puts("_SME_");
+    if ((features & (ARM64_SVE | ARM64_SVE2)) == (ARM64_SVE | ARM64_SVE2)) puts("_SVE2_");
+    if ((features & (ARM64_SME | ARM64_SME2)) == (ARM64_SME | ARM64_SME2)) puts("_SME2_");
     return 0;
 }
